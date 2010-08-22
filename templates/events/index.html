@@ -19,7 +19,7 @@
       {% for event in latest_event_list %}
       	<section>
   	        <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
-  	        {{ event.date }}<br>
+  	        {{ event.dateBegin }}<br>
   	        <a href="{{ event.url }}">{{ event.url }}</a>
           </section>
       {% endfor %}

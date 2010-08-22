@@ -1,4 +1,4 @@
-from techism2.events.models import Event
+from techism2.events.models import Event, Address
 from django.contrib import admin
 
 class EventAdmin(admin.ModelAdmin):
@@ -11,3 +11,4 @@ class EventAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
 
 admin.site.register(Event)
+admin.site.register(Address)
