@@ -3,7 +3,7 @@ from techism2.events.models import Event
 from django.http import HttpResponse
 
 def index(request):
-    latest_event_list = Event.objects.all().order_by('-date')[:10]
+    latest_event_list = Event.objects.all().order_by('-dateBegin')[:10]
     return render_to_response('events/index.html', {'latest_event_list': latest_event_list})
 
 def detail(request, event_id):
