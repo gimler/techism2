@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <title>Event Übersicht</title>
-    <link href="/resources/css/styles.css" media="screen" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-    <header>
-        <hgroup>
-            <h1>techism</h1>
-            <h2>Events, Projekte und User Groups in M&uuml;nchen</h2>
-        </hgroup>
-    </header>
+{% extends "base.html "%}
+{% block content %}
 
   {% if latest_event_list %}
       {% for event in latest_event_list %}
-      	<section>
+      	<div class="event_short">
   	        <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
   	        {{ event.dateBegin }}<br>
   	        <a href="{{ event.url }}">{{ event.url }}</a>
-          </section>
+          </div>
       {% endfor %}
   {% else %}
       <p>No events are available.</p>
@@ -29,4 +16,4 @@
   {% if request.user.is_authenticated %}
     <a href="">neues Event anlegen</a>
   {% endif %}
-</body>
+{% endblock %}

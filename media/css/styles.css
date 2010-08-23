@@ -4,8 +4,12 @@ body {
   color: #fff;
 }
 
-section {
+.event_short {
   background-color: #3d3c41;
+  width: 200px;
+  float: left;
+  padding: 5px;
+  margin:10px;
 }
 
 a {
