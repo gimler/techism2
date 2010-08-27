@@ -10,8 +10,17 @@ On linux the Appengine SDK must be added to PATH
 Don't use dev_appserver.sh, run with
 python manage.py runserver
 
+Available URLs:
+http://localhost:8000/events/
+http://localhost:8000/admin/
+http://localhost:8000/_ah/admin
+http://localhost:8000/_ah/login
 
-Prerequisites
--------------
-- Python 2.5
+Script to add dummy address and event:
+from techism2.events.models import Address
+from techism2.events.models import Event
+a1 = Address(name="Address 1",street="Street 1",city="City 1")
+a1.save()
+e1 = Event(title="Event 1",location=a1,dateBegin=datetime.datetime.today(),url="http://www.google.de",description="abc")
+e1.save()
 
