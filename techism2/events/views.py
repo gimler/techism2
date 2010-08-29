@@ -16,8 +16,10 @@ def detail(request, event_id):
 def create(request):
     if request.method == 'POST': 
         form = EventForm(request.POST) 
-        #if form.is_valid(): 
-        return HttpResponseRedirect('/events/')
+        if form.is_valid(): 
+            return HttpResponseRedirect('/events/')
+        else:
+            return render_to_response('events/create.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
     form = EventForm ()
     return render_to_response('events/create.html', {'form': form}, context_instance=RequestContext(request))
 
