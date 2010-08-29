@@ -16,6 +16,10 @@ http://localhost:8000/admin/
 http://localhost:8000/_ah/admin
 http://localhost:8000/_ah/login
 
+Deployment to App Engine:
+python manage.py deploy
+(don't use appcfg)
+
 Script to add dummy address and event:
 from techism2.events.models import Address
 from techism2.events.models import Event
