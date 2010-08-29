@@ -9,6 +9,17 @@
 
 <body>
     <header>
+        <p>
+          {% if user.is_authenticated %}
+            {{ user.email }}
+            {% if user.is_staff %}
+              <a href="/admin/">Admin</a> 
+            {% endif %}
+            <a href="/accounts/logout/">Logout</a> 
+          {% else %}
+            <a href="/accounts/login/">Login</a>
+          {% endif %}
+        </p>
         <hgroup>
             <h1>techism</h1>
             <h2>Events, Projekte und User Groups in M&uuml;nchen</h2>
@@ -16,6 +27,5 @@
     </header>
 
     {% block content %}{% endblock %}
-    
 </body>
 </html>
