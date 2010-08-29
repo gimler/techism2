@@ -17,6 +17,18 @@ def create(request):
     if request.method == 'POST': 
         form = EventForm(request.POST) 
         if form.is_valid(): 
+            title = form.cleaned_data['title']
+            dateBegin = form.cleaned_data['dateBegin']
+            dateEnd = form.cleaned_data['dateEnd']
+            url = form.cleaned_data['url']
+            description = ['description']
+            event = Event()
+            event.title=title
+            event.dateBegin=dateBegin
+            event.dateEnd=dateEnd
+            event.url=url
+            event.description=description
+            event.save()
             return HttpResponseRedirect('/events/')
         else:
             return render_to_response('events/create.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
