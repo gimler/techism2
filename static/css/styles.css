@@ -4,14 +4,21 @@ body {
   color: #fff;
 }
 
+a {
+	color: #2ff21d;
+}
+
+label {
+  width: 100px;
+  display: inline-block;
+  padding: 5px;
+}
+
+
 .event_short {
   background-color: #3d3c41;
   width: 200px;
   float: left;
   padding: 5px;
   margin:10px;
-}
-
-a {
-	color: #2ff21d;
 }

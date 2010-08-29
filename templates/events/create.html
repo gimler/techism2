@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <link type="text/css" href="/static/jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css" media="screen" rel="stylesheet"  />
+  <script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
+  <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
+  <script type="text/javascript">
+     $(function() {
+         $("#id_dateBegin").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_dateEnd").datepicker({ dateFormat: 'yy-mm-dd' });
+     });
+  </script>
+{% endblock %}
+
+
 {% block content %}
   <form action="/events/create/" method="post">    
     {% csrf_token %}
