@@ -8,7 +8,7 @@ class EventForm(forms.Form):
     dateEnd = forms.DateTimeField(label= 'Ende',required=False)
     url = forms.URLField()
     description = forms.CharField(label= 'Beschreibung', widget=forms.Textarea )
-    #location = forms.ModelChoiceField (Address.objects.all(), required=False)
+    location = forms.ModelChoiceField (Address.objects.all(), required=False)
     
     #name = forms.CharField(max_length=200, required=False)
     #street = forms.CharField(max_length=200, required=False)

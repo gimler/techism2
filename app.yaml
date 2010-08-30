@@ -3,7 +3,7 @@ version: 4
 runtime: python
 api_version: 1
 
-default_expiration: '1d'
+default_expiration: '100d'
 
 handlers:
 - url: /remote_api

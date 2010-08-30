@@ -7,6 +7,9 @@ class Address(models.Model):
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     
+    def __unicode__(self):
+        return self.name;
+    
 class Event(models.Model):
     title = models.CharField(max_length=200)
     dateBegin = models.DateField('event date from')
@@ -14,6 +17,9 @@ class Event(models.Model):
     url = models.URLField()
     description = models.TextField()
     location = models.ForeignKey(Address, blank=True, null=True)
+    
+    def __unicode__(self):
+        return self.title
     
     
 

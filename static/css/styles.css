@@ -22,3 +22,7 @@ label {
   padding: 5px;
   margin:10px;
 }
+
+.clear_left {
+  clear:left;
+}
