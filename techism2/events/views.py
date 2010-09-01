@@ -14,22 +14,17 @@ def detail(request, event_id):
     event = Event.objects.get(id=event_id)
     return render_to_response('events/detail.html', {'event':event}, context_instance=RequestContext(request))
 
+def archive(request):
+    event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')[:10]
+    return render_to_response('events/archive.html', {'event_list' : event_list})
+
+
 @login_required
 def create(request):
     if request.method == 'POST': 
         form = EventForm(request.POST) 
         if form.is_valid(): 
-            title = form.cleaned_data['title']
-            dateBegin = form.cleaned_data['dateBegin']
-            dateEnd = form.cleaned_data['dateEnd']
-            url = form.cleaned_data['url']
-            description = ['description']
-            event = Event()
-            event.title=title
-            event.dateBegin=dateBegin
-            event.dateEnd=dateEnd
-            event.url=url
-            event.description=description
+            event= __createEvent(form)
             event.save()
             return HttpResponseRedirect('/events/')
         else:
@@ -37,3 +32,13 @@ def create(request):
     form = EventForm ()
     return render_to_response('events/create.html', {'form': form}, context_instance=RequestContext(request))
 
+
+def __createEvent (form):
+    event = Event()
+    event.title=form.cleaned_data['title']
+    event.dateBegin=form.cleaned_data['dateBegin']
+    event.dateEnd=form.cleaned_data['dateEnd']
+    event.url=form.cleaned_data['url']
+    event.description=form.cleaned_data['description']
+    event.location=form.cleaned_data['location']
+    return event

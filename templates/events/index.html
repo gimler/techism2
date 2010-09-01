@@ -16,6 +16,7 @@
   <div class="clear_left"/>
   
   {% if user.is_authenticated %}
-    <a href="/events/create">neues Event anlegen</a>
+    <a href="/events/create">neues Event anlegen</a><br><br>
   {% endif %}
+  <a href="/events/archive">Vergangene Veranstaltungen</a>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Vergangene Veranstaltungen</h3>
+
+  {% if latest_event_list %}
+      {% for event in latest_event_list %}
+        <div class="event_short">
+            <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
+            {{ event.dateBegin }}<br>
+          </div>
+      {% endfor %}
+  {% else %}
+      <p>No events are available.</p>
+  {% endif %}
+  <a href="/events">Zu den aktuellen Veranstaltungen</a>
+{% endblock %}

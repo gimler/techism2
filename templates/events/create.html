@@ -2,14 +2,6 @@
 
 {% block head %}
   <link type="text/css" href="/static/jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css" media="screen" rel="stylesheet"  />
-  <script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
-  <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
-  <script type="text/javascript">
-     $(function() {
-         $("#id_dateBegin").datepicker({ dateFormat: 'yy-mm-dd' });
-         $("#id_dateEnd").datepicker({ dateFormat: 'yy-mm-dd' });
-     });
-  </script>
 {% endblock %}
 
 
@@ -19,4 +11,16 @@
     {{ form.as_p }}
     <input type="submit" value="Veranstaltung Eintragen" />
   </form>
+{% endblock %}
+
+
+{% block scripts %}
+  <script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
+  <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
+  <script type="text/javascript">
+     $(function() {
+         $("#id_dateBegin").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_dateEnd").datepicker({ dateFormat: 'yy-mm-dd' });
+     });
+  </script>
 {% endblock %}
