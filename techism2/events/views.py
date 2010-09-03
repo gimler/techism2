@@ -16,7 +16,7 @@ def detail(request, event_id):
 
 def archive(request):
     event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')[:10]
-    return render_to_response('events/archive.html', {'event_list' : event_list})
+    return render_to_response('events/archive.html', {'event_list' : event_list}, context_instance=RequestContext(request))
 
 
 @login_required
