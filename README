@@ -2,8 +2,8 @@ techism2
 --------
 
 Prerequisites:
-- Python 2.5
--Appengine SDK must be added to PATH
+- Python 2.5 (only Python Version supported by AppEngine)
+- Appengine SDK must be added to PATH (Download: http://code.google.com/intl/de-DE/appengine/downloads.html#Google_App_Engine_SDK_for_Python)
 
 
 Uses Django-nonrel and djangoappengine
