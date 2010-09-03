@@ -1,11 +1,14 @@
 techism2
 --------
 
+Prerequisites:
+- Python 2.5
+-Appengine SDK must be added to PATH
+
+
 Uses Django-nonrel and djangoappengine
 http://www.allbuttonspressed.com/projects/django-nonrel
 http://www.allbuttonspressed.com/projects/djangoappengine
-
-On linux the Appengine SDK must be added to PATH
 
 Don't use dev_appserver.sh, run with
 python manage.py runserver
