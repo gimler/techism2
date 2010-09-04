@@ -125,13 +125,20 @@ def setup_project():
     # This module is just too important for development.
     # The second part of this hack is in runserver.py which adds
     # important environment variables like PATH etc.
-    if not on_production_server:
+    if have_appserver and not on_production_server:
         try:
             from google.appengine.api.mail_stub import subprocess
             sys.modules['subprocess'] = subprocess
-        except ImportError:
+            # subprocess in Python 2.5 on Linux and OS X uses the buffer()
+            # builtin which unfortunately gets removed by the GAE SDK, so
+            # we have to get it back with this ugly hack 
+            import inspect
+            frame = inspect.currentframe().f_back.f_back.f_back
+            old_builtin = frame.f_locals['old_builtin']
+            subprocess.buffer = old_builtin['buffer']
+        except Exception, e:
             import logging
-            logging.warn('Could not add the subprocess module to the sandbox.')
+            logging.warn('Could not add the subprocess module to the sandbox: %s' % e)
 
     os.environ.update(env_ext)
 

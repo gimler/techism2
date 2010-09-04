@@ -6,6 +6,19 @@ class StringType(object):
         self.internal_type = internal_type
 
     def __mod__(self, field):
+        # Hack to save URLField and EmailField to the native
+        # GAE data types Link and Email.
+        # Overriding the data_types dictionary has no effect because the
+        # get_internal_type() is not overridden in URLField and EmailField
+        # and returns "CharField". Hence the Field.db_type() method returns
+        # the mapping of the CharField. 
+        field_type = field['model']._meta.get_field(field['name'])
+        field_type_class_name = field_type.__class__.__name__
+        if field_type_class_name == 'URLField':
+            return 'gae_link'
+        elif field_type_class_name == 'EmailField':
+            return 'gae_email'
+        
         indexes = get_indexes().get(field['model'], {})
         if field['name'] in indexes.get('indexed', ()):
             return 'text'
