@@ -41,4 +41,5 @@ def __createEvent (form):
     event.url=form.cleaned_data['url']
     event.description=form.cleaned_data['description']
     event.location=form.cleaned_data['location']
+    event.tags=form.cleaned_data['tags']
     return event

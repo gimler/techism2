@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from techism2.events.models import Address
+from techism2.events import fields
 
 class EventForm(forms.Form):
     title = forms.CharField(max_length=200, label= 'Titel')
@@ -9,6 +10,7 @@ class EventForm(forms.Form):
     url = forms.URLField()
     description = forms.CharField(label= 'Beschreibung', widget=forms.Textarea )
     location = forms.ModelChoiceField (Address.objects.all(), required=False)
+    tags = fields.CommaSeparatedListFormField(label= 'Tags', required=False)
     
     #name = forms.CharField(max_length=200, required=False)
     #street = forms.CharField(max_length=200, required=False)
