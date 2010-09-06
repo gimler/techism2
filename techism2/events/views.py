@@ -5,18 +5,25 @@ from techism2.events.models import Event
 from techism2.events.forms import EventForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from techism2.events import tag_cloud
 
 def index(request):
+    tags = tag_cloud.get_tags()
     latest_event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')[:10]
-    return render_to_response('events/index.html', {'latest_event_list': latest_event_list}, context_instance=RequestContext(request))
+    return render_to_response('events/index.html', {'latest_event_list': latest_event_list, 'tags': tags}, context_instance=RequestContext(request))
 
 def detail(request, event_id):
     event = Event.objects.get(id=event_id)
     return render_to_response('events/detail.html', {'event':event}, context_instance=RequestContext(request))
 
 def archive(request):
-    event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')[:10]
+    event_list = Event.objects.filter(dateBegin__lt=datetime.today()).order_by('dateBegin')[:10]
     return render_to_response('events/archive.html', {'event_list' : event_list}, context_instance=RequestContext(request))
+
+def tag(request, tag_name):
+    tags = tag_cloud.get_tags()
+    event_list = Event.objects.filter(tags=tag_name)
+    return render_to_response('events/tag.html', {'event_list': event_list, 'tag_name': tag_name, 'tags': tags}, context_instance=RequestContext(request))
 
 
 @login_required

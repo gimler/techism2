@@ -23,6 +23,15 @@ label {
   margin:10px;
 }
 
+.tag_cloud {
+  background-color: #3d3c41;
+  width: 430px;
+  /*height: 200px;*/
+  float: left;
+  padding: 5px;
+  margin:10px;
+}
+
 .clear_left {
   clear:left;
 }

@@ -3,8 +3,8 @@
 {% block content %}
 <h3>Vergangene Veranstaltungen</h3>
 
-  {% if latest_event_list %}
-      {% for event in latest_event_list %}
+  {% if event_list %}
+      {% for event in event_list %}
         <div class="event_short">
             <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
             {{ event.dateBegin }}<br>
@@ -13,5 +13,8 @@
   {% else %}
       <p>No events are available.</p>
   {% endif %}
+  
+  <div class="clear_left"/>
+  
   <a href="/events">Zu den aktuellen Veranstaltungen</a>
 {% endblock %}

@@ -38,7 +38,7 @@
             Beginn: {{ event.dateBegin }}<br>
             Url: <a href="{{ event.url }}">{{ event.url }}</a><br>
             Beschreibung: {{ event.description }}<br>
-            Tags: {{ event.tags|join:", " }}<br>
+            Tags: {{ event.tags|default_if_none:""|join:", " }}<br>
             Veranstaltungsort: {{event.location.name}}
             {{event.location.street}}
             {{event.location.city}}
