@@ -20,6 +20,9 @@ def archive(request):
     event_list = Event.objects.filter(dateBegin__lt=datetime.today()).order_by('dateBegin')[:10]
     return render_to_response('events/archive.html', {'event_list' : event_list}, context_instance=RequestContext(request))
 
+def impressum(request):
+    return render_to_response('events/impressum.html', {}, context_instance=RequestContext(request))
+
 def tag(request, tag_name):
     tags = tag_cloud.get_tags()
     event_list = Event.objects.filter(tags=tag_name)
