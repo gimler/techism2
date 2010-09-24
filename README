@@ -24,10 +24,44 @@ python manage.py deploy
 (don't use appcfg)
 
 Script to add dummy address and event:
+Open the "Interactive Console" (http://localhost:8000/_ah/admin/interactive), paste this and run the program:
+#####################################################################################
 from techism2.events.models import Address
 from techism2.events.models import Event
-a1 = Address(name="Address 1",street="Street 1",city="City 1")
-a1.save()
-e1 = Event(title="Event 1",location=a1,dateBegin=datetime.datetime.today(),url="http://www.google.de",description="abc")
-e1.save()
+from random import choice
+
+# Available tags (higher weight to Pyhton and HTML)
+tags=["Java","Python","Python","Python","PHP","NoSQL",".NET","MySQL","Google","Scrum","Open Source","Social","Linux","Mac","HTML","HTML","HTML","JavaScript"]
+
+# Available cities
+cities=["Giesing","Perlach","Neuhausen","Schwabing","Sendling","Pasing"]
+
+# Available streets
+streets=["Leopoldstr.","Dachauer Str.", "Prinzregentenstr.", "Hauptbahnhof", "Marienplatz"]
+
+# Create 10 addresses, choose a random city and street
+addresses=[]
+for i in range(1,10):
+    a = Address(
+        name="Address " + str(i),
+        street=choice(streets),
+        city=choice(cities),
+        latitude=48.1372,
+        longitude=11.57542)
+    addresses.append(a)
+    a.save()
+
+# Create 31 events, from 10 days in past to 20 days in future. 
+# Choose one of the previously created addresses for each event.
+# Choose two of the available tags.
+for i in range(-10,20):
+    e = Event(
+        title="Event " + str(i),
+        dateBegin=datetime.datetime.today() + datetime.timedelta(days=i),
+        url="http://www.google.de",
+        description="Some description of event " + str(i) + ".",
+        location=choice(addresses),
+        tags=[choice(tags),choice(tags)])
+    e.save()
+#####################################################################################
 
