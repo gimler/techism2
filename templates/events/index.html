@@ -18,5 +18,25 @@
   {% if user.is_authenticated %}
     <a href="/events/create">neues Event anlegen</a><br><br>
   {% endif %}
-  <a href="/events/archive">Vergangene Veranstaltungen</a>
+  <a href="/events/archive">Vergangene Veranstaltungen</a><br><br>
+  
+  <div class="tag_cloud" id="tagcloud">
+    Tag Cloud
+    <ul >
+      {% for tag,count in tags.items %}
+      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
+      {% endfor %}
+    </ul
+  </div>
+{% endblock %}
+
+{% block scripts %}  
+  <script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
+  <script type="text/javascript" src="/static/jquery/js/jquery-tagcloud-0.5.0.min.js"></script> 
+  <script type="text/javascript" src="/static/jquery/js/jquery-tinysort-1.0.1.min.js"></script> 
+  <script type="text/javascript">
+$(function(){
+  $("#tagcloud>ul").tagcloud({type:"list",colormin:"2FF21D",colormax:"2FF21D"}).find("li").tsort();
+});
+  </script>
 {% endblock %}

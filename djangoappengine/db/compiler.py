@@ -370,7 +370,7 @@ class SQLCompiler(NonrelCompiler):
                         'None')
                 else:
                     value = value.id()
-            elif db_type == 'text':
+            elif db_type in ('text', 'gae_email', 'gae_link') :
                 if value.name() is None:
                     raise DatabaseError('Wrong type for Key. Expected string, found'
                         'None')
@@ -399,6 +399,10 @@ class SQLCompiler(NonrelCompiler):
 
         if db_type == 'gae_key':
             return value
+        elif db_type == 'gae_link':
+            value = Link(value)
+        elif db_type == 'gae_email':
+            value = Email(value)
         elif db_type == 'longtext':
             # long text fields cannot be indexed on GAE so use GAE's database
             # type Text

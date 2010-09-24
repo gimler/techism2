@@ -1,3 +1,7 @@
-
+django
 /sqlite3.db
 *.pyc
+.project
+.pydevproject
+.settings/
+
