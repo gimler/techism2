@@ -34,17 +34,17 @@
 
 {% block content %}
   {% if event %}
-      <h3>{{ event.title }}</h3>
-      <p><label>Beginn:</label> {{ event.dateBegin }}</p>
-      <p><label>Url:</label> <a href="{{ event.url }}">{{ event.url }}</a></p>
-      <p><label>Beschreibung:</label> {{ event.description }}</p>
-    
-      <label>Veranstaltungsort:</label> {{event.location.name}}<br>
-      <label></label>    {{event.location.street}}<br>
-      <label></label>   {{event.location.city}}
-    {% if event.location.latitude and event.location.longitude %}
-      <div id="map_canvas" style="height: 400px; width: 600px"></div>
-    {% endif %}
+            <h3>{{ event.title }}</h3>
+            Beginn: {{ event.dateBegin }}<br>
+            Url: <a href="{{ event.url }}">{{ event.url }}</a><br>
+            Beschreibung: {{ event.description }}<br>
+            Tags: {{ event.tags|default_if_none:""|join:", " }}<br>
+            Veranstaltungsort: {{event.location.name}}
+            {{event.location.street}}
+            {{event.location.city}}
+            {% if event.location.latitude and event.location.longitude %}
+              <div id="map_canvas" style="height: 400px; width: 600px"></div>
+            {% endif %}
   {% else %}
       <p>No events are available.</p>
   {% endif %}
