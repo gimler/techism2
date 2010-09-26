@@ -6,10 +6,21 @@ from techism2.events.forms import EventForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from techism2.events import tag_cloud
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 def index(request):
     tags = tag_cloud.get_tags()
-    latest_event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')[:10]
+    latest_event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')
+    paginator = Paginator(latest_event_list, 25);
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+        
+    try:
+        latest_event_list = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        latest_event_list = paginator.page(paginator.num_pages)
     return render_to_response('events/index.html', {'latest_event_list': latest_event_list, 'tags': tags}, context_instance=RequestContext(request))
 
 def detail(request, event_id):
