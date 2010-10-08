@@ -32,7 +32,8 @@
 
 
 
-{% block content %}
+{% block content %}         
+<section id="content">
   {% if event %}
             <h3>{{ event.title }}</h3>
             Beginn: {{ event.dateBegin }}<br>
@@ -48,7 +49,8 @@
   {% else %}
       <p>No events are available.</p>
   {% endif %}
-  <a href="/events">zur&uuml;ck zur &Uuml;bersicht</a>
+  <a href="/events">zur&uuml;ck zur &Uuml;bersicht</a>  
+</section> 
 {% endblock %}
 
 

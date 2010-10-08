@@ -112,17 +112,17 @@ nav li {
 }  
 
 
-#content {       
+#Content {       
 	background: #FFFFFF; 
 	border-radius: 5px;  
 }
 
-.event {
+.Event {
 	border-bottom:1px solid #afafaf;
 	padding:5px 5px 5px 5px;
 }
 
-.event #last {
+.Event #last {
 	border-bottom:0px;
 }	
 	

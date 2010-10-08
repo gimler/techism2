@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-
+<section id="content">
   {% if latest_event_list %}
       {% for event in latest_event_list %}
-      	<div class="event_short">
-  	        <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
-  	        {{ event.dateBegin }}<br>
-  	        <a href="{{ event.url }}">{{ event.url }}</a>
-          </div>
+		<article class="event">
+			<header>
+				<h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
+				<span id="shortdate">{{ event.dateBegin }}</span>
+			</header>  
+		</article>
       {% endfor %}
+
+	  {% if user.is_authenticated %}
+		<article>
+			<header>
+				<h2><a href="/events/create">Event hinzufügen</a></h2>
+			</header>  
+		</article>
+	  {% endif %}
+
   {% else %}
       <p>No events are available.</p>
   {% endif %}
-  
-  <div class="clear_left"/>
-  
-  {% if user.is_authenticated %}
-    <a href="/events/create">neues Event anlegen</a><br><br>
-  {% endif %}
-  <a href="/events/archive">Vergangene Veranstaltungen</a><br><br>
-  
-  <div class="tag_cloud" id="tagcloud">
+</section>  
+
+  <!--div class="tag_cloud" id="tagcloud">
     Tag Cloud
     <ul >
       {% for tag,count in tags.items %}
       <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
       {% endfor %}
     </ul
-  </div>
+  </div-->
 {% endblock %}
 
 {% block scripts %}  
