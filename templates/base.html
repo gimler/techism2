@@ -4,6 +4,18 @@
     <meta charset="utf-8" />
     <title>Techism</title>
     <link href="/static/css/style.css" media="screen" rel="stylesheet" type="text/css" />
+  	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
+	<script type="text/javascript"> 
+	$(document).ready(function(){
+   	$(".detail").hide();  
+	$(".event").mouseenter(function() {
+		$(this).children(".detail").slideToggle(300);
+    });
+	$(".event").mouseleave(function() {
+		$(this).children(".detail").slideToggle(400);
+    });  
+   });
+	</script>
     {% block head %}{% endblock %}
 </head>
 
