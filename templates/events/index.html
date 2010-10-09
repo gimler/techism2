@@ -10,17 +10,20 @@
 			</header>  
 
             <section class="detail">
+	            <h3>Was</h3>
+					<section id="description">{{ event.description }}</section>            		
+					<section id="url"><a href="{{ event.url }}">{{ event.url }}</a></section>
+            		<section id="tags">{{ event.tags|default_if_none:""|join:", " }}</section>
+	            <h3>Wann</h3>
 				Beginn: {{ event.dateBegin }}<br>
-            	Url: <a href="{{ event.url }}">{{ event.url }}</a><br>
-            	Beschreibung: {{ event.description }}<br>
-            	Tags: {{ event.tags|default_if_none:""|join:", " }}<br>
+	            <h3>Wo</h3>
             	Veranstaltungsort: {{event.location.name}}
             	{{event.location.street}}
             	{{event.location.city}}
             	{% if event.location.latitude and event.location.longitude %}
             	  <div id="map_canvas" style="height: 400px; width: 600px"></div>
             	{% endif %}
-			</section>
+			</section>                
 			
 		</article>
       {% endfor %}
@@ -37,9 +40,7 @@
       <p>No events are available.</p>
   {% endif %}  
 
-</section>  
-  
-  <div class="clear_left"/>
+</section>   
   
   <div class="pagination">
     <span class="step-links">
