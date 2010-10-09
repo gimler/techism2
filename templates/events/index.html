@@ -15,14 +15,13 @@
 					<section id="url"><a href="{{ event.url }}">{{ event.url }}</a></section>
             		<section id="tags">{{ event.tags|default_if_none:""|join:", " }}</section>
 	            <h3>Wann</h3>
-				Beginn: {{ event.dateBegin }}<br>
+				<section id="begin">{{ event.dateBegin }}</section>
 	            <h3>Wo</h3>
-            	Veranstaltungsort: {{event.location.name}}
-            	{{event.location.street}}
-            	{{event.location.city}}
+            	Veranstaltungsort: 
+				<section id="location">{{event.location.name}}</section>  
             	{% if event.location.latitude and event.location.longitude %}
-            	  <div id="map_canvas" style="height: 400px; width: 600px"></div>
-            	{% endif %}
+				<img src="http://maps.google.com/maps/api/staticmap?size=500x200&markers=icon:http://chart.apis.google.com/chart%3Fchst%3Dd_map_pin_icon%26chld%3Dcafe%257C996600|224+West+20th+Street|75+9th+Ave|700+E+9th+St&sensor=true" style="height:auto;width:100%;"/>
+				{% endif %}
 			</section>                
 			
 		</article>
