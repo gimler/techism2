@@ -125,5 +125,11 @@ nav li {
 .event #last {
 	border-bottom:0px;
 }	
+
+label {
+  width: 130px;
+  display: inline-block;
+  padding: 5px;
+}
 	
 }
