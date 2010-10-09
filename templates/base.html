@@ -8,15 +8,26 @@
     <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
 	$(document).ready(function(){
+	$(".event h2 a").attr("href", "#");
    	$(".detail").hide();  
+	/* hover for mouse enabled devices */
 	$(".event").mouseenter(function() {
 		$(this).children(".detail").slideToggle(300);
     });
 	$(".event").mouseleave(function() {
 		$(this).children(".detail").slideToggle(400);
     });  
+	/* clicks for touch interface */
+
+	$(".event").click(function() {
+		$(this).children(".detail").slideToggle(300);
+    });  
+
    });
-	</script>
+	</script> 
+	
+	
+	
     {% block head %}{% endblock %}
 </head>
 
@@ -45,7 +56,6 @@
 		</section>
 
     {% block content %}{% endblock %}
-
 	<footer>                          
 		<nav>
 			<ul>

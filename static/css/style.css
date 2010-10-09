@@ -13,7 +13,10 @@ body {
 	margin: 0 auto;
 	width: 85%;
 	font: 13px/22px Trebuchet MS, Helvetica, Arial, sans-serif;
-	background: #232323 url("/static/images/bg_noise.gif") repeat;
+	background: 
+	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
+	/*url("/static/images/logo_net.gif")  no-repeat -50px 10px,*/
+	#232323 url("/static/images/bg_noise.gif") repeat;
 }
 
 nav a {
