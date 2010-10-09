@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+<section id="content">
   <h3>Events, die mit '{{ tag_name }}' getaggt sind</h3>
 
   {% if event_list %}
@@ -28,7 +28,8 @@
       <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
       {% endfor %}
     </ul
-  </div>
+  </div>  
+</div>
 {% endblock %}
 
 {% block scripts %}  

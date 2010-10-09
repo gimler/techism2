@@ -6,11 +6,13 @@
 
 
 {% block content %}
+<section id="content">
   <form action="/events/create/" method="post">    
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Veranstaltung Eintragen" />
   </form>
+</section>
 {% endblock %}
 
 

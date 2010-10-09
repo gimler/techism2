@@ -1,17 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-
+<section id="content">
   {% if latest_event_list %}
-      {% for event in latest_event_list.object_list %}
-      	<div class="event_short">
-  	        <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
-  	        {{ event.dateBegin }}<br>
-  	        <a href="{{ event.url }}">{{ event.url }}</a>
-          </div>
+      {% for event in latest_event_list.object_list %} 
+		<article class="event">
+			<header>
+				<h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
+				<span id="shortdate">{{ event.dateBegin }}</span>
+			</header>  
+
+            <section class="detail">
+				Beginn: {{ event.dateBegin }}<br>
+            	Url: <a href="{{ event.url }}">{{ event.url }}</a><br>
+            	Beschreibung: {{ event.description }}<br>
+            	Tags: {{ event.tags|default_if_none:""|join:", " }}<br>
+            	Veranstaltungsort: {{event.location.name}}
+            	{{event.location.street}}
+            	{{event.location.city}}
+            	{% if event.location.latitude and event.location.longitude %}
+            	  <div id="map_canvas" style="height: 400px; width: 600px"></div>
+            	{% endif %}
+			</section>
+			
+		</article>
       {% endfor %}
+
+	  {% if user.is_authenticated %}
+		<article>
+			<header>
+				<h2><a href="/events/create">Event hinzufügen</a></h2>
+			</header>  
+		</article>
+	  {% endif %}
+
   {% else %}
       <p>No events are available.</p>
-  {% endif %}
+  {% endif %}  
+
+</section>  
   
   <div class="clear_left"/>
   
@@ -36,18 +62,17 @@
   {% endif %}
   <a href="/events/archive">Vergangene Veranstaltungen</a><br><br>
   
-  <div class="tag_cloud" id="tagcloud">
+  <!--div class="tag_cloud" id="tagcloud">
     Tag Cloud
     <ul >
       {% for tag,count in tags.items %}
       <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
       {% endfor %}
     </ul
-  </div>
+  </div-->
 {% endblock %}
 
 {% block scripts %}  
-  <script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
   <script type="text/javascript" src="/static/jquery/js/jquery-tagcloud-0.5.0.min.js"></script> 
   <script type="text/javascript" src="/static/jquery/js/jquery-tinysort-1.0.1.min.js"></script> 
   <script type="text/javascript">
