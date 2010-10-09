@@ -26,6 +26,21 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: django_openid_auth_association
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: django_openid_auth_nonce
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: django_openid_auth_useropenid
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: events_address
   properties:
   - name: __key__

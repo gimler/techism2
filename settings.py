@@ -16,6 +16,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django_openid_auth',
     'techism2.events',
 )
 
@@ -30,7 +31,13 @@ TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),)
 
 ROOT_URLCONF = 'urls'
 
+OPENID_CREATE_USERS = True
+OPENID_UPDATE_DETAILS_FROM_SREG = True
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+
+
 AUTHENTICATION_BACKENDS = (
     'djangotoolbox.auth.backends.NonrelPermissionBackend',
-    'auth_helpers.backends.GoogleAccountBackend',
+    'django_openid_auth.auth.OpenIDBackend'
 )
