@@ -1,0 +1,132 @@
+/* Makeshift CSS Reset */
+{
+	margin: 0;
+	padding: 0; 
+}
+
+/* Tell the browser to render HTML 5 elements as block */
+section, header, footer, aside, nav, article {
+	display: block;
+}
+
+body {
+	margin: 0 auto;
+	width: 85%;
+	font: 13px/22px Trebuchet MS, Helvetica, Arial, sans-serif;
+	background: 
+	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
+	/*url("/static/images/logo_net.gif")  no-repeat -50px 10px,*/
+	#232323 url("/static/images/bg_noise.gif") repeat;
+}
+
+nav a {
+	color:#ffffff;
+	text-decoration: none;
+}
+
+nav #active a {
+	color:#00ff00;
+	text-decoration: none;
+} 
+
+
+h1 a {
+	font-size: 28px;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+h2 {
+	font-size: 28px;
+	line-height: 44px;
+	display:inline;
+}
+
+h2 a {
+	text-decoration:none;
+	color:#000000;
+}            
+
+#shortdate{
+	background: #afafaf;
+	color:#FFFFFF;
+	padding:5px; 
+	border-radius: 22px; 
+}
+
+.tags a {
+	background: #cdcdcd;
+	color:#FFFFFF;
+	padding:5px; 
+	border-radius: 22px; 
+	text-decoration: none; 
+}
+
+h3 {
+	font-size: 18px;
+	line-height: 22px;
+}
+
+p {
+	padding-bottom: 22px;
+} 
+
+#top{
+	display: table;
+/*	background: #333333;*/ 
+}      
+
+#top header {
+	display: table-cell;	
+}                       
+
+#top nav {
+	display: table-cell;
+	padding-left:22px;	
+}  
+
+footer{
+	display: table;  
+	width: 100%;
+}
+
+footer nav{
+	display: table-cell;	
+	padding-bottom: 10px;
+}
+    
+footer nav #synicate{
+	display: table-cell;	
+}
+
+ul {
+	padding: 0px;
+}
+
+nav li {
+	font-size: 28px;
+	list-style: none; 
+	float: left;
+	margin-right: 20px;
+}  
+
+
+#content {       
+	background: #FFFFFF; 
+	border-radius: 5px;  
+}
+
+.event {
+	border-bottom:1px solid #afafaf;
+	padding:5px 5px 5px 5px;
+}
+
+.event #last {
+	border-bottom:0px;
+}	
+	
+}
