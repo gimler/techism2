@@ -18,6 +18,14 @@ body {
 	/*url("/static/images/logo_net.gif")  no-repeat -50px 10px,*/
 	#232323 url("/static/images/bg_noise.gif") repeat;
 }
+  
+#admin {         
+	background-color:#FFFFFF;
+	opacity:.3;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding:5px;	 	
+}
 
 nav a {
 	color:#ffffff;
@@ -51,12 +59,21 @@ h2 a {
 	color:#000000;
 }            
 
-#shortdate{
-	background: #afafaf;
+#datebox{
+	/*display:inline;*/
+/*	background: #afafaf;
 	color:#FFFFFF;
 	padding:5px; 
-	border-radius: 22px; 
-}
+	border-radius: 5px;  */ 
+	margin-left:10px; 
+} 
+
+#shortdate{
+	background: #efefef;
+	color:#FFFFFF;
+	border-radius: 5px;
+	padding:3px;  
+	}
 
 .tags a {
 	background: #cdcdcd;
@@ -125,9 +142,23 @@ nav li {
 	padding:5px 5px 5px 5px;
 }
 
-.event #last {
-	border-bottom:0px;
-}	
+.last {
+	border-bottom:0px; 
+}
+
+.event header{
+	display: table;
+}
+
+.event header h2{
+	display: table-cell;
+	/*width:100%;*/
+}
+
+.event header #shortdate{
+	display: table-cell; 
+	vertical-align:middle;
+}   
 
 label {
   width: 130px;

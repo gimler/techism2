@@ -7,6 +7,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from techism2.events import tag_cloud
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.contrib.auth import logout as django_logout
 
 def index(request):
     tags = tag_cloud.get_tags()
@@ -39,13 +40,11 @@ def tag(request, tag_name):
     event_list = Event.objects.filter(tags=tag_name)
     return render_to_response('events/tag.html', {'event_list': event_list, 'tag_name': tag_name, 'tags': tags}, context_instance=RequestContext(request))
 
-
-@login_required
 def create(request):
     if request.method == 'POST': 
         form = EventForm(request.POST) 
         if form.is_valid(): 
-            event= __createEvent(form)
+            event= __createEvent(form, request.user)
             if event.location == None:
                 address=__createAddress(form)
                 address.save()
@@ -57,8 +56,11 @@ def create(request):
     form = EventForm ()
     return render_to_response('events/create.html', {'form': form}, context_instance=RequestContext(request))
 
+def logout(request):
+    django_logout(request)
+    return HttpResponseRedirect('/')
 
-def __createEvent (form):
+def __createEvent (form, user):
     event = Event()
     event.title=form.cleaned_data['title']
     event.dateBegin=form.cleaned_data['dateBegin']
@@ -67,6 +69,8 @@ def __createEvent (form):
     event.description=form.cleaned_data['description']
     event.location=form.cleaned_data['location']
     event.tags=form.cleaned_data['tags']
+    if user.is_authenticated():
+        event.user=user
     return event
 
 def __createAddress (form):
