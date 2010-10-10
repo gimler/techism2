@@ -1,32 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Sign in with your OpenID</h1>
-{% if form.errors %}
-<p class="errors">Please correct errors below:<br />
-    {% if form.openid_identifier.errors %}
-    <span class="error">{{ form.openid_identifier.errors|join:", " }}</span>
-    {% endif %}
-    {% if form.next.errors %}
-    <span class="error">{{ form.next.errors|join:", " }}</span>
-    {% endif %}
-</p>
-{% endif %}
-<form name="fopenid" action="{{ action }}" method="post">
-    {% csrf_token %}
-    <fieldset>
-        <legend>Sign In Using Your OpenID</legend>
-        <div class="form-row">
-            <label for="id_openid_identifier">OpenID</label><br />
-            {{ form.openid_identifier }}
-        </div>
-        <div class="submit-row ">
-            <input name="bsignin" type="submit" value="Sign in">
-        </div>
- {% if next %}
-        <input type="hidden" name="next" value="{{ next }}" />
- {% endif %}
-    </fieldset>
-</form>
+<section id="content">
+  <article class="event">
+    <section>
+    <header>
+      <h2>Login</h2>
+    </header>
+      Für Techism benätigst Du keinen neuen Benutzernamen und Password. stattdessem wird
+      OpenID oder Google Login zur Authentifizierung benutzt. 
+    </section>
+    
+    <section>
+    <header>
+      <h3>OpenID Login</h3>
+    </header>
+      Bitte trage Deine OpenID in das folgende Feld ein, falls Du einen Account bei einem 
+      aufgeführem Anbieter hast, kannst Du einfach auf das entsprechende Logo klicken. 
+      Du wirst dann zu deinem Anbieter (OpenID Provider) weitergeleitet und musst Dich dort
+      u.U. authentifizieren. Anschließend wirst Du gefragt, ob Du die OpenID benutzen willst,
+      um Dich bei Techism anzumelden. Weiterhin fragt Techism von Deinem OpenID Provider Deinen
+      Namen und E-Mail Adresse ab, diese Daten werden auch innerhalb von Techism gespeichert 
+      und bei jedem zukünftigen Login aktualisiert.
+    
+      <div >
+        <a href="#"><img src="/static/openid/openid.png" onclick="id_openid_identifier.value=''" /></a>
+        <a href="#"><img src="/static/openid/google.png" onclick="id_openid_identifier.value='https://www.google.com/accounts/o8/id'" /></a>
+        <a href="#"><img src="/static/openid/yahoo.png" onclick="id_openid_identifier.value='https://me.yahoo.com/'" /></a>
+      </div>
+
+      {% if form.errors %}
+        <p class="errors">Please correct errors below:<br />
+            {% if form.openid_identifier.errors %}
+            <span class="error">{{ form.openid_identifier.errors|join:", " }}</span>
+            {% endif %}
+            {% if form.next.errors %}
+            <span class="error">{{ form.next.errors|join:", " }}</span>
+            {% endif %}
+        </p>
+      {% endif %}
+      <form name="fopenid" action="{{ action }}" method="post">
+          {% csrf_token %}
+                  <label for="id_openid_identifier">OpenID</label>
+                  {{ form.openid_identifier }}
+                  <input name="bsignin" type="submit" value="Sign in">
+       {% if next %}
+              <input type="hidden" name="next" value="{{ next }}" />
+       {% endif %}
+      </form>
+    </section>
+    
+    <section>
+    <header>
+      <h3>Google Login</h3>
+    </header>
+    <a href="/accounts/google_login">Google Login</a>
+    </section>
+    
+  </article>  
+</section>
 {% endblock %}
 
 

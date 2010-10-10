@@ -16,5 +16,8 @@ urlpatterns = patterns('',
     
     (r'^accounts/', include('django_openid_auth.urls')),
     (r'^accounts/logout/$', 'techism2.events.views.logout'),
+    url(r'^accounts/google_login/$', 'auth_helpers.views.login', name='google_login'),
+    url(r'^accounts/google_logout/$', 'auth_helpers.views.logout', name='google_logout'),
+    url(r'^accounts/google_authenticate/$', 'auth_helpers.views.authenticate', name='google_authenticate'),
 
 )
