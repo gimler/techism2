@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from techism2.events.models import Event
+from techism2.events.models import Event, Address
 from techism2.events.forms import EventForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -47,6 +47,10 @@ def create(request):
         form = EventForm(request.POST) 
         if form.is_valid(): 
             event= __createEvent(form)
+            if event.location == None:
+                address=__createAddress(form)
+                address.save()
+                event.location=address
             event.save()
             return HttpResponseRedirect('/events/')
         else:
@@ -68,3 +72,10 @@ def __createEvent (form):
     event.location=form.cleaned_data['location']
     event.tags=form.cleaned_data['tags']
     return event
+
+def __createAddress (form):
+    address = Address()
+    address.name=form.cleaned_data['location_name']
+    address.street=form.cleaned_data['location_street']
+    address.city=form.cleaned_data['location_city']
+    return address

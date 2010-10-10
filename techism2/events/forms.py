@@ -12,9 +12,9 @@ class EventForm(forms.Form):
     location = forms.ModelChoiceField (Address.objects.all(), required=False)
     tags = fields.CommaSeparatedListFormField(label= 'Tags', required=False)
     
-    #name = forms.CharField(max_length=200, required=False)
-    #street = forms.CharField(max_length=200, required=False)
-    #city = forms.CharField(max_length=200,required=False)
+    location_name = forms.CharField(label= 'Name',max_length=200, required=False)
+    location_street = forms.CharField(label= 'Strasse & Hausnr.',max_length=200, required=False)
+    location_city = forms.CharField(label= 'Ort', max_length=200,required=False)
     #latitude = forms.FloatField(required=False)
     #longitude = forms.FloatField(required=False)
   
