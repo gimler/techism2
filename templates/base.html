@@ -49,7 +49,15 @@
           	  <a href="/accounts/login/">Login</a>
           	{% endif %}
    	   	</section>
-    
+ 
+	  <section class="tag_cloud" id="tagcloud">
+	    <ul >
+	      {% for tag,count in tags.items %}
+	      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
+	      {% endfor %}
+	    </ul
+	  </section>
+   
 		<section id="top">
 			<header>
 				<h1><a href="/">Techism</a></h1>
@@ -62,13 +70,7 @@
 			</nav>
 		</section>
 
-	  <section class="tag_cloud" id="tagcloud">
-	    <ul >
-	      {% for tag,count in tags.items %}
-	      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
-	      {% endfor %}
-	    </ul
-	  </div>
+
 
     {% block content %}{% endblock %}
 	<footer>                          
