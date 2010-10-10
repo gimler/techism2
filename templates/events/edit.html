@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <link type="text/css" href="/static/jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css" media="screen" rel="stylesheet"  />
+{% endblock %}
+
+
+{% block content %}
+<section id="content">
+  <form action="" method="post">    
+    {% csrf_token %}
+    {{ form.id }}
+    {{ form.title.label_tag }} {{ form.title }}<br>
+    {{ form.dateBegin.label_tag }} {{ form.dateBegin }}<br>
+    {{ form.dateEnd.label_tag }} {{ form.dateEnd }}<br>
+    {{ form.url.label_tag }} {{ form.url }}<br>
+    {{ form.description.label_tag }} {{ form.description  }}<br>
+    {{ form.tags.label_tag }} {{ form.tags }}<br>     
+    
+    <input type="submit" value="Veranstaltung Ändern" />
+  </form>
+</section>
+{% endblock %}
+
+
+{% block scripts %}
+  <script type="text/javascript">
+     $(function() {
+         $("#id_dateBegin").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_dateEnd").datepicker({ dateFormat: 'yy-mm-dd' });
+     });
+  </script>
+{% endblock %}
