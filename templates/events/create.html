@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
-  <link type="text/css" href="/static/jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css" media="screen" rel="stylesheet"  />
+  <link type="text/css" href="/static/jquery/css/custom-theme/jquery-ui-1.8.5.custom.css" media="screen" rel="stylesheet"  />
 {% endblock %}
 
 
@@ -16,14 +16,11 @@
     {{ form.url.label_tag }} {{ form.url }}<br>
     {{ form.description.label_tag }} {{ form.description  }}<br>
     <b>{{ form.location.label_tag }}</b><br>
-    <div>
     vorhandene  auswählen: {{ form.location }}<br>
-    </div><div>
     oder neue anlegen:<br>
     {{ form.location_name.label_tag }} {{ form.location_name }}<br>
     {{ form.location_street.label_tag }} {{ form.location_street }}<br>
     {{ form.location_city.label_tag }} {{ form.location_city }}<br>
-    </div>
     {{ form.tags.label_tag }} {{ form.tags }}<br>     
     
     <input type="submit" value="Veranstaltung Eintragen" />
