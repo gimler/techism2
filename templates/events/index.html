@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block content %}
 <section id="content">
   {% if event_list %}
@@ -16,12 +17,18 @@
             		<section id="tags">{{ event.tags|default_if_none:""|join:", " }}</section>
 	            <h3>Wann</h3>
 				<section id="begin">{{ event.dateBegin }}</section>
+				{% if event.dateEnd %} bis
+				    <section id="end">{{ event.dateEnd }}</section>
+				{% endif %}
 	            <h3>Wo</h3>
             	Veranstaltungsort: 
-				<section id="location">{{event.location.name}}</section>  
-            	{% if event.location.latitude and event.location.longitude %}
-				<img src="http://maps.google.com/maps/api/staticmap?size=500x200&markers=icon:http://chart.apis.google.com/chart%3Fchst%3Dd_map_pin_icon%26chld%3Dcafe%257C996600|224+West+20th+Street|75+9th+Ave|700+E+9th+St&sensor=true" style="height:auto;width:100%;"/>
-				{% endif %}
+				<section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>  
+            	 {% if event.location.latitude and event.location.longitude %}
+				          <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
+				       {% endif %}
+				       {% if not event.location.latitude and event.location.street and event.location.city  %}
+				          <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>          
+				       {% endif %}
 			</section>                
 			
 		</article>
