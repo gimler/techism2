@@ -27,14 +27,6 @@
 		</article>
       {% endfor %}
 
-	  {% if user.is_authenticated %}
-		<article>
-			<header>
-				<h2><a href="/events/create">Event hinzufügen</a></h2>
-			</header>  
-		</article>
-	  {% endif %}
-
   {% else %}
       <p>No events are available.</p>
   {% endif %}  
