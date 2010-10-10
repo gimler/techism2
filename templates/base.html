@@ -8,20 +8,24 @@
     <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
 	$(document).ready(function(){
-	$(".event h2 a").attr("href", "#");
+	$(".event h2 a").attr("href", "#event");
    	$(".detail").hide();  
 	/* hover for mouse enabled devices */
+/*
 	$(".event").mouseenter(function() {
 		$(this).children(".detail").slideToggle(300);
     });
 	$(".event").mouseleave(function() {
 		$(this).children(".detail").slideToggle(400);
     });  
+*/
 	/* clicks for touch interface */
 
 	$(".event").click(function() {
 		$(this).children(".detail").slideToggle(300);
-    });  
+    }); 
+
+ 	$(".event:last").addClass("last");
 
    });
 	</script> 
@@ -51,10 +55,18 @@
 			<nav>
 				<ul>
 				<li id="active"><a href="/events/">Events</a></li>
-				<li id="active"><a href="/events/create">Event hinzufügen</a></li>
+				<li><a href="/events/create">Event hinzufügen</a></li>
 				</ul>
 			</nav>
 		</section>
+
+	  <section class="tag_cloud" id="tagcloud">
+	    <ul >
+	      {% for tag,count in tags.items %}
+	      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
+	      {% endfor %}
+	    </ul
+	  </div>
 
     {% block content %}{% endblock %}
 	<footer>                          
