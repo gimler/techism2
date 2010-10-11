@@ -8,6 +8,9 @@
 			<header>
 				<h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
 				<div id="datebox"><div id="shortdate">{{ event.dateBegin }}</div></div>
+				{% if event.user == user or user.is_superuser %}
+				  <div id="editlink"><a href="/events/edit/{{ event.id }}/">Edit</a></div>
+				{% endif %}
 			</header>  
                    
             <section class="detail">

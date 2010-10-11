@@ -1,10 +1,10 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseForbidden
 from techism2.events.models import Event, Address
 from techism2.events.forms import EventForm
 from datetime import datetime
-from django.contrib.auth.decorators import login_required
 from techism2.events import tag_cloud
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth import logout as django_logout
@@ -56,6 +56,24 @@ def create(request):
     form = EventForm ()
     return render_to_response('events/create.html', {'form': form}, context_instance=RequestContext(request))
 
+def edit(request, event_id):
+    event = Event.objects.get(id=event_id)
+    if event.user != request.user and request.user.is_superuser == False:
+        return HttpResponseForbidden()
+
+    if request.method == 'POST': 
+        form = EventForm(request.POST) 
+        if form.is_valid(): 
+            event= __editEvent(form, event)
+            # TODO: handle address modification
+            event.save()
+            return HttpResponseRedirect('/events/')
+        else:
+            return render_to_response('events/create.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
+
+    form = __toEventForm(event)
+    return render_to_response('events/edit.html', {'form': form}, context_instance=RequestContext(request))
+
 def logout(request):
     django_logout(request)
     return HttpResponseRedirect('/')
@@ -73,9 +91,33 @@ def __createEvent (form, user):
         event.user=user
     return event
 
+def __editEvent (form, event):
+    event.title=form.cleaned_data['title']
+    event.dateBegin=form.cleaned_data['dateBegin']
+    event.dateEnd=form.cleaned_data['dateEnd']
+    event.url=form.cleaned_data['url']
+    event.description=form.cleaned_data['description']
+    event.tags=form.cleaned_data['tags']
+    return event
+
 def __createAddress (form):
     address = Address()
     address.name=form.cleaned_data['location_name']
     address.street=form.cleaned_data['location_street']
     address.city=form.cleaned_data['location_city']
     return address
+
+def __toEventForm (event):
+    data = {'title': event.title,
+            'dateBegin': event.dateBegin,
+            'dateEnd': event.dateEnd,
+            'url': event.url,
+            'description': event.description,
+            'location': event.location.id,
+            'tags': event.tags,
+            'location_name': event.location.name,
+            'location_street': event.location.street,
+            'location_city': event.location.city
+            }
+    form = EventForm(data)
+    return form;
