@@ -31,7 +31,8 @@
           map.setCenter(results[0].geometry.location);
           var marker = new google.maps.Marker({
               map: map, 
-              position: results[0].geometry.location
+              position: results[0].geometry.location,
+              draggable: true
           });
         } else {
           document.getElementById("map_error").innerHTML="Geocode war nicht erfolgreich: " + status;
@@ -53,21 +54,40 @@
   <form action="/events/create/" method="post">    
     {% csrf_token %}
     {{ form.id }}
+    
+    {{ form.title.errors }}
     {{ form.title.label_tag }} {{ form.title }}<br>
+    
+    {{ form.dateBegin.errors }}
     {{ form.dateBegin.label_tag }} {{ form.dateBegin }}<br>
+    
+    {{ form.dateEnd.errors }}
     {{ form.dateEnd.label_tag }} {{ form.dateEnd }}<br>
+    
+    {{ form.url.errors }}
     {{ form.url.label_tag }} {{ form.url }}<br>
+    
+    {{ form.description.errors }}
     {{ form.description.label_tag }} {{ form.description  }}<br>
+    
+    {{ form.tags.errors }}
     {{ form.tags.label_tag }} {{ form.tags }}<br><br> 
+    
     <b>{{ form.location.label_tag }}</b><br>
     vorhandene  auswählen: {{ form.location }}<br>
     oder neue anlegen:<br>
+    
+    {{ form.location_name.errors }}
     {{ form.location_name.label_tag }} {{ form.location_name }}<br>
+    
+    {{ form.location_street.errors }}
     {{ form.location_street.label_tag }} {{ form.location_street }}<br>
+    
+    {{ form.location_city.errors }}
     {{ form.location_city.label_tag }} {{ form.location_city }}<br>
     <input onclick="displayAddress()" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
     <div id="map_canvas" style="height: 400px; width: 600px"></div>
-    <input type="submit" value="Veranstaltung Eintragen" />
+    <input type="submit" value="Event hinzufügen" />
   </form>
   
 </section>

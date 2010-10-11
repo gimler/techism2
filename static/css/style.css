@@ -158,6 +158,10 @@ nav li {
 .event header #shortdate{
 	display: table-cell; 
 	vertical-align:middle;
+}
+
+.errorlist {
+    color: #f74440;
 }   
 
 label {
