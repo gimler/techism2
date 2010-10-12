@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<section id="tagcloud">
+    {% for tag,count in tags.items %}
+        <a class="tagsize{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
+    {% endfor %}
+</section>
+
 <section id="content">
     {% if event_list %}
         {% for event in event_list.object_list %} 
@@ -58,14 +65,4 @@
         {% endif %}
     </span>
 </div>
-{% endblock %}
-
-{% block scripts %}  
-<script type="text/javascript" src="/static/jquery/js/jquery-tagcloud-0.5.0.min.js"></script> 
-<script type="text/javascript" src="/static/jquery/js/jquery-tinysort-1.0.1.min.js"></script> 
-<script type="text/javascript">
-    $(function(){
-      $("#tagcloud>ul").tagcloud({type:"list",colormin:"2FF21D",colormax:"2FF21D"}).find("li").tsort();
-    });
-</script>
 {% endblock %}

@@ -62,14 +62,6 @@
 			</nav>
 		</section>
 
-	  <section class="tag_cloud" id="tagcloud">
-	    <ul >
-	      {% for tag,count in tags.items %}
-	      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
-	      {% endfor %}
-	    </ul
-	  </section>
-
     {% block content %}{% endblock %}
 	<footer>                          
 		<nav>
