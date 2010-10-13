@@ -12,7 +12,8 @@ section, header, footer, aside, nav, article {
 body {
 	margin: 0 auto;
 	width: 85%;
-	font: 13px/22px Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-family: 'Nobile', Trebuchet MS, Helvetica, Arial, sans-serif;
+	font: 13px/22px;
 	background: 
 	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
 	/*url("/static/images/logo_net.gif")  no-repeat -50px 10px,*/
