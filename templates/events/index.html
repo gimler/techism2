@@ -1,49 +1,56 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<section id="tagcloud">
+    {% for tag,count in tags.items %}
+        <a class="tagsize{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
+    {% endfor %}
+</section>
+
 <section id="content">
-  {% if event_list %}
-      {% for event in event_list.object_list %} 
-		<article class="event">
-			<header>
-				<h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
-				<div id="datebox"><div id="shortdate">{{ event.dateBegin }}</div></div>
-				{% if event.user == user or user.is_superuser %}
-				  <div id="editlink"><a href="/events/edit/{{ event.id }}/">Edit</a></div>
-				{% endif %}
-			</header>  
-                   
-            <section class="detail">
-	            <h3>Was</h3>
-					<section id="description">{{ event.description }}</section>            		
-					<section id="url"><a href="{{ event.url }}">{{ event.url }}</a></section>
-            		<section id="tags">{{ event.tags|default_if_none:""|join:", " }}</section>
-	            <h3>Wann</h3>
-				<section id="begin">{{ event.dateBegin }}</section>
-				{% if event.dateEnd %} bis
-				    <section id="end">{{ event.dateEnd }}</section>
-				{% endif %}
-	            <h3>Wo</h3>
-            	Veranstaltungsort: 
-				<section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>  
-            	 {% if event.location.latitude and event.location.longitude %}
-				          <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
-				       {% endif %}
-				       {% if not event.location.latitude and event.location.street and event.location.city  %}
-				          <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>          
-				       {% endif %}
-			</section>                
-			
-		</article>
-      {% endfor %}
-
-  {% else %}
-      <p>No events are available.</p>
-  {% endif %}  
-
-</section>   
-  
-  <div class="pagination">
+    {% if event_list %}
+        {% for event in event_list.object_list %} 
+            <article class="event">
+                <header>
+                    <h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
+                    <div id="datebox"><div id="shortdate">{{ event.dateBegin }}</div></div>
+                    {% if event.user == user or user.is_superuser %}
+                        <div id="editlink"><a href="/events/edit/{{ event.id }}/">Edit</a></div>
+                    {% endif %}
+                </header>  
+                
+                <section class="detail">
+                    <h3>Was</h3>
+                    <section id="description">{{ event.description }}</section>            		
+                    <section id="url"><a href="{{ event.url }}">{{ event.url }}</a></section>
+                    <section id="tags">
+                        {% for tag in event.tags %}
+                            <a href="#">{{ tag }}</a>
+                        {% endfor %}
+                    </section>
+                    <h3>Wann</h3>
+                    <section id="begin">{{ event.dateBegin }}</section>
+                    {% if event.dateEnd %} bis
+                        <section id="end">{{ event.dateEnd }}</section>
+                    {% endif %}
+                    <h3>Wo</h3>
+                    Veranstaltungsort: 
+                    <section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>  
+                    {% if event.location.latitude and event.location.longitude %}
+                        <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
+                    {% endif %}
+                    {% if not event.location.latitude and event.location.street and event.location.city  %}
+                        <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>          
+                   {% endif %}
+                </section>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No events are available.</p>
+    {% endif %}  
+</section>
+<div class="pagination">
     <span class="step-links">
         {% if event_list.has_previous %}
             <a href="?page={{ event_list.previous_page_number }}">vorherige</a>
@@ -57,17 +64,5 @@
             <a href="?page={{ event_list.next_page_number }}">nächste</a>
         {% endif %}
     </span>
-  </div>
-  
-
-{% endblock %}
-
-{% block scripts %}  
-  <script type="text/javascript" src="/static/jquery/js/jquery-tagcloud-0.5.0.min.js"></script> 
-  <script type="text/javascript" src="/static/jquery/js/jquery-tinysort-1.0.1.min.js"></script> 
-  <script type="text/javascript">
-$(function(){
-  $("#tagcloud>ul").tagcloud({type:"list",colormin:"2FF21D",colormax:"2FF21D"}).find("li").tsort();
-});
-  </script>
+</div>
 {% endblock %}

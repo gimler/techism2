@@ -19,26 +19,4 @@
   
   <a href="/events">Zu den aktuellen Veranstaltungen</a>
   
-  <div class="clear_left"/>
-  
-  <div class="tag_cloud" id="tagcloud">
-    Tag Cloud
-    <ul>
-      {% for tag,count in tags.items %}
-      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
-      {% endfor %}
-    </ul
-  </div>  
-</div>
-{% endblock %}
-
-{% block scripts %}  
-  <script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
-  <script type="text/javascript" src="/static/jquery/js/jquery-tagcloud-0.5.0.min.js"></script> 
-  <script type="text/javascript" src="/static/jquery/js/jquery-tinysort-1.0.1.min.js"></script> 
-  <script type="text/javascript">
-$(function(){
-  $("#tagcloud>ul").tagcloud({type:"list",colormin:"2FF21D",colormax:"2FF21D"}).find("li").tsort();
-});
-  </script>
 {% endblock %}
