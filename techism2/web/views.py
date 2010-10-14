@@ -68,10 +68,10 @@ def logout(request):
     django_logout(request)
     return HttpResponseRedirect('/')
 
-def __saveEvent(request, button_label, event=Event()):
+def __saveEvent(request, button_label, old_event=None):
     form = EventForm(request.POST) 
     if form.is_valid(): 
-        event= __createEvent(form, request.user, event)
+        event= __createEvent(form, request.user, old_event)
         if event.location == None:
             location=__createLocation(form)
             location.save()
@@ -90,6 +90,8 @@ def __saveEvent(request, button_label, event=Event()):
 
 def __createEvent (form, user, event):
     "Creates an Event from the submitted EventForm"
+    if event == None:
+        event = Event()
     event.title=form.cleaned_data['title']
     event.set_date_time_begin_cet(form.cleaned_data['date_time_begin'])
     event.set_date_time_end_cet(form.cleaned_data['date_time_end'])
