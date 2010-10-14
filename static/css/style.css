@@ -12,7 +12,8 @@ section, header, footer, aside, nav, article {
 body {
 	margin: 0 auto;
 	width: 85%;
-	font: 13px/22px Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-family: 'Nobile', Trebuchet MS, Helvetica, Arial, sans-serif;
+	font: 13px/22px;
 	background: 
 	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
 	#232323 url("/static/images/bg_noise.gif") repeat;
@@ -173,6 +174,10 @@ nav li {
 .event header #shortdate{
 	display: table-cell; 
 	vertical-align:middle;
+}
+
+.errorlist {
+    color: #f74440;
 }   
 
 label {
