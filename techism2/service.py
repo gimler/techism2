@@ -1,9 +1,6 @@
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import HttpResponseRedirect
 from techism2.models import Event
 from datetime import datetime
-from django.contrib.auth.decorators import login_required
+
 
 def get_tags():
     # TODO: cache, use django cache which uses GAE memcache
@@ -17,4 +14,4 @@ def get_tags():
                         tags[tag] = 0
                     tags[tag] += 1
     return tags
-    
+

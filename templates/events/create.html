@@ -51,8 +51,6 @@
     das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.
     {% endif %}
 
-    {{ error }}
-
   <form action="/events/create/" method="post">    
     {% csrf_token %}
     {{ form.id }}
@@ -60,11 +58,11 @@
     {{ form.title.errors }}
     {{ form.title.label_tag }} {{ form.title }}<br>
     
-    {{ form.dateTimeBegin.errors }}
-    {{ form.dateTimeBegin.label_tag }} {{ form.dateTimeBegin }}<br>
+    {{ form.date_time_begin.errors }}
+    {{ form.date_time_begin.label_tag }} {{ form.date_time_begin }}<br>
     
-    {{ form.dateTimeEnd.errors }}
-    {{ form.dateTimeEnd.label_tag }} {{ form.dateTimeEnd }}<br>
+    {{ form.date_time_end.errors }}
+    {{ form.date_time_end.label_tag }} {{ form.date_time_end }}<br>
     
     {{ form.url.errors }}
     {{ form.url.label_tag }} {{ form.url }}<br>
@@ -99,8 +97,8 @@
 {% block scripts %}
   <script type="text/javascript">
      $(function() {
-         $("#id_dateTimeBegin_0").datepicker({ dateFormat: 'yy-mm-dd' });
-         $("#id_dateTimeEnd_0").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_date_time_begin_0").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_date_time_end_0").datepicker({ dateFormat: 'yy-mm-dd' });
      });
   </script>
 {% endblock %}

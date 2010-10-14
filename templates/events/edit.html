@@ -12,8 +12,8 @@
     {% csrf_token %}
     {{ form.id }}
     {{ form.title.label_tag }} {{ form.title }}<br>
-    {{ form.dateTimeBegin.label_tag }} {{ form.dateTimeBegin }}<br>
-    {{ form.dateTimeEnd.label_tag }} {{ form.dateTimeEnd }}<br>
+    {{ form.date_time_begin.label_tag }} {{ form.date_time_begin }}<br>
+    {{ form.date_time_end.label_tag }} {{ form.date_time_end }}<br>
     {{ form.url.label_tag }} {{ form.url }}<br>
     {{ form.description.label_tag }} {{ form.description  }}<br>
     {{ form.tags.label_tag }} {{ form.tags }}<br>     
@@ -27,8 +27,8 @@
 {% block scripts %}
   <script type="text/javascript">
      $(function() {
-         $("#id_dateTimeBegin_0").datepicker({ dateFormat: 'yy-mm-dd' });
-         $("#id_dateTimeEnd_0").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_date_time_begin_0").datepicker({ dateFormat: 'yy-mm-dd' });
+         $("#id_date_time_end_0").datepicker({ dateFormat: 'yy-mm-dd' });
      });
   </script>
 {% endblock %}
