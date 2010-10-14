@@ -40,72 +40,64 @@ def tag(request, tag_name):
     return render_to_response('events/tag.html', {'event_list': event_list, 'tag_name': tag_name, 'tags': tags}, context_instance=RequestContext(request))
 
 def create(request):
-    if request.method == 'POST': 
-        form = EventForm(request.POST) 
-        if form.is_valid(): 
-            event= __createEvent(form, request.user)
-            if event.location == None:
-                location=__createLocation(form)
-                location.save()
-                event.location=location
-            event.save()
-            return HttpResponseRedirect('/events/')
-        else:
-            return render_to_response(
-                'events/event.html',
-                {
-                    'form': form, 
-                    'error': form.errors,
-                    'button_label': u'Event hinzuf\u00FCgen'
-                },
-                context_instance=RequestContext(request))
-    form = EventForm ()
+    button_label = u'Event hinzuf\u00FCgen'
+    
+    if request.method == 'POST':
+        return __saveEvent(request, button_label)
+    
     return render_to_response(
         'events/event.html',
         {
-            'form': form,
-            'button_label': u'Event hinzuf\u00FCgen'
+            'form': EventForm(),
+            'button_label': button_label
         },
         context_instance=RequestContext(request))
 
 def edit(request, event_id):
+    button_label = u'Event \u00E4ndern'
+    
     event = Event.objects.get(id=event_id)
     if event.user != request.user and request.user.is_superuser == False:
         return HttpResponseForbidden()
-
-    if request.method == 'POST': 
-        form = EventForm(request.POST) 
-        if form.is_valid(): 
-            event= __editEvent(form, event)
-            # TODO: handle location modification
-            event.save()
-            return HttpResponseRedirect('/events/')
-        else:
-            return render_to_response(
-                'events/event.html',
-                {
-                    'form': form, 
-                    'error': form.errors,
-                    'button_label': u'Event \u00E4ndern'
-                },
-                context_instance=RequestContext(request))
-
+    
+    if request.method == 'POST':
+        return __saveEvent(request, button_label, event)
+    
     form = __toEventForm(event)
     return render_to_response(
         'events/event.html',
         {
             'form': form,
-            'button_label': u'Event \u00E4ndern'
+            'button_label': button_label
         },
         context_instance=RequestContext(request))
-
 
 def logout(request):
     django_logout(request)
     return HttpResponseRedirect('/')
 
-def __createEvent (form, user):
-    event = Event()
+def __saveEvent(request, button_label, event=Event()):
+    form = EventForm(request.POST) 
+    if form.is_valid(): 
+        event= __createEvent(form, request.user, event)
+        if event.location == None:
+            location=__createLocation(form)
+            location.save()
+            event.location=location
+        event.save()
+        return HttpResponseRedirect('/events/')
+    else:
+        return render_to_response(
+            'events/event.html',
+            {
+                'form': form, 
+                'error': form.errors,
+                'button_label': button_label
+            },
+            context_instance=RequestContext(request))
+
+def __createEvent (form, user, event):
+    "Creates an Event from the submitted EventForm"
     event.title=form.cleaned_data['title']
     event.set_date_time_begin_cet(form.cleaned_data['date_time_begin'])
     event.set_date_time_end_cet(form.cleaned_data['date_time_end'])
@@ -113,20 +105,12 @@ def __createEvent (form, user):
     event.description=form.cleaned_data['description']
     event.location=form.cleaned_data['location']
     event.tags=form.cleaned_data['tags']
-    if user.is_authenticated():
+    if event.user == None and user.is_authenticated():
         event.user=user
     return event
 
-def __editEvent (form, event):
-    event.title=form.cleaned_data['title']
-    event.set_date_time_begin_cet(form.cleaned_data['date_time_begin'])
-    event.set_date_time_end_cet(form.cleaned_data['date_time_end'])
-    event.url=form.cleaned_data['url']
-    event.description=form.cleaned_data['description']
-    event.tags=form.cleaned_data['tags']
-    return event
-
 def __createLocation (form):
+    "Creates a Location from the submitted EventForm"
     location = Location()
     location.name=form.cleaned_data['location_name']
     location.street=form.cleaned_data['location_street']
@@ -134,6 +118,7 @@ def __createLocation (form):
     return location
 
 def __toEventForm (event):
+    "Converts an Event to an EventForm"
     data = {'title': event.title,
             'date_time_begin': event.get_date_time_begin_cet(),
             'date_time_begin_0': event.get_date_time_begin_cet(),
