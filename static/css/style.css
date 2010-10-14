@@ -12,12 +12,13 @@ section, header, footer, aside, nav, article {
 body {
 	margin: 0 auto;
 	width: 85%;
-	font: 13px/22px Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
+	font: 13px/22px;
 	background: 
 	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
-	/*url("/static/images/logo_net.gif")  no-repeat -50px 10px,*/
 	#232323 url("/static/images/bg_noise.gif") repeat;
-}
+}  
+
   
 #admin {         
 	background-color:#FFFFFF;
@@ -27,12 +28,22 @@ body {
 	padding:5px;	 	
 }
 
-nav a {
+nav a, li {
 	color:#ffffff;
 	text-decoration: none;
+} 
+
+nav #syndicate a {
+	text-decoration: none;
+	font-weight:light;
 }
 
 nav #active a {
+	color:#00ff00;
+	text-decoration: none;
+}
+
+#url a {
 	color:#00ff00;
 	text-decoration: none;
 } 
@@ -57,14 +68,14 @@ h2 {
 h2 a {
 	text-decoration:none;
 	color:#000000;
-}            
+} 
+
+h3 {
+	line-height: 0;
+	margin-top:20px;
+}           
 
 #datebox{
-	/*display:inline;*/
-/*	background: #afafaf;
-	color:#FFFFFF;
-	padding:5px; 
-	border-radius: 5px;  */ 
 	margin-left:10px; 
 } 
 
@@ -75,17 +86,40 @@ h2 a {
 	padding:3px;  
 	}
 
-.tags a {
-	background: #cdcdcd;
+#tagcloud a {
+/*	background: #cdcdcd;*/
+	background: #000000;
+	font-color:#FFFFFF;
 	color:#FFFFFF;
 	padding:5px; 
-	border-radius: 22px; 
+	border-radius: 5px;
 	text-decoration: none; 
+	border: 1px solid grey;
 }
 
-h3 {
-	font-size: 18px;
-	line-height: 22px;
+#tagcloud a:hover {     
+	background: #424242;
+}
+
+#tagcloud {
+	padding:5px; 
+	border-radius: 5px;
+	text-decoration: none;
+	line-height:35px;  
+}          
+
+.tags, #tags a {
+/*	background: #cdcdcd;*/
+	background: #000000;
+	color:#FFFFFF;
+	padding:5px; 
+	border-radius: 5px; 
+	text-decoration: none; 
+	line-height:40px;  
+}
+
+#tags a:hover {     
+	background: #424242;
 }
 
 p {
@@ -123,12 +157,12 @@ footer nav #synicate{
 ul {
 	padding: 0px;
 }
-
+                 
 nav li {
 	font-size: 28px;
 	list-style: none; 
-	float: left;
 	margin-right: 20px;
+	float: left; 	
 }  
 
 
@@ -139,7 +173,7 @@ nav li {
 
 .event {
 	border-bottom:1px solid #afafaf;
-	padding:5px 5px 5px 5px;
+	padding:5px 5px 5px 10px;
 }
 
 .last {
@@ -158,12 +192,18 @@ nav li {
 .event header #shortdate{
 	display: table-cell; 
 	vertical-align:middle;
+}
+
+.errorlist {
+    color: #f74440;
 }   
 
 label {
   width: 130px;
   display: inline-block;
   padding: 5px;
-}
+}       
+
+
 	
-}
+

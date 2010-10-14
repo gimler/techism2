@@ -5,14 +5,18 @@
 	<meta name="viewport" content="width=440, height=320, user-scalable=yes" />
     <title>Techism</title>
 	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular&subset=latin">
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">
+	<!--ink rel="stylesheet/less" href="/static/css/style.less" type="text/css" --/>
+	<!--script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script-->
     <link href="/static/css/style.css" media="screen" rel="stylesheet" type="text/css" />
   	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
     <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
 	$(document).ready(function(){
 	$(".event h2 a").attr("href", "#event");
-   	$(".detail").hide();  
+   	$(".detail").hide(); 
+ 	$("#admin").hide();
 	/* hover for mouse enabled devices */
 /*
 	$(".event").mouseenter(function() {
@@ -33,7 +37,6 @@
 	</script> 
 	
 	
-	
     {% block head %}{% endblock %}
 </head>
 
@@ -49,7 +52,7 @@
           	  <a href="/accounts/login/">Login</a>
           	{% endif %}
    	   	</section>
-    
+   
 		<section id="top">
 			<header>
 				<h1><a href="/">Techism</a></h1>
@@ -65,20 +68,32 @@
     {% block content %}{% endblock %}
 	<footer>                          
 		<nav>
+
+			<ul>
+			<li>
+	        {% if event_list.has_previous %}
+	            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
+	        {% endif %}
+	        <span class="current">
+	            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
+	        </span>
+	        {% if event_list.has_next %}
+	            <a href="?page={{ event_list.next_page_number }}">&raquo;</a>
+	        {% endif %}
+			</li>
+			</ul>			
+			
 			<ul>
 			<li><a href="/events/archive">Archiv</a></li>
 			<li><a href="#">&Uuml;ber uns</a></li>
 			<li><a href="/events/impressum/">Impressum</a></li>
+			</ul>           
+			<ul id="syndicate">            
 			<li><a href="#">API</a></li>
-			</ul>
-		</nav>
-		<nav id="syndicate">
-			<ul>
 			<li><a href="#">iCal</a></li>
 			<li><a href="#">RSS</a></li>
 			<li><a href="http://twitter.com/techism">Twitter</a></li>
-			</ul>
-		</nav>            
+			</ul>           
 	</footer>
     
     {% block scripts %}{% endblock %}
