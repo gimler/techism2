@@ -11,33 +11,25 @@ from django.contrib.auth import logout as django_logout
 
 
 def index(request):
-    tags = service.get_tags()
     event_list = Event.objects.filter(date_time_begin__gte=datetime.today()).order_by('date_time_begin')
-    
-    try:
-        page = int(request.GET.get('page', '1'))
-    except ValueError:
-        page = 1
-    
-    paginator = Paginator(event_list, 10);
-    try:
-        event_list = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        event_list = paginator.page(paginator.num_pages)
-    
-    return render_to_response('events/index.html', {'event_list': event_list, 'tags': tags}, context_instance=RequestContext(request))
+    tags = service.get_tags()
+    page = __getPaginatorPage(request, event_list)
+    return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def archive(request):
-    event_list = Event.objects.filter(dateTimeBegin__lt=datetime.today()).order_by('dateTimeBegin')[:10]
-    return render_to_response('events/archive.html', {'event_list' : event_list}, context_instance=RequestContext(request))
+    event_list = Event.objects.filter(date_time_begin__lt=datetime.today()).order_by('-date_time_begin')
+    tags = service.get_tags()
+    page = __getPaginatorPage(request, event_list)
+    return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
+
+def tag(request, tag_name):
+    event_list = Event.objects.filter(tags=tag_name).order_by('date_time_begin')
+    tags = service.get_tags()
+    page = __getPaginatorPage(request, event_list)
+    return render_to_response('events/index.html', {'event_list': page, 'tags': tags, 'tag_name': tag_name}, context_instance=RequestContext(request))
 
 def impressum(request):
     return render_to_response('events/impressum.html', {}, context_instance=RequestContext(request))
-
-def tag(request, tag_name):
-    tags = service.get_tags()
-    event_list = Event.objects.filter(tags=tag_name)
-    return render_to_response('events/tag.html', {'event_list': event_list, 'tag_name': tag_name, 'tags': tags}, context_instance=RequestContext(request))
 
 def create(request):
     button_label = u'Event hinzuf\u00FCgen'
@@ -137,4 +129,17 @@ def __toEventForm (event):
     form = EventForm(data)
     return form;
 
+def __getPaginatorPage(request, event_list):
+    try:
+        num = int(request.GET.get('page', '1'))
+    except ValueError:
+        num = 1
+    
+    paginator = Paginator(event_list, 10);
+    try:
+        page = paginator.page(num)
+    except (EmptyPage, InvalidPage):
+        page = paginator.page(paginator.num_pages)
+    
+    return page
 
