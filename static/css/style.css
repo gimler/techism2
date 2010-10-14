@@ -15,9 +15,9 @@ body {
 	font: 13px/22px Trebuchet MS, Helvetica, Arial, sans-serif;
 	background: 
 	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
-	/*url("/static/images/logo_net.gif")  no-repeat -50px 10px,*/
 	#232323 url("/static/images/bg_noise.gif") repeat;
-}
+}  
+
   
 #admin {         
 	background-color:#FFFFFF;
@@ -33,6 +33,11 @@ nav a {
 }
 
 nav #active a {
+	color:#00ff00;
+	text-decoration: none;
+}
+
+#url a {
 	color:#00ff00;
 	text-decoration: none;
 } 
@@ -61,6 +66,7 @@ h2 a {
 
 h3 {
 	line-height: 0;
+	margin-top:20px;
 }           
 
 #datebox{
@@ -89,17 +95,12 @@ h3 {
 	text-decoration: none; 
 }          
 
-.tags a {
+.tags, #tags a {
 	background: #cdcdcd;
 	color:#FFFFFF;
 	padding:5px; 
-	border-radius: 22px; 
+	border-radius: 5px; 
 	text-decoration: none; 
-}
-
-h3 {
-	font-size: 18px;
-	line-height: 22px;
 }
 
 p {

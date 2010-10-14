@@ -6,13 +6,16 @@
     <title>Techism</title>
 	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">
+	<!--ink rel="stylesheet/less" href="/static/css/style.less" type="text/css" --/>
+	<!--script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script-->
     <link href="/static/css/style.css" media="screen" rel="stylesheet" type="text/css" />
   	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
     <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
 	$(document).ready(function(){
 	$(".event h2 a").attr("href", "#event");
-   	$(".detail").hide();  
+   	$(".detail").hide(); 
+ 	$("#admin").hide();
 	/* hover for mouse enabled devices */
 /*
 	$(".event").mouseenter(function() {
@@ -33,7 +36,6 @@
 	</script> 
 	
 	
-	
     {% block head %}{% endblock %}
 </head>
 
@@ -50,13 +52,11 @@
           	{% endif %}
    	   	</section>
  
-	  <section class="tag_cloud" id="tagcloud">
-	    <ul >
-	      {% for tag,count in tags.items %}
-	      <li value="{{ count }}"><a href="/events/tags/{{ tag }}/">{{ tag }}</a> </li> 
-	      {% endfor %}
-	    </ul
-	  </section>
+		<section id="tagcloud">
+		    {% for tag,count in tags.items %}
+		        <a id="{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
+		    {% endfor %}
+		</section>
    
 		<section id="top">
 			<header>

@@ -2,12 +2,6 @@
 
 {% block content %}
 
-<section id="tagcloud">
-    {% for tag,count in tags.items %}
-        <a class="tagsize{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
-    {% endfor %}
-</section>
-
 <section id="content">
     {% if event_list %}
         {% for event in event_list.object_list %} 
