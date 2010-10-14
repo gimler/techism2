@@ -1,9 +1,21 @@
 from techism2.models import Event
 from datetime import datetime
+from django.core.cache import cache
 
+tags_cache_key = "tags"
 
 def get_tags():
-    # TODO: cache, use django cache which uses GAE memcache
+    # Note: no synchronization, propably not possible on GAE
+    tags = cache.get(tags_cache_key)
+    
+    if tags:
+        return tags
+    else:
+        tags = __fetch_tags()
+        cache.set(tags_cache_key, tags, 1800) # expire after 30 min
+        return tags
+
+def __fetch_tags():
     dict_list = Event.objects.values('tags')
     tags = dict()    
     for dictionary in dict_list:

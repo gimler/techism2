@@ -19,4 +19,22 @@ class EventForm(forms.Form):
     location_city = forms.CharField(label= u'Ort', max_length=200,required=False)
     #latitude = forms.FloatField(required=False)
     #longitude = forms.FloatField(required=False)
-  
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        location_name = cleaned_data.get("location_name")
+        location_street = cleaned_data.get("location_street")
+        location_city = cleaned_data.get("location_city")
+        
+        if location_name or location_street or location_city:
+            if not location_name:
+                self._errors["location_name"] = self.error_class([u'Alle Location Felder m\u00FCssen gef\u00FCllt sein.'])
+                del cleaned_data["location_name"]
+            if not location_street:
+                self._errors["location_street"] = self.error_class([u'Alle Location Felder m\u00FCssen gef\u00FCllt sein.'])
+                del cleaned_data["location_street"]
+            if not location_city:
+                self._errors["location_city"] = self.error_class([u'Alle Location Felder m\u00FCssen gef\u00FCllt sein.'])
+                del cleaned_data["location_city"]
+        
+        return cleaned_data 
