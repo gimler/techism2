@@ -30,13 +30,9 @@
                     {% endif %}
                     <h3>Wo</h3>
                     {% if event.location.name and event.location.street and event.location.city %}
-                        <section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>  
-                        {% if event.location.latitude and event.location.longitude %}
-                            <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
-                        
-                        {% else  %}
-                            <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>          
-                       {% endif %}
+                        <section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>     
+                        <img src="http://maps.google.com/maps/api/staticmap?center=48.13788,11.575953&size=300x200&zoom=15&sensor=false" />
+                        <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
                    {% else %}
                         ist uns leider nicht bekannt...
                    {% endif %}
