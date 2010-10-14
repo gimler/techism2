@@ -50,3 +50,8 @@ indexes:
   properties:
   - name: __key__
     direction: desc
+
+- kind: techism2_event
+  properties:
+  - name: tags
+  - name: date_time_begin

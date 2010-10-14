@@ -17,7 +17,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django_openid_auth',
-    'techism2.events',
+    'techism2.web',
 )
 
 if has_djangoappengine:

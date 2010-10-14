@@ -5,6 +5,14 @@ Prerequisites:
 - Python 2.5 (only Python Version supported by AppEngine)
 - Appengine SDK must be added to PATH (Download: http://code.google.com/intl/de-DE/appengine/downloads.html#Google_App_Engine_SDK_for_Python)
 
+Update
+------
+Update django-nonrel:
+  hg clone http://bitbucket.org/wkornewald/django-nonrel
+  cd django-nonrel
+  zip -r django.zip django
+  mv django.zip .../techism2/zip-packages/
+
 
 Uses Django-nonrel and djangoappengine
 http://www.allbuttonspressed.com/projects/django-nonrel
@@ -23,44 +31,44 @@ Deployment to App Engine:
 python manage.py deploy
 (don't use appcfg)
 
-Script to add dummy address and event:
+Script to add dummy location and event:
 Open the "Interactive Console" (http://localhost:8000/_ah/admin/interactive), paste this and run the program:
 #####################################################################################
-from techism2.events.models import Address
-from techism2.events.models import Event
+from techism2.models import Location
+from techism2.models import Event
 from random import choice
 
 # Available tags (higher weight to Pyhton and HTML)
 tags=["Java","Python","Python","Python","PHP","NoSQL",".NET","MySQL","Google","Scrum","Open Source","Social","Linux","Mac","HTML","HTML","HTML","JavaScript"]
 
 # Available cities
-cities=["Giesing","Perlach","Neuhausen","Schwabing","Sendling","Pasing"]
+cities=["München"]
 
 # Available streets
 streets=["Leopoldstr.","Dachauer Str.", "Prinzregentenstr.", "Hauptbahnhof", "Marienplatz"]
 
-# Create 10 addresses, choose a random city and street
-addresses=[]
+# Create 10 locations, choose a random city and street
+locations=[]
 for i in range(1,10):
-    a = Address(
-        name="Address " + str(i),
+    l = Location(
+        name="Location " + str(i),
         street=choice(streets),
         city=choice(cities),
         latitude=48.1372,
         longitude=11.57542)
-    addresses.append(a)
-    a.save()
+    locations.append(l)
+    l.save()
 
 # Create 31 events, from 10 days in past to 20 days in future. 
-# Choose one of the previously created addresses for each event.
+# Choose one of the previously created locations for each event.
 # Choose two of the available tags.
-for i in range(-10,20):
+for i in range(-5,10):
     e = Event(
         title="Event " + str(i),
-        dateBegin=datetime.datetime.today() + datetime.timedelta(days=i),
+        date_time_begin=datetime.datetime.today() + datetime.timedelta(days=i),
         url="http://www.google.de",
         description="Some description of event " + str(i) + ".",
-        location=choice(addresses),
+        location=choice(locations),
         tags=[choice(tags),choice(tags)])
     e.save()
 #####################################################################################
