@@ -29,13 +29,16 @@
                         <section id="end">{{ event.get_date_time_end_cet|date:"Y-m-d H:i" }}</section>
                     {% endif %}
                     <h3>Wo</h3>
-                    Veranstaltungsort: 
-                    <section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>  
-                    {% if event.location.latitude and event.location.longitude %}
-                        <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
-                    {% endif %}
-                    {% if not event.location.latitude and event.location.street and event.location.city  %}
-                        <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>          
+                    {% if event.location.name and event.location.street and event.location.city %}
+                        <section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>  
+                        {% if event.location.latitude and event.location.longitude %}
+                            <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
+                        
+                        {% else  %}
+                            <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>          
+                       {% endif %}
+                   {% else %}
+                        ist uns leider nicht bekannt...
                    {% endif %}
                 </section>
             </article>
