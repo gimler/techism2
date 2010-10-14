@@ -1,8 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from techism2.events.models import Event
-from techism2.events.forms import EventForm
+from techism2.models import Event
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 

@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
-from techism2.events import fields
+from techism2 import fields
 
-class Address(models.Model):
+class Location(models.Model):
     name = models.CharField(max_length=200)
     street = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
@@ -18,7 +18,7 @@ class Event(models.Model):
     dateTimeEnd = models.DateTimeField(blank=True, null=True)
     url = models.URLField()
     description = models.TextField()
-    location = models.ForeignKey(Address, blank=True, null=True)
+    location = models.ForeignKey(Location, blank=True, null=True)
     tags = fields.CommaSeparatedListField(models.CharField(max_length=20), blank=True, null=True)
     user = models.ForeignKey(User, blank=True, null=True)
     

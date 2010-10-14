@@ -4,19 +4,23 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', 'techism2.events.views.index'),
-    (r'^events/$', 'techism2.events.views.index'),
-    (r'^events/(?P<event_id>\d+)/$', 'techism2.events.views.detail'),
-    (r'^events/edit/(?P<event_id>\d+)/$', 'techism2.events.views.edit'),
-    (r'^events/create/$', 'techism2.events.views.create'),
-    (r'^events/archive/$', 'techism2.events.views.archive'),
-    (r'^events/impressum/$', 'techism2.events.views.impressum'),
-    (r'^events/tags/(?P<tag_name>.+)/$', 'techism2.events.views.tag'),
+    # web
+    (r'^$', 'techism2.web.views.index'),
+    (r'^events/$', 'techism2.web.views.index'),
+    (r'^events/(?P<event_id>\d+)/$', 'techism2.web.views.detail'),
+    (r'^events/edit/(?P<event_id>\d+)/$', 'techism2.web.views.edit'),
+    (r'^events/create/$', 'techism2.web.views.create'),
+    (r'^events/archive/$', 'techism2.web.views.archive'),
+    (r'^events/impressum/$', 'techism2.web.views.impressum'),
+    (r'^events/tags/(?P<tag_name>.+)/$', 'techism2.web.views.tag'),
+    
+    # iCal
+    #(r'^feed.ics$', 'techism2.ical.views.ical'),
     
     (r'^admin/', include(admin.site.urls)),
     
     (r'^accounts/', include('django_openid_auth.urls')),
-    (r'^accounts/logout/$', 'techism2.events.views.logout'),
+    (r'^accounts/logout/$', 'techism2.web.views.logout'),
     url(r'^accounts/google_login/$', 'auth_helpers.views.login', name='google_login'),
     url(r'^accounts/google_logout/$', 'auth_helpers.views.logout', name='google_logout'),
     url(r'^accounts/google_authenticate/$', 'auth_helpers.views.authenticate', name='google_authenticate'),

@@ -2,10 +2,10 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
-from techism2.events.models import Event, Address
-from techism2.events.forms import EventForm
+from techism2.models import Event, Location
+from techism2.web.forms import EventForm
 from datetime import datetime
-from techism2.events import tag_cloud
+from techism2 import tag_cloud
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth import logout as django_logout
 from pytz.gae import pytz
@@ -55,9 +55,9 @@ def create(request):
         if form.is_valid(): 
             event= __createEvent(form, request.user)
             if event.location == None:
-                address=__createAddress(form)
-                address.save()
-                event.location=address
+                location=__createLocation(form)
+                location.save()
+                event.location=location
             event.save()
             return HttpResponseRedirect('/events/')
         else:
@@ -74,7 +74,7 @@ def edit(request, event_id):
         form = EventForm(request.POST) 
         if form.is_valid(): 
             event= __editEvent(form, event)
-            # TODO: handle address modification
+            # TODO: handle location modification
             event.save()
             return HttpResponseRedirect('/events/')
         else:
@@ -109,12 +109,12 @@ def __editEvent (form, event):
     event.tags=form.cleaned_data['tags']
     return event
 
-def __createAddress (form):
-    address = Address()
-    address.name=form.cleaned_data['location_name']
-    address.street=form.cleaned_data['location_street']
-    address.city=form.cleaned_data['location_city']
-    return address
+def __createLocation (form):
+    location = Location()
+    location.name=form.cleaned_data['location_name']
+    location.street=form.cleaned_data['location_street']
+    location.city=form.cleaned_data['location_city']
+    return location
 
 def __toEventForm (event):
     data = {'title': event.title,

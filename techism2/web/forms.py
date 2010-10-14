@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from techism2.events.models import Address
-from techism2.events.models import Event
-from techism2.events import fields
+from techism2.models import Location
+from techism2.models import Event
+from techism2.web import fields
 
 
 class EventForm(forms.Form):
@@ -11,7 +11,7 @@ class EventForm(forms.Form):
     dateTimeEnd = forms.SplitDateTimeField(label='Ende', required=False, widget=forms.SplitDateTimeWidget(date_format='%Y-%m-%d', time_format='%H:%M'))
     url = forms.URLField()
     description = forms.CharField(label= 'Beschreibung', widget=forms.Textarea )
-    location = forms.ModelChoiceField (Address.objects.all(), required=False)
+    location = forms.ModelChoiceField (Location.objects.all(), required=False)
     tags = fields.CommaSeparatedListFormField(label= 'Tags', required=False)
     
     location_name = forms.CharField(label= 'Name',max_length=200, required=False)
