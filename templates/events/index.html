@@ -44,19 +44,11 @@
         <p>No events are available.</p>
     {% endif %}  
 </section>
-<div class="pagination">
-    <span class="step-links">
-        {% if event_list.has_previous %}
-            <a href="?page={{ event_list.previous_page_number }}">vorherige</a>
-        {% endif %}
 
-        <span class="current">
-            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
-        </span>
+<section id="tagcloud">
+    {% for tag,count in tags.items %}
+        <a id="{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
+    {% endfor %}
+</section>
 
-        {% if event_list.has_next %}
-            <a href="?page={{ event_list.next_page_number }}">nächste</a>
-        {% endif %}
-    </span>
-</div>
 {% endblock %}

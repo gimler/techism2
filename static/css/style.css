@@ -12,7 +12,7 @@ section, header, footer, aside, nav, article {
 body {
 	margin: 0 auto;
 	width: 85%;
-	font-family: 'Nobile', Trebuchet MS, Helvetica, Arial, sans-serif;
+	font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
 	font: 13px/22px;
 	background: 
 	url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
@@ -28,9 +28,14 @@ body {
 	padding:5px;	 	
 }
 
-nav a {
+nav a, li {
 	color:#ffffff;
 	text-decoration: none;
+} 
+
+nav #syndicate a {
+	text-decoration: none;
+	font-weight:light;
 }
 
 nav #active a {
@@ -82,26 +87,39 @@ h3 {
 	}
 
 #tagcloud a {
-	background: #4B4B4B;
+/*	background: #cdcdcd;*/
+	background: #000000;
 	font-color:#FFFFFF;
 	color:#FFFFFF;
 	padding:5px; 
 	border-radius: 5px;
 	text-decoration: none; 
+	border: 1px solid grey;
 }
+
+#tagcloud a:hover {     
+	background: #424242;
+}
+
 #tagcloud {
-	background: #000000;
 	padding:5px; 
 	border-radius: 5px;
-	text-decoration: none; 
+	text-decoration: none;
+	line-height:35px;  
 }          
 
 .tags, #tags a {
-	background: #cdcdcd;
+/*	background: #cdcdcd;*/
+	background: #000000;
 	color:#FFFFFF;
 	padding:5px; 
 	border-radius: 5px; 
 	text-decoration: none; 
+	line-height:40px;  
+}
+
+#tags a:hover {     
+	background: #424242;
 }
 
 p {
@@ -139,12 +157,12 @@ footer nav #synicate{
 ul {
 	padding: 0px;
 }
-
+                 
 nav li {
 	font-size: 28px;
 	list-style: none; 
-	float: left;
 	margin-right: 20px;
+	float: left; 	
 }  
 
 

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=440, height=320, user-scalable=yes" />
     <title>Techism</title>
 	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nobile&subset=latin">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular&subset=latin">
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">
 	<!--ink rel="stylesheet/less" href="/static/css/style.less" type="text/css" --/>
 	<!--script src="http://lesscss.googlecode.com/files/less-1.0.21.min.js"></script-->
@@ -52,12 +52,6 @@
           	  <a href="/accounts/login/">Login</a>
           	{% endif %}
    	   	</section>
- 
-		<section id="tagcloud">
-		    {% for tag,count in tags.items %}
-		        <a id="{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
-		    {% endfor %}
-		</section>
    
 		<section id="top">
 			<header>
@@ -74,20 +68,32 @@
     {% block content %}{% endblock %}
 	<footer>                          
 		<nav>
+
+			<ul>
+			<li>
+	        {% if event_list.has_previous %}
+	            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
+	        {% endif %}
+	        <span class="current">
+	            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
+	        </span>
+	        {% if event_list.has_next %}
+	            <a href="?page={{ event_list.next_page_number }}">&raquo;</a>
+	        {% endif %}
+			</li>
+			</ul>			
+			
 			<ul>
 			<li><a href="/events/archive">Archiv</a></li>
 			<li><a href="#">&Uuml;ber uns</a></li>
 			<li><a href="/events/impressum/">Impressum</a></li>
+			</ul>           
+			<ul id="syndicate">            
 			<li><a href="#">API</a></li>
-			</ul>
-		</nav>
-		<nav id="syndicate">
-			<ul>
 			<li><a href="#">iCal</a></li>
 			<li><a href="#">RSS</a></li>
 			<li><a href="http://twitter.com/techism">Twitter</a></li>
-			</ul>
-		</nav>            
+			</ul>           
 	</footer>
     
     {% block scripts %}{% endblock %}
