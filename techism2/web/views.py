@@ -51,9 +51,22 @@ def create(request):
             event.save()
             return HttpResponseRedirect('/events/')
         else:
-            return render_to_response('events/create.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
+            return render_to_response(
+                'events/event.html',
+                {
+                    'form': form, 
+                    'error': form.errors,
+                    'button_label': u'Event hinzuf\u00FCgen'
+                },
+                context_instance=RequestContext(request))
     form = EventForm ()
-    return render_to_response('events/create.html', {'form': form}, context_instance=RequestContext(request))
+    return render_to_response(
+        'events/event.html',
+        {
+            'form': form,
+            'button_label': u'Event hinzuf\u00FCgen'
+        },
+        context_instance=RequestContext(request))
 
 def edit(request, event_id):
     event = Event.objects.get(id=event_id)
@@ -68,10 +81,24 @@ def edit(request, event_id):
             event.save()
             return HttpResponseRedirect('/events/')
         else:
-            return render_to_response('events/edit.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
+            return render_to_response(
+                'events/event.html',
+                {
+                    'form': form, 
+                    'error': form.errors,
+                    'button_label': u'Event \u00E4ndern'
+                },
+                context_instance=RequestContext(request))
 
     form = __toEventForm(event)
-    return render_to_response('events/edit.html', {'form': form}, context_instance=RequestContext(request))
+    return render_to_response(
+        'events/event.html',
+        {
+            'form': form,
+            'button_label': u'Event \u00E4ndern'
+        },
+        context_instance=RequestContext(request))
+
 
 def logout(request):
     django_logout(request)
@@ -118,9 +145,9 @@ def __toEventForm (event):
             'description': event.description,
             'location': event.location.id,
             'tags': event.tags,
-            'location_name': event.location.name,
-            'location_street': event.location.street,
-            'location_city': event.location.city
+            #'location_name': event.location.name,
+            #'location_street': event.location.street,
+            #'location_city': event.location.city
             }
     form = EventForm(data)
     return form;

@@ -51,7 +51,7 @@
     das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.
     {% endif %}
 
-  <form action="/events/create/" method="post">    
+  <form action="" method="post">    
     {% csrf_token %}
     {{ form.id }}
     
@@ -87,7 +87,7 @@
     {{ form.location_city.label_tag }} {{ form.location_city }}<br>
     <input onclick="displayLocation()" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
     <div id="map_canvas" style="height: 400px; width: 600px"></div>
-    <input type="submit" value="Event hinzufügen" />
+    <input type="submit" value="{{ button_label }}" />
   </form>
   
 </section>

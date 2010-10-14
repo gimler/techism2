@@ -25,7 +25,7 @@
                     </section>
                     <h3>Wann</h3>
                     <section id="begin">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</section>
-                    {% if event.dateTimeEnd %} bis
+                    {% if event.get_date_time_end_cet %} bis
                         <section id="end">{{ event.get_date_time_end_cet|date:"Y-m-d H:i" }}</section>
                     {% endif %}
                     <h3>Wo</h3>
