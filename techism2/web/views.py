@@ -13,19 +13,19 @@ from django.contrib.auth import logout as django_logout
 def index(request):
     event_list = Event.objects.filter(date_time_begin__gte=datetime.today()).order_by('date_time_begin')
     tags = service.get_tags()
-    page = __getPaginatorPage(request, event_list)
+    page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def archive(request):
     event_list = Event.objects.filter(date_time_begin__lt=datetime.today()).order_by('-date_time_begin')
     tags = service.get_tags()
-    page = __getPaginatorPage(request, event_list)
+    page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def tag(request, tag_name):
     event_list = Event.objects.filter(tags=tag_name).order_by('date_time_begin')
     tags = service.get_tags()
-    page = __getPaginatorPage(request, event_list)
+    page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags, 'tag_name': tag_name}, context_instance=RequestContext(request))
 
 def impressum(request):
@@ -35,7 +35,7 @@ def create(request):
     button_label = u'Event hinzuf\u00FCgen'
     
     if request.method == 'POST':
-        return __saveEvent(request, button_label)
+        return __save_event(request, button_label)
     
     return render_to_response(
         'events/event.html',
@@ -53,9 +53,9 @@ def edit(request, event_id):
         return HttpResponseForbidden()
     
     if request.method == 'POST':
-        return __saveEvent(request, button_label, event)
+        return __save_event(request, button_label, event)
     
-    form = __toEventForm(event)
+    form = __to_event_form(event)
     return render_to_response(
         'events/event.html',
         {
@@ -68,15 +68,10 @@ def logout(request):
     django_logout(request)
     return HttpResponseRedirect('/')
 
-def __saveEvent(request, button_label, old_event=None):
+def __save_event(request, button_label, old_event=None):
     form = EventForm(request.POST) 
     if form.is_valid(): 
-        event= __createEvent(form, request.user, old_event)
-        if event.location == None:
-            location=__createLocation(form)
-            location.save()
-            event.location=location
-        event.save()
+        event= __create_or_update_event_with_location(form, request.user, old_event)
         return HttpResponseRedirect('/events/')
     else:
         return render_to_response(
@@ -88,10 +83,11 @@ def __saveEvent(request, button_label, old_event=None):
             },
             context_instance=RequestContext(request))
 
-def __createEvent (form, user, event):
-    "Creates an Event from the submitted EventForm"
+def __create_or_update_event_with_location (form, user, event):
+    "Creates or updates an Event from the submitted EventForm. If the given Event is None a new Event is created."
     if event == None:
         event = Event()
+    
     event.title=form.cleaned_data['title']
     event.set_date_time_begin_cet(form.cleaned_data['date_time_begin'])
     event.set_date_time_end_cet(form.cleaned_data['date_time_end'])
@@ -101,17 +97,28 @@ def __createEvent (form, user, event):
     event.tags=form.cleaned_data['tags']
     if event.user == None and user.is_authenticated():
         event.user=user
+    
+    if event.location == None:
+        location = __create_location(form)
+        event.location=location
+    
+    event.save()
+    
     return event
 
-def __createLocation (form):
+def __create_location (form):
     "Creates a Location from the submitted EventForm"
     location = Location()
     location.name=form.cleaned_data['location_name']
     location.street=form.cleaned_data['location_street']
     location.city=form.cleaned_data['location_city']
-    return location
+    if location.name and location.street and location.city:
+        location.save()
+        return location
+    else:
+        return None
 
-def __toEventForm (event):
+def __to_event_form (event):
     "Converts an Event to an EventForm"
     data = {'title': event.title,
             'date_time_begin': event.get_date_time_begin_cet(),
@@ -122,7 +129,7 @@ def __toEventForm (event):
             'date_time_end_1': event.get_date_time_end_cet(),
             'url': event.url,
             'description': event.description,
-            'location': event.location.id,
+            'location': event.location.id if event.location else None,
             'tags': event.tags,
             #'location_name': event.location.name,
             #'location_street': event.location.street,
@@ -131,7 +138,7 @@ def __toEventForm (event):
     form = EventForm(data)
     return form;
 
-def __getPaginatorPage(request, event_list):
+def __get_paginator_page(request, event_list):
     try:
         num = int(request.GET.get('page', '1'))
     except ValueError:
