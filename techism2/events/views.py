@@ -8,10 +8,13 @@ from datetime import datetime
 from techism2.events import tag_cloud
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth import logout as django_logout
+from pytz.gae import pytz
+from pytz import timezone
 
 def index(request):
     tags = tag_cloud.get_tags()
-    event_list = Event.objects.filter(dateBegin__gte=datetime.today()).order_by('dateBegin')
+    event_list = Event.objects.filter(dateTimeBegin__gte=datetime.today()).order_by('dateTimeBegin')
+    
     paginator = Paginator(event_list, 25);
     try:
         page = int(request.GET.get('page', '1'))
@@ -22,6 +25,12 @@ def index(request):
         event_list = paginator.page(page)
     except (EmptyPage, InvalidPage):
         event_list = paginator.page(paginator.num_pages)
+        
+    for event in event_list.object_list:
+        event.dateTimeBegin = __to_cet(event.dateTimeBegin)
+        if event.dateTimeEnd:
+            event.dateTimeEnd = __to_cet(event.dateTimeEnd)
+    
     return render_to_response('events/index.html', {'event_list': event_list, 'tags': tags}, context_instance=RequestContext(request))
 
 def detail(request, event_id):
@@ -29,7 +38,7 @@ def detail(request, event_id):
     return render_to_response('events/detail.html', {'event':event}, context_instance=RequestContext(request))
 
 def archive(request):
-    event_list = Event.objects.filter(dateBegin__lt=datetime.today()).order_by('dateBegin')[:10]
+    event_list = Event.objects.filter(dateTimeBegin__lt=datetime.today()).order_by('dateTimeBegin')[:10]
     return render_to_response('events/archive.html', {'event_list' : event_list}, context_instance=RequestContext(request))
 
 def impressum(request):
@@ -69,7 +78,7 @@ def edit(request, event_id):
             event.save()
             return HttpResponseRedirect('/events/')
         else:
-            return render_to_response('events/create.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
+            return render_to_response('events/edit.html', {'form': form, 'error': form.errors}, context_instance=RequestContext(request))
 
     form = __toEventForm(event)
     return render_to_response('events/edit.html', {'form': form}, context_instance=RequestContext(request))
@@ -81,8 +90,8 @@ def logout(request):
 def __createEvent (form, user):
     event = Event()
     event.title=form.cleaned_data['title']
-    event.dateBegin=form.cleaned_data['dateBegin']
-    event.dateEnd=form.cleaned_data['dateEnd']
+    event.dateTimeBegin=__to_utc(form.cleaned_data['dateTimeBegin'])
+    event.dateTimeEnd=__to_utc(form.cleaned_data['dateTimeEnd'])
     event.url=form.cleaned_data['url']
     event.description=form.cleaned_data['description']
     event.location=form.cleaned_data['location']
@@ -93,8 +102,8 @@ def __createEvent (form, user):
 
 def __editEvent (form, event):
     event.title=form.cleaned_data['title']
-    event.dateBegin=form.cleaned_data['dateBegin']
-    event.dateEnd=form.cleaned_data['dateEnd']
+    event.dateTimeBegin=__to_utc(form.cleaned_data['dateTimeBegin'])
+    event.dateTimeEnd=__to_utc(form.cleaned_data['dateTimeEnd'])
     event.url=form.cleaned_data['url']
     event.description=form.cleaned_data['description']
     event.tags=form.cleaned_data['tags']
@@ -109,8 +118,12 @@ def __createAddress (form):
 
 def __toEventForm (event):
     data = {'title': event.title,
-            'dateBegin': event.dateBegin,
-            'dateEnd': event.dateEnd,
+            'dateTimeBegin': __to_cet(event.dateTimeBegin),
+            'dateTimeBegin_0': __to_cet(event.dateTimeBegin),
+            'dateTimeBegin_1': __to_cet(event.dateTimeBegin),
+            'dateTimeEnd': __to_cet(event.dateTimeEnd),
+            'dateTimeEnd_0': __to_cet(event.dateTimeEnd),
+            'dateTimeEnd_1': __to_cet(event.dateTimeEnd),
             'url': event.url,
             'description': event.description,
             'location': event.location.id,
@@ -121,3 +134,21 @@ def __toEventForm (event):
             }
     form = EventForm(data)
     return form;
+
+utc = pytz.utc
+cet = timezone('Europe/Berlin')
+
+def __to_utc (cet_datetime):
+    if cet_datetime == None:
+        return None
+    localized = cet.localize(cet_datetime)
+    utc_datetime = localized.astimezone(utc)
+    return utc_datetime
+
+def __to_cet (utc_datetime):
+    if utc_datetime == None:
+        return None
+    localized = utc.localize(utc_datetime)
+    cet_datetime = localized.astimezone(cet)
+    return cet_datetime
+

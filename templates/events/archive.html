@@ -8,7 +8,7 @@
       {% for event in event_list %}
         <div class="event_short">
             <h3><a href="/events/{{ event.id }}/">{{ event.title }}</a></h3>
-            {{ event.dateBegin }}<br>
+            {{ event.dateTimeBegin }}<br>
           </div>
       {% endfor %}
   {% else %}

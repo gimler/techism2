@@ -5,6 +5,14 @@ Prerequisites:
 - Python 2.5 (only Python Version supported by AppEngine)
 - Appengine SDK must be added to PATH (Download: http://code.google.com/intl/de-DE/appengine/downloads.html#Google_App_Engine_SDK_for_Python)
 
+Update
+------
+Update django-nonrel:
+  hg clone http://bitbucket.org/wkornewald/django-nonrel
+  cd django-nonrel
+  zip -r django.zip django
+  mv django.zip .../techism2/zip-packages/
+
 
 Uses Django-nonrel and djangoappengine
 http://www.allbuttonspressed.com/projects/django-nonrel
@@ -57,7 +65,7 @@ for i in range(1,10):
 for i in range(-10,20):
     e = Event(
         title="Event " + str(i),
-        dateBegin=datetime.datetime.today() + datetime.timedelta(days=i),
+        dateTimeBegin=datetime.datetime.today() + datetime.timedelta(days=i),
         url="http://www.google.de",
         description="Some description of event " + str(i) + ".",
         location=choice(addresses),

@@ -14,8 +14,8 @@ class Address(models.Model):
     
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    dateBegin = models.DateField()
-    dateEnd = models.DateField(blank=True, null=True)
+    dateTimeBegin = models.DateTimeField()
+    dateTimeEnd = models.DateTimeField(blank=True, null=True)
     url = models.URLField()
     description = models.TextField()
     location = models.ForeignKey(Address, blank=True, null=True)

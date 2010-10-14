@@ -1,12 +1,14 @@
 from django import forms
 from django.forms import ModelForm
 from techism2.events.models import Address
+from techism2.events.models import Event
 from techism2.events import fields
 
+
 class EventForm(forms.Form):
-    title = forms.CharField(max_length=200, label= 'Titel')
-    dateBegin = forms.DateTimeField(label= 'Beginn')
-    dateEnd = forms.DateTimeField(label= 'Ende',required=False)
+    title = forms.CharField(max_length=200, label='Titel')
+    dateTimeBegin = forms.SplitDateTimeField(label='Beginn', widget=forms.SplitDateTimeWidget(date_format='%Y-%m-%d', time_format='%H:%M'))
+    dateTimeEnd = forms.SplitDateTimeField(label='Ende', required=False, widget=forms.SplitDateTimeWidget(date_format='%Y-%m-%d', time_format='%H:%M'))
     url = forms.URLField()
     description = forms.CharField(label= 'Beschreibung', widget=forms.Textarea )
     location = forms.ModelChoiceField (Address.objects.all(), required=False)
