@@ -7,7 +7,7 @@
         {% for event in event_list.object_list %} 
             <article class="event">
                 <header>
-                    <h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
+                    <h2><a id="{{ event.id }} event" href="#event">{{ event.title }}</a></h2>
                     <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</div></div>
                     {% if event.user == user or user.is_superuser %}
                         <div id="editlink"><a href="/events/edit/{{ event.id }}/">Edit</a></div>
@@ -48,7 +48,8 @@
 					</section>
                 </section>
             </article>
-        {% endfor %}
+        {% endfor %}   
+
     {% else %}
         <p>No events are available.</p>
     {% endif %}  

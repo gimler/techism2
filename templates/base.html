@@ -7,33 +7,51 @@
 	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular&subset=latin">
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">              
-	<link rel="stylesheet/less" href="/static/css/style.less" type="text/css" />
-	<script src="/static/less/less-1.0.35.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<!--link rel="stylesheet/less" href="/static/css/style.less" type="text/css" /-->
+	<!--script src="/static/less/less-1.0.35.min.js" type="text/javascript" charset="utf-8"></script-->
   	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
-    <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
+    <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script>     
+	<script src="../static/jquery/js/jquery.infinitescroll.js" type="text/javascript" charset="utf-8"></script>	
 	<script type="text/javascript"> 
 	$(document).ready(function(){
-	$(".event h2 a").attr("href", "#event");
    	$(".detail").hide(); 
  	$("#admin").hide();
-	/* hover for mouse enabled devices */
-/*
-	$(".event").mouseenter(function() {
+	/* clicks for touch interface */                 
+	$('.event').live('click', function() {
+		console.log("click!");
 		$(this).children(".detail").slideToggle(300);
-    });
-	$(".event").mouseleave(function() {
-		$(this).children(".detail").slideToggle(400);
-    });  
-*/
-	/* clicks for touch interface */
-	$(".event").click(function() {
-		$(this).children(".detail").slideToggle(300);
-    }); 
+	});
 
- 	$(".event:last").addClass("last");
+$('#content').infinitescroll({
+
+  navSelector  : "#loadmore",            
+                 // selector for the paged navigation (it will be hidden)
+  nextSelector : "#nextpage",   
+                 // selector for the NEXT link (to page 2)
+  itemSelector : ".event",          
+                 // selector for all items you'll retrieve
+});
+
+// kill scroll binding
+$(window).unbind('.infscr');
+
+// hook up the manual click guy.
+$('#loadmore').click(function(){
+  $(document).trigger('retrieve.infscr');	
+  return;
+});
+
+// remove the paginator when we're done.
+$(document).ajaxError(function(e,xhr,opt){
+  if (xhr.status == 404) $('#nextpage a').remove();
+});
+
+
+                                                            
+
 
    });    
-
 
 
 	</script> 
@@ -70,6 +88,7 @@
 		<nav>
 
 			<ul>
+				<li><a href="#" id="loadmore">LOAD MORE</a></li>
 			<li>
 	        {% if event_list.has_previous %}
 	            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
@@ -78,7 +97,7 @@
 	            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
 	        </span>
 	        {% if event_list.has_next %}
-	            <a href="?page={{ event_list.next_page_number }}">&raquo;</a>
+	            <a id="nextpage" href="?page={{ event_list.next_page_number }}">&raquo;</a>
 	        {% endif %}
 			</li>
 			</ul>			
