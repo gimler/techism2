@@ -15,27 +15,37 @@
                 </header>  
                 
                 <section class="detail">
-                    <h3>Was</h3>
-                    <section id="description">{{ event.description }}</section>            		
-                    <section id="url"><a href="{{ event.url }}">{{ event.url }}</a></section>
-                    <section id="tags">
-                        {% for tag in event.tags %}
-                            <a href="#">{{ tag }}</a>
-                        {% endfor %}
-                    </section>
-                    <h3>Wann</h3>
-                    <section id="begin">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</section>
-                    {% if event.get_date_time_end_cet %} bis
-                        <section id="end">{{ event.get_date_time_end_cet|date:"Y-m-d H:i" }}</section>
-                    {% endif %}
-                    <h3>Wo</h3>
-                    {% if event.location.name and event.location.street and event.location.city %}
-                        <section id="location">{{event.location.name}}, {{event.location.street}}, {{event.location.city}}</section>     
-                        <img src="http://maps.google.com/maps/api/staticmap?center=48.13788,11.575953&size=300x200&zoom=15&sensor=false" />
-                        <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Google Maps</a>
-                   {% else %}
-                        ist uns leider nicht bekannt...
-                   {% endif %}
+                    <section id="what">
+	                    <h3>Was</h3>  
+						<p>{{ event.description }}</p>
+	                    <section id="url"><a href="{{ event.url }}">Website</a></section>
+	                    <section id="tags">
+	                        {% for tag in event.tags %}
+	                            <a href="#">{{ tag }}</a>
+	                        {% endfor %}
+	                    </section>
+					</section>    
+                    <section id="when">
+						<h3>Wann</h3>         		
+                    	<section id="begin">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</section>
+                    	{% if event.get_date_time_end_cet %} bis
+                    	    <section id="end">{{ event.get_date_time_end_cet|date:"Y-m-d H:i" }}</section>
+                    	{% endif %}
+					</section>	
+                    <section id="where"><h3>Wo</h3>
+                    	{% if event.location.name and event.location.street and event.location.city %}
+                    	    <section id="location">
+							<p>{{event.location.name}}, {{event.location.street}}, {{event.location.city}} 
+							<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Karte</a>
+							</p>     
+							</section>
+                    	    <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">
+							<img src="http://maps.google.com/maps/api/staticmap?center=48.13788,11.575953&size=300x100&zoom=15&sensor=false" />       
+							</a>
+                    	                   {% else %}
+                    	    ist uns leider nicht bekannt...
+                    	                   {% endif %}
+					</section>
                 </section>
             </article>
         {% endfor %}

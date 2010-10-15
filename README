@@ -72,4 +72,15 @@ for i in range(-5,10):
         tags=[choice(tags),choice(tags)])
     e.save()
 #####################################################################################
+from techism2.models import Location
+from techism2.models import Event
+
+event_list = Event.objects.all()
+for event in event_list:
+    event.delete()
+
+location_list = Location.objects.all()
+for location in location_list:
+    location.delete()
+#####################################################################################
 
