@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% load web_tags %}
 <section id="content">
     {% if event_list %}
         {% for event in event_list.object_list %} 
             <article class="event">
                 <header>
                     <h2><a id="{{ event.id }} event" href="#event">{{ event.title }}</a></h2>
-                    <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</div></div>
+                    <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|display_date }}</div></div>
                     {% if event.user == user or user.is_superuser %}
                         <div id="editlink"><a href="/events/edit/{{ event.id }}/">Edit</a></div>
                     {% endif %}
@@ -27,9 +27,9 @@
 					</section>    
                     <section id="when">
 						<h3>Wann</h3>         		
-                    	<section id="begin">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</section>
+                    	<section id="begin">{{ event.get_date_time_begin_cet|display_date }}</section>
                     	{% if event.get_date_time_end_cet %} bis
-                    	    <section id="end">{{ event.get_date_time_end_cet|date:"Y-m-d H:i" }}</section>
+                    	    <section id="end">{{ event.get_date_time_end_cet|display_date }}</section>
                     	{% endif %}
 					</section>	
                     <section id="where"><h3>Wo</h3>

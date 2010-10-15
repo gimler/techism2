@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     (r'^events/tags/(?P<tag_name>.+)/$', 'techism2.web.views.tag'),
     
     # iCal
-    #(r'^feed.ics$', 'techism2.ical.views.ical'),
+    (r'^feed.ics$', 'techism2.ical.views.ical'),
     
     (r'^admin/', include(admin.site.urls)),
     

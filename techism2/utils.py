@@ -17,3 +17,9 @@ def utc_to_cet (utc_datetime):
     localized = utc.localize(utc_datetime)
     cet_datetime = localized.astimezone(cet)
     return cet_datetime
+
+def localize_to_utc (datetime):
+    if datetime == None:
+        return None
+    localized = utc.localize(datetime)
+    return localized
