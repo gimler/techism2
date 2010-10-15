@@ -22,9 +22,23 @@ class Event(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True)
     tags = fields.CommaSeparatedListField(models.CharField(max_length=20), blank=True, null=True)
     user = models.ForeignKey(User, blank=True, null=True)
+    date_time_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_time_modified = models.DateTimeField(auto_now=True, null=True)
     
     def __unicode__(self):
         return self.title
+    
+    def get_date_time_created_utc(self):
+        "Gets the 'Created' date/time in UTC."
+        return utils.localize_to_utc(self.date_time_created);
+    
+    def get_date_time_modified_utc(self):
+        "Gets the 'Modifed' date/time in UTC."
+        return utils.localize_to_utc(self.date_time_modified);
+    
+    def get_date_time_begin_utc(self):
+        "Gets the 'Begin' date/time in UTC."
+        return utils.localize_to_utc(self.date_time_begin);
     
     def get_date_time_begin_cet(self):
         "Gets the 'Begin' date/time in CET/CEST."
@@ -33,6 +47,10 @@ class Event(models.Model):
     def set_date_time_begin_cet(self, date_time_begin_cet):
         "Sets the 'Begin' date/time in CET/CEST timezone. Internally the date/time is saved in UTC timezone."
         self.date_time_begin = utils.cet_to_utc(date_time_begin_cet)
+    
+    def get_date_time_end_utc(self):
+        "Gets the 'End' date/time in UTC."
+        return utils.localize_to_utc(self.date_time_end);
     
     def get_date_time_end_cet(self):
         "Gets the 'End' date/time in CET/CEST."
