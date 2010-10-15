@@ -9,7 +9,7 @@ def display_date(value):
     if not value:
         return '';
     elif (value.date()== date.today()):
-        return "Heute"
+        return "Heute, " + value.strftime("%Y-%m-%d %H:%M")
     else:
         return value.strftime("%Y-%m-%d %H:%M")
 
