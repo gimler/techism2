@@ -8,7 +8,8 @@
 @nav-size:28px;   
 @h2-font-size:28px;  
 @h1-font-size:28px; 
-@h3-font-size:28px;
+@h3-font-size:28px; 
+@validate-error:#424242;
 
 /* Tell the browser to render HTML 5 elements as block */
 section, header, footer, aside, nav, article {
@@ -180,7 +181,6 @@ footer nav #synicate{
 	display: table-cell;	
 }
 
-
 #content {       
 	background: #FFFFFF; 
 	border-radius: @general-border-radius;  
@@ -214,8 +214,20 @@ footer nav #synicate{
 	vertical-align:middle;
 }
 
+/* CREATE FORM */
+
+#create {
+	padding: 5px 10px;
+}     
+
+#create ul {
+	list-style-type: none;
+}
+
 .errorlist {
     color: #f74440;
+	background: @validate-error; 
+	padding:3px;
 }   
 
 label {
