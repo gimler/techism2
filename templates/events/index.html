@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% load web_tags %}
 <section id="content">
     {% if event_list %}
         {% for event in event_list.object_list %} 
             <article class="event">
                 <header>
                     <h2><a href="/events/{{ event.id }}/">{{ event.title }}</a></h2>
-                    <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</div></div>
+                    <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|display_date }}, {{ event.get_date_time_begin_cet|date:"Y-m-d H:i" }}</div></div>
                     {% if event.user == user or user.is_superuser %}
                         <div id="editlink"><a href="/events/edit/{{ event.id }}/">Edit</a></div>
                     {% endif %}
