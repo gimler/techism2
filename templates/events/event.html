@@ -2,6 +2,7 @@
 
 {% block head %}
   <link type="text/css" href="/static/jquery/css/custom-theme/jquery-ui-1.8.5.custom.css" media="screen" rel="stylesheet"/>
+  <script type="text/javascript" src="/static/jquery/js/jquery.ui.datepicker-de.js"></script>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script type="text/javascript">
@@ -110,8 +111,9 @@
 {% block scripts %}
   <script type="text/javascript">
      $(function() {
-         $("#id_date_time_begin_0").datepicker({ dateFormat: 'yy-mm-dd' });
-         $("#id_date_time_end_0").datepicker({ dateFormat: 'yy-mm-dd' });
+         $.datepicker.setDefaults( $.datepicker.regional[ "de" ] );
+         $("#id_date_time_begin_0").datepicker( $.datepicker.regional[ "de" ]);
+         $("#id_date_time_end_0").datepicker( $.datepicker.regional[ "de" ]);
      });
   </script>
 {% endblock %}

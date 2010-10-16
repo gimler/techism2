@@ -26,6 +26,8 @@ if has_djangoappengine:
 TEST_RUNNER = 'djangotoolbox.test.CapturingTestSuiteRunner'
 
 LANGUAGE_CODE = 'de-DE'
+USE_I18N = True
+USE_L10N = True
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')

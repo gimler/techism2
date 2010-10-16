@@ -2,12 +2,17 @@
  # -*- coding: utf-8 -*-
 from django.template import Library 
 from django.template.defaultfilters import stringfilter
+from django.conf import settings
 from datetime import date, timedelta
+import locale
 
 register = Library()
 
 @register.filter
 def display_date(event_date):
+    
+    loc = settings.__getattr__('LANGUAGE_CODE')
+
     if not event_date:
         return '';
     elif (__is_today(event_date)):
