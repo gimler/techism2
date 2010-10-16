@@ -2,38 +2,51 @@
 <html lang="de">
 <head>
     <meta charset="utf-8" />
-	<meta name="viewport" content="width=440, height=320, user-scalable=yes" />
+	<meta name="viewport" content="width=480, height=640, user-scalable=yes" />
     <title>Techism - Open Source und Community Events in München</title>
 	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular&subset=latin">
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">              
-	<link rel="stylesheet/less" href="/static/css/style.less" type="text/css" />
-	<script src="/static/less/less-1.0.35.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<!--link rel="stylesheet/less" href="/static/css/style.less" type="text/css" /-->
+	<!--script src="/static/less/less-1.0.35.min.js" type="text/javascript" charset="utf-8"></script-->
   	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
-    <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script> 
+    <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script>     
+	<script src="../static/jquery/js/jquery.infinitescroll.js" type="text/javascript" charset="utf-8"></script>	
 	<script type="text/javascript"> 
 	$(document).ready(function(){
-	$(".event h2 a").attr("href", "#event");
    	$(".detail").hide(); 
- 	$("#admin").hide();
-	/* hover for mouse enabled devices */
-/*
-	$(".event").mouseenter(function() {
+ 	/*$("#admin").hide();*/
+	/* clicks for touch interface */                 
+	$('.event').live('click', function() {
+		console.log("click!");
 		$(this).children(".detail").slideToggle(300);
-    });
-	$(".event").mouseleave(function() {
-		$(this).children(".detail").slideToggle(400);
-    });  
-*/
-	/* clicks for touch interface */
-	$(".event").click(function() {
-		$(this).children(".detail").slideToggle(300);
-    }); 
-
- 	$(".event:last").addClass("last");
-
-   });    
-
+	});
+	/*infinite scrolling*/
+	$('#content').infinitescroll({
+	  navSelector  : "a#nextpage:last",                  // selector for the paged navigation (it will be hidden)
+	  nextSelector : "a#nextpage:last",                 // selector for the NEXT link (to page 2)
+	  itemSelector : ".event",                         // selector for all items you'll retrieve
+	},function(arrayOfNewElems){
+	                 	console.log("call");
+						  $(".detail").hide();
+						 var showevents = $(".event").size();
+						var eventsqty = {{ event_list.paginator.num_pages }}*2;
+						if (showevents>eventsqty) $("#loadmore").hide(); 
+						 console.log(showevents); 
+					});
+	// kill scroll binding
+	$(window).unbind('.infscr');
+	// hook up the manual click guy.
+	$('#loadmore').click(function(){
+	  $(document).trigger('retrieve.infscr');	
+	  return;
+	});
+	// remove the paginator when we're done.
+	$(document).ajaxError(function(e,xhr,opt){
+	  if (xhr.status == 404) $('#nextpage a').remove();
+	});
+	});    
 
 
 	</script> 
@@ -43,22 +56,11 @@
 </head>
 
 <body>
-		<section id="admin">
-        	{% if user.is_authenticated %}
-          	  {{ user.email }}
-          	  {% if user.is_staff %}
-          	    <a href="/admin/">Admin</a> 
-          	  {% endif %}
-          	  <a href="/accounts/logout/">Logout</a> 
-          	{% else %}
-          	  <a href="/accounts/login/">Login</a>
-          	{% endif %}
-   	   	</section>
-   
+  
 		<section id="top">
 			<nav>
 				<ul>
-				<li><h1><a href="/events/create">Techism</a></h1></li>
+				<li><h1><a href="/">Techism</a></h1></li>
 				<li id="active"><a href="/events/">Events</a></li>
 				<li><a href="/events/create">Event hinzufügen</a></li>
 				</ul>
@@ -68,25 +70,27 @@
     {% block content %}{% endblock %}
 	<footer>                          
 		<nav>
-
+    		<ul>
+    			<li>
+    				<span class="current">
+    					            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
+    					        </span>
+    			</li>
+    		</ul>
+	        
 			<ul>
-			<li>
-	        {% if event_list.has_previous %}
-	            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
-	        {% endif %}
-	        <span class="current">
-	            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
-	        </span>
-	        {% if event_list.has_next %}
-	            <a href="?page={{ event_list.next_page_number }}">&raquo;</a>
-	        {% endif %}
-			</li>
-			</ul>			
-			
-			<ul>
-			<li><a href="/events/archive">Archiv</a></li>
 			<li><a href="#">&Uuml;ber uns</a></li>
+			<li><a href="#">FAQ</a></li>
 			<li><a href="/events/impressum/">Impressum</a></li>
+	    	{% if user.is_authenticated %}
+	      	  {{ user.email }}
+	      	  {% if user.is_staff %}
+	      	    <li><a href="/admin/">Admin</a></li> 
+	      	  {% endif %}
+	      	  	<li><a href="/accounts/logout/">Logout</a></li> 
+	      	{% else %}
+	      	  	<li><a href="/accounts/login/">Login</a></li>
+	      	{% endif %}			                             
 			</ul>           
 			<ul id="syndicate">            
 			<li><a href="#">API</a></li>

@@ -48,9 +48,10 @@
 <section id="content">
 	
     <section id="create">
+	
 	{% if not user.is_authenticated %}
-    	Du bist nicht eingeloggt. Wenn Du Dich <a href="/accounts/login/">einloggst</a>, wird
-    	das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.
+    	<div id="message">Du bist nicht eingeloggt. Wenn Du Dich <a href="/accounts/login/">einloggst</a>, wird
+    		das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.</div>
     	{% endif %}
     	
     	  <form action="" method="post">    
