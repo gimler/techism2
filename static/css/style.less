@@ -12,8 +12,10 @@
 @h3-font-size:20px; 
 @validate-error:#424242;    
 @content-margin:10px; 
-@link-color:#000000;
-
+@link-color:#000000; 
+@content-background:#FFFFFF; 
+@content-font-color:#000000;
+@content-font-color-invertet:#FFFFFF;
 
 /* Tell the browser to render HTML 5 elements as block */
 section, header, footer, aside, nav, article {
@@ -139,7 +141,7 @@ h3 {
 	padding:3px;  
 	margin-left:5px;
 	display:inline;
-	}               
+	}                 
 
 #tagcloud {
 	padding:5px; 
@@ -172,11 +174,25 @@ h3 {
 } 
 
 #top{
-	margin-bottom: 12px;
+//	margin-bottom: 12px;
 	margin-top: 20px;
 	margin-left:@content-margin;
 	display: table;
-}                     
+} 
+
+#add {
+	border-radius:@tag-border-radius;
+	background: -webkit-gradient(linear, left 35, left bottom, from(@content-background), to(#797979));
+	padding-left:10px;
+	padding-right:10px;
+	height:40px;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;              
+	a {
+		color:@content-font-color;
+		font-weight:bold;
+	}
+}                                                                    
 
 footer{
 	display: table;  
@@ -194,8 +210,9 @@ footer{
 }
 
 #content {       
-	background: #FFFFFF; 
-	border-radius: @general-border-radius;  
+	background: @content-background; 
+	border-radius: @general-border-radius;
+	color:@content-font-color;  
 }
 
 .event {
@@ -234,10 +251,22 @@ footer{
 
 #message{
 	margin-top:5px;
-	background:@tag-background-light;
+	background:@tag-hover;
 	color:#FFFFFF;
 	border-radius:@tag-border-radius;
-	padding:5px;	
+	padding:15px;
+	li{ 
+	   	list-style: disc;
+		margin-left:25px; 
+	}
+	p {
+		margin-top:0px;
+		margin-bottom:0px;
+	} 
+	a {
+		 color:@content-font-color-invertet;
+	}
+			
 }
 
 .errorlist {
