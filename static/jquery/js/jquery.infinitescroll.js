@@ -182,7 +182,6 @@
         
             if (!opts.animate) props.isDuringAjax = false; // once the call is done, we can allow it again.
         }
-		  $(".detail").hide();    
 }
     
       

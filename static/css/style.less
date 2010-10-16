@@ -1,5 +1,6 @@
 @tag-background:#000000;
 @tag-color:#FFFFFF;
+@tag-background-light:#E2E2E2;
 @tag-hover:#424242;
 @general-font-size:15px;
 @link-highlight:#00ff00;
@@ -8,9 +9,11 @@
 @nav-size:28px;   
 @h2-font-size:28px;  
 @h1-font-size:28px; 
-@h3-font-size:28px; 
+@h3-font-size:20px; 
 @validate-error:#424242;    
-@content-margin:10px;
+@content-margin:10px; 
+@link-color:#000000;
+
 
 /* Tell the browser to render HTML 5 elements as block */
 section, header, footer, aside, nav, article {
@@ -65,9 +68,14 @@ ul {
 	padding: 0px;
 }                      
 
-#url a {
-	color:@link-highlight;
+p a {
+	color:@link-color;
+	font-weight:bold;
 	text-decoration: none;
+	display:inline;       
+	&:hover{
+		text-decoration: underline;
+	}
 } 
 
 h1 {
@@ -96,19 +104,24 @@ h2 {
 h3 {
 	font-size:@h3-font-size;
 	line-height: 0;
-	margin-top:20px;
+//	margin-top:20px;
 }           
+
+#what p {
+	margin-bottom:5px;
+}
 
 #datebox{
 	margin-left:10px; 
 } 
 
-#shortdate{
-	background: #efefef;
+#shortdate, #editlink{
+//	background: #efefef;
+	background:@tag-background-light;
 	color:#FFFFFF;
 	border-radius:@tag-border-radius;
 	padding:3px;  
-	}
+	}                 
 
 #tagcloud {
 	padding:5px; 
@@ -135,7 +148,7 @@ h3 {
 	border-radius:@tag-border-radius; 
 	text-decoration: none; 
 	line-height:40px;  
-	a:hover {     
+	&:hover {     
 		background:@tag-hover;
 	}
 } 
@@ -168,8 +181,8 @@ footer{
 }
 
 .event {
-	border-top: 1px solid #F0F0F0;
-	border-bottom: 1px solid #DDD;
+	border-top: 1px solid #f7f7f7;
+	border-bottom: 1px solid #ececec;
 	padding:5px @content-margin 5px @content-margin;
 	&:first-child {
 		border-top: none;

@@ -16,42 +16,37 @@
 	<script type="text/javascript"> 
 	$(document).ready(function(){
    	$(".detail").hide(); 
- 	$("#admin").hide();
+ 	/*$("#admin").hide();*/
 	/* clicks for touch interface */                 
 	$('.event').live('click', function() {
 		console.log("click!");
 		$(this).children(".detail").slideToggle(300);
 	});
-
-$('#content').infinitescroll({
-
-  navSelector  : "#loadmore",            
-                 // selector for the paged navigation (it will be hidden)
-  nextSelector : "#nextpage",   
-                 // selector for the NEXT link (to page 2)
-  itemSelector : ".event",          
-                 // selector for all items you'll retrieve
-});
-
-// kill scroll binding
-$(window).unbind('.infscr');
-
-// hook up the manual click guy.
-$('#loadmore').click(function(){
-  $(document).trigger('retrieve.infscr');	
-  return;
-});
-
-// remove the paginator when we're done.
-$(document).ajaxError(function(e,xhr,opt){
-  if (xhr.status == 404) $('#nextpage a').remove();
-});
-
-
-                                                            
-
-
-   });    
+	/*infinite scrolling*/
+	$('#content').infinitescroll({
+	  navSelector  : "a#nextpage:last",                  // selector for the paged navigation (it will be hidden)
+	  nextSelector : "a#nextpage:last",                 // selector for the NEXT link (to page 2)
+	  itemSelector : ".event",                         // selector for all items you'll retrieve
+	},function(arrayOfNewElems){
+	                 	console.log("call");
+						  $(".detail").hide();
+						 var showevents = $(".event").size();
+						var eventsqty = {{ event_list.paginator.num_pages }}*2;
+						if (showevents>eventsqty) $("#loadmore").hide(); 
+						 console.log(showevents); 
+					});
+	// kill scroll binding
+	$(window).unbind('.infscr');
+	// hook up the manual click guy.
+	$('#loadmore').click(function(){
+	  $(document).trigger('retrieve.infscr');	
+	  return;
+	});
+	// remove the paginator when we're done.
+	$(document).ajaxError(function(e,xhr,opt){
+	  if (xhr.status == 404) $('#nextpage a').remove();
+	});
+	});    
 
 
 	</script> 
@@ -61,22 +56,11 @@ $(document).ajaxError(function(e,xhr,opt){
 </head>
 
 <body>
-		<section id="admin">
-        	{% if user.is_authenticated %}
-          	  {{ user.email }}
-          	  {% if user.is_staff %}
-          	    <a href="/admin/">Admin</a> 
-          	  {% endif %}
-          	  <a href="/accounts/logout/">Logout</a> 
-          	{% else %}
-          	  <a href="/accounts/login/">Login</a>
-          	{% endif %}
-   	   	</section>
-   
+  
 		<section id="top">
 			<nav>
 				<ul>
-				<li><h1><a href="/events/create">Techism</a></h1></li>
+				<li><h1><a href="/">Techism</a></h1></li>
 				<li id="active"><a href="/events/">Events</a></li>
 				<li><a href="/events/create">Event hinzufügen</a></li>
 				</ul>
@@ -86,26 +70,27 @@ $(document).ajaxError(function(e,xhr,opt){
     {% block content %}{% endblock %}
 	<footer>                          
 		<nav>
-
-			<ul>
-				<li><a href="#" id="loadmore">LOAD MORE</a></li>
-			<li>
-	        {% if event_list.has_previous %}
-	            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
-	        {% endif %}
-	        <span class="current">
-	            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
-	        </span>
-	        {% if event_list.has_next %}
-	            <a id="nextpage" href="?page={{ event_list.next_page_number }}">&raquo;</a>
-	        {% endif %}
-			</li>
-			</ul>			
-			
+    		<ul>
+    			<li>
+    				<span class="current">
+    					            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
+    					        </span>
+    			</li>
+    		</ul>
+	        
 			<ul>
 			<li><a href="/events/archive">Archiv</a></li>
 			<li><a href="#">&Uuml;ber uns</a></li>
 			<li><a href="/events/impressum/">Impressum</a></li>
+	    	{% if user.is_authenticated %}
+	      	  {{ user.email }}
+	      	  {% if user.is_staff %}
+	      	    <li><a href="/admin/">Admin</a></li> 
+	      	  {% endif %}
+	      	  	<li><a href="/accounts/logout/">Logout</a></li> 
+	      	{% else %}
+	      	  	<li><a href="/accounts/login/">Login</a></li>
+	      	{% endif %}			                             
 			</ul>           
 			<ul id="syndicate">            
 			<li><a href="#">API</a></li>
