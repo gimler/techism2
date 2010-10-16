@@ -2,3 +2,12 @@ cron:
 - description: keep alive
   url: /
   schedule: every 2 minutes
+
+- description: update event.archived flag
+  url: /cron/update_archived_flag
+  schedule: every 2 minutes
+
+- description: update tags cache
+  url: /cron/update_tags_cache
+  schedule: every 2 minutes
+

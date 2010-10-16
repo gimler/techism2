@@ -5,25 +5,27 @@ from django.http import HttpResponseForbidden
 from techism2.models import Event, Location
 from techism2.web.forms import EventForm
 from datetime import datetime
+from datetime import timedelta
 from techism2 import service
+from techism2 import utils
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth import logout as django_logout
 
 
 def index(request):
-    event_list = Event.objects.filter(date_time_begin__gte=datetime.today()).order_by('date_time_begin')
+    event_list = Event.objects.filter(archived__exact=False).order_by('date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def archive(request):
-    event_list = Event.objects.filter(date_time_begin__lt=datetime.today()).order_by('-date_time_begin')
+    event_list = Event.objects.filter(archived__exact=True).order_by('-date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def tag(request, tag_name):
-    event_list = Event.objects.filter(tags=tag_name).order_by('date_time_begin')
+    event_list = Event.objects.filter(archived__exact=False).filter(tags=tag_name).order_by('date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags, 'tag_name': tag_name}, context_instance=RequestContext(request))
@@ -101,6 +103,9 @@ def __create_or_update_event_with_location (form, user, event):
     if event.location == None:
         location = __create_location(form)
         event.location=location
+    
+    # We also compute and store the archived flag
+    event.update_archived_flag()
     
     event.save()
     

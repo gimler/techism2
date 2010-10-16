@@ -43,5 +43,22 @@ indexes:
 
 - kind: techism2_event
   properties:
+  - name: archived
+  - name: date_time_begin
+
+- kind: techism2_event
+  properties:
+  - name: archived
+  - name: date_time_begin
+    direction: desc
+
+- kind: techism2_event
+  properties:
+  - name: archived
+  - name: tags
+  - name: date_time_begin
+
+- kind: techism2_event
+  properties:
   - name: tags
   - name: date_time_begin
