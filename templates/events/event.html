@@ -50,8 +50,14 @@
     <section id="create">
 	
 	{% if not user.is_authenticated %}
-    	<div id="message">Du bist nicht eingeloggt. Wenn Du Dich <a href="/accounts/login/">einloggst</a>, wird
-    		das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.</div>
+    	<div id="message">
+			<p>Eine Anmeldung für das Eintragen neuer Events ist optional. Die Anmeldung bringt dir bei häufiger Benutzung jedoch folgende Vorteile:</p>
+			<ul>
+				<li>* Nachträgliches Editieren und Löschen deiner angelegten Event möglich.</li>
+				<li>* Nach 5 korrekten Eintragungen bekommst du Veröffentlichungsrechte und kannst ohne manuelle Freischaltung Events einstellen.</li>
+			</ul>
+			<p><a href="/accounts/login/">Hier anmelden</a> oder ohne Anmeldung fortfahren.</p>
+		</div>
     	{% endif %}
     	
     	  <form action="" method="post">    

@@ -14,7 +14,8 @@ h2{font-size:28px;line-height:44px;display:inline;}h2 a{text-decoration:none;col
 h3{font-size:20px;line-height:0;}
 #what p{margin-bottom:5px;}
 #datebox{margin-left:10px;}
-#shortdate,#editlink{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}
+#shortdate{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}#shortdate a{margin-left:15px;}
+#edit{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;margin-left:5px;display:inline;}
 #tagcloud{padding:5px;border-radius:5px;text-decoration:none;line-height:35px;}#tagcloud a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;border:1px solid grey;}
 #tagcloud a:hover{background:#424242;}
 .tags,#tags a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;line-height:40px;}.tags:hover,#tags a:hover{background:#424242;}
