@@ -14,7 +14,7 @@
             <p>{{ event.description }} <a id="url" href="{{ event.url }}">Website</a></p>
             <section id="tags">
                 {% for tag in event.tags %}
-                    <a href="#">{{ tag }}</a>
+                    <a {% ifequal tag_name tag %}class="selected"{% endifequal %} href="/events/tags/{{ tag }}/">{{ tag }}</a>
                 {% endfor %}
             </section>
         </section>    
