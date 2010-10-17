@@ -49,7 +49,7 @@
                 </section>
             </article>
         {% endfor %}   
-			{% if event_list.has_next %}
+			{% if event_list.has_next or event_list.has_previous %}
            <article class="event">
             	<header>
                 	<h2>
@@ -57,7 +57,7 @@
 				            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
 				        {% endif %}
 				        {% if event_list.has_next %}
-				            <a id="nextpage" href="?page={{ event_list.next_page_number }}">&raquo;</a>
+				            <a href="?page={{ event_list.next_page_number }}">&raquo;</a>
 				        {% endif %} 
 				
 		    				<!--span class="current">
