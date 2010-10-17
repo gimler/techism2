@@ -70,6 +70,17 @@ def edit(request, event_id):
         },
         context_instance=RequestContext(request))
 
+def show(request, event_id):
+    tags = service.get_tags()
+    event = Event.objects.get(id=event_id)
+    return render_to_response(
+        'events/show.html',
+        {
+            'event': event,
+            'tags': tags
+        },
+        context_instance=RequestContext(request))
+
 def logout(request):
     django_logout(request)
     return HttpResponseRedirect('/')

@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 from techism2 import service
 from techism2.models import Event, Location
 from datetime import datetime, timedelta
@@ -14,7 +15,7 @@ def ical(request):
     cal['prodid'] = icalendar.vText(u'-//Techism//Techism//DE')
     cal['version'] = icalendar.vText(u'2.0')
     cal['x-wr-calname'] = icalendar.vText(u'Techism')
-    cal['x-wr-caldesc'] = icalendar.vText(u'Techism - Open Source und Community Events in M\u00FCnchen')
+    cal['x-wr-caldesc'] = icalendar.vText(u'Techism - IT-Events in M\u00FCnchen')
     
     for e in event_list:
         event = icalendar.Event()
@@ -52,14 +53,18 @@ def ical(request):
         if e.date_time_end:
             event['dtend'] = icalendar.vDatetime(e.get_date_time_end_utc())
         if e.url:
-            event['url'] = icalendar.vUri(e.url)
+            relative_url = reverse('event-show', args=[e.id])
+            absolute_url = request.build_absolute_uri(relative_url)
+            event['url'] = icalendar.vUri(absolute_url)
+        
+        # geo value isn't used by iCal readers :-(
+        # maybe a trick is to add the geo coordinates to the location field using the following format:
+        # $latitude, $longitude ($name, $street, $city)
         if e.location:
             location = u'%s, %s, %s' % (e.location.name, e.location.street, e.location.city)
             event['location'] = icalendar.vText(location)
         if e.location and e.location.latitude and e.location.longitude:
             event['geo'] = icalendar.vGeo((e.location.latitude, e.location.longitude))
-        # TODO: remove hard-coded geo value
-        event['geo'] = icalendar.vGeo((48.1372, 11.57542))
         
         cal.add_component(event)
     
