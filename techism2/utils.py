@@ -21,5 +21,9 @@ def utc_to_cet (utc_datetime):
 def localize_to_utc (datetime):
     if datetime == None:
         return None
-    localized = utc.localize(datetime)
-    return localized
+    if datetime.tzinfo == None:
+        localized = utc.localize(datetime)
+        return localized
+    else:
+        utc_datetime = datetime.astimezone(utc)
+        return utc_datetime
