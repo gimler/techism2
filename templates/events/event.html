@@ -22,7 +22,7 @@
   }
   google.maps.event.addDomListener(window, 'load', initializeMunichCityCenter);
   
-</script>
+</script>                                             
 <script type="text/javascript" src="/static/js/googlemaps.js"></script>
 {% endblock %}
 
@@ -33,8 +33,15 @@
     <section id="create">
 	
 	{% if not user.is_authenticated %}
-    	<div id="message">Du bist nicht eingeloggt. Wenn Du Dich <a href="/accounts/login/">einloggst</a>, wird
-    		das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.</div>
+    	<div id="message">
+			<p>Bitte beachten!</p>
+			<ul>
+			<li>Unser Fokus sind <strong>Treffen</strong>, <strong>Vorträge</strong> und <strong>Konferenzen</strong> aus dem <strong>Open Source</strong>, <strong>Usergroup</strong> und <strong>DIY</strong> Umfeld</li>
+			<li>Rein kommerziell motivierte Veranstalungen, ganz besonders welche mit Teilnahmebeschränkungen und Kosten >100€ werden in der Regel nicht aufgenommen.</li>
+			<li>Neue Events werden erst nach einem Review freigeschaltet. Dies ist leider nötig um "Spam"-Listungen zu vermeiden. Nach 5 erfolgreichen Eintragung entfällt der Review Prozess für dich.</li> 
+			</ul>
+			<p>Eine Anmeldung ist optional und ermöglichst das nachträgliche Editieren und Löschen deiner angelegten Events - <a href="/accounts/login/">Hier anmelden</a></p>
+		</div>
     	{% endif %}
     	
     	  <form action="" method="post">    
