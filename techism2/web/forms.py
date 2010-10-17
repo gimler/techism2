@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from techism2.models import Location
 from techism2.models import Event
-from techism2.web import fields
+from techism2 import fields
 
 
 class EventForm(forms.Form):
