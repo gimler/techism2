@@ -2,15 +2,14 @@
 
 {% block head %}
   <script type="text/javascript" src="/static/jquery/js/jquery.ui.datepicker-de.js"></script>
-  <script type="text/javascript" src="/static/js/googlemaps.js"></script>
-  <script type="text/javascript" src="/static/js/templates/event.js"></script>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="/static/js/googlemaps.js"></script>
+  <script type="text/javascript" src="/static/js/templates/event.js"></script>
   <script type="text/javascript">
 
       
   </script>
-  <script type="text/javascript" src="/static/js/googlemaps.js"></script>
 {% endblock %}
 
 
@@ -20,8 +19,15 @@
     <section id="create">
 	
 	{% if not user.is_authenticated %}
-    	<div id="message">Du bist nicht eingeloggt. Wenn Du Dich <a href="/accounts/login/">einloggst</a>, wird
-    		das Event mit Deinem Account verknüpft und Du kannst das Event später bearbeiten.</div>
+    	<div id="message">
+			<p>Bitte beachten!</p>
+			<ul>
+			<li>Unser Fokus sind <strong>Treffen</strong>, <strong>Vorträge</strong> und <strong>Konferenzen</strong> aus dem <strong>Open Source</strong>, <strong>Usergroup</strong> und <strong>DIY</strong> Umfeld</li>
+			<li>Rein kommerziell motivierte Veranstalungen, ganz besonders welche mit Teilnahmebeschränkungen und Kosten >100€ werden in der Regel nicht aufgenommen.</li>
+			<li>Neue Events werden erst nach einem Review freigeschaltet. Dies ist leider nötig um "Spam"-Listungen zu vermeiden. Nach 5 erfolgreichen Eintragung entfällt der Review Prozess für dich.</li> 
+			</ul>
+			<p>Eine Anmeldung ist optional und ermöglichst das nachträgliche Editieren und Löschen deiner angelegten Events - <a href="/accounts/login/">Hier anmelden</a></p>
+		</div>
     	{% endif %}
     	
     	  <form action="" method="post">    
@@ -45,33 +51,32 @@
 	 	<section id="when">   
 			<h3>Wann</h3>
 
-    	{{ form.date_time_begin.errors }}
-    	{{ form.date_time_begin.label_tag }} {{ form.date_time_begin }} Uhr<br>
-    	
-    	{{ form.date_time_end.errors }}
-    	{{ form.date_time_end.label_tag }} {{ form.date_time_end }} Uhr<br>
+        	{{ form.date_time_begin.errors }}
+        	{{ form.date_time_begin.label_tag }} {{ form.date_time_begin }} Uhr<br>
+        	
+        	{{ form.date_time_end.errors }}
+        	{{ form.date_time_end.label_tag }} {{ form.date_time_end }} Uhr<br>
 
 		</section>     	
 	 	<section id="where">
-		<h3>Wo</h3> 
-    	<b>{{ form.location.label_tag }}</b><br>
-    	vorhandene  auswählen: {{ form.location }}<br>
-    	oder neue anlegen:<br>
-    	
-    	{{ form.location_name.errors }}
-    	{{ form.location_name.label_tag }} {{ form.location_name }}<br>
-    	
-    	{{ form.location_street.errors }}
-    	{{ form.location_street.label_tag }} {{ form.location_street }}<br>
-    	
-    	{{ form.location_city.errors }}
-    	{{ form.location_city.label_tag }} {{ form.location_city }}<br>
-    	<input onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
-    	<div id="map_canvas" style="height: 400px; width: 600px"></div>
-  
-		<input type="submit" value="{{ button_label }}" />
-    	</form>
-    </section>  
-    	
-  </section>
+    		<h3>Wo</h3> 
+        	<b>{{ form.location.label_tag }}</b><br>
+        	vorhandene  auswählen: {{ form.location }}<br>
+        	oder neue anlegen:<br>
+        	
+        	{{ form.location_name.errors }}
+        	{{ form.location_name.label_tag }} {{ form.location_name }}<br>
+        	
+        	{{ form.location_street.errors }}
+        	{{ form.location_street.label_tag }} {{ form.location_street }}<br>
+        	
+        	{{ form.location_city.errors }}
+        	{{ form.location_city.label_tag }} {{ form.location_city }}<br>
+        	<input onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
+        	<div id="map_canvas" style="height: 400px; width: 600px"></div>
+      
+    		<input type="submit" value="{{ button_label }}" />
+        	</form>
+        </section>  
+</section>
 {% endblock %}

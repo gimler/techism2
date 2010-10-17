@@ -69,3 +69,10 @@ class Event(models.Model):
         else:   
             self.archived = self.get_date_time_begin_utc() + timedelta(hours=1) < utc
 
+class StaticPage(models.Model):
+    name = models.CharField(max_length=200, primary_key=True)
+    content = models.TextField()
+    date_time_created = models.DateTimeField(auto_now_add=True)
+    date_time_modified = models.DateTimeField(auto_now=True)
+
+
