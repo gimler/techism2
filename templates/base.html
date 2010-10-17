@@ -80,7 +80,6 @@
 			<ul>
 			<li><a href="/impressum/">Impressum</a></li>
 	    	{% if user.is_authenticated %}
-	      	  {{ user.email }}
 	      	  {% if user.is_staff %}
 	      	    <li><a href="/admin/">Admin</a></li> 
 	      	  {% endif %}
