@@ -15,9 +15,6 @@ urlpatterns = patterns('',
     
     # static pages
     (r'^impressum/$', 'techism2.web.views.static_impressum'),
-    (r'^aboutus/$', 'techism2.web.views.static_aboutus'),
-    (r'^faq/$', 'techism2.web.views.static_faq'),
-    (r'^api/$', 'techism2.web.views.static_api'),
     
     # iCal
     (r'^feed.ics$', 'techism2.ical.views.ical'),
