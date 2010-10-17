@@ -1,12 +1,13 @@
 from django.http import HttpResponse
 from techism2.models import Event, Location
-from datetime import datetime
+from datetime import datetime, timedelta
 import icalendar
 import time
 
 
 def ical(request):
-    event_list = Event.objects.filter(date_time_begin__gte=datetime.today()).order_by('date_time_begin')
+    ninety_days = datetime.utcnow() + timedelta(days=90)
+    event_list = Event.objects.filter(archived__exact=False).filter(date_time_begin__lte=ninety_days).order_by('date_time_begin')
     
     cal = icalendar.Calendar()
     cal['prodid'] = icalendar.vText(u'-//Techism//Techism//DE')

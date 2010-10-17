@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-from techism2 import fields
-from techism2 import utils
+from datetime import datetime, timedelta
+from techism2 import fields, utils
 
 class Location(models.Model):
     name = models.CharField(max_length=200)
@@ -22,6 +22,7 @@ class Event(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True)
     tags = fields.CommaSeparatedListField(models.CharField(max_length=20), blank=True, null=True)
     user = models.ForeignKey(User, blank=True, null=True)
+    archived = models.NullBooleanField()
     date_time_created = models.DateTimeField(auto_now_add=True, null=True)
     date_time_modified = models.DateTimeField(auto_now=True, null=True)
     
@@ -60,5 +61,11 @@ class Event(models.Model):
         "Sets the 'End' date/time, expecting CET/CEST timezone. Internally the date/time is saved in UTC timezone"
         self.date_time_end = utils.cet_to_utc(date_time_end_cet)
     
-    
+    def update_archived_flag(self):
+        "Updates the 'Archived' flag, depending if the the end date is set or not"
+        utc = utils.localize_to_utc(datetime.utcnow())
+        if self.get_date_time_end_utc():
+            self.archived = self.get_date_time_end_utc() < utc
+        else:   
+            self.archived = self.get_date_time_begin_utc() + timedelta(hours=1) < utc
 

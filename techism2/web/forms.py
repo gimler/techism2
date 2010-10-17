@@ -2,13 +2,13 @@ from django import forms
 from django.forms import ModelForm
 from techism2.models import Location
 from techism2.models import Event
-from techism2.web import fields
+from techism2 import fields
 
 
 class EventForm(forms.Form):
     title = forms.CharField(max_length=200, label=u'Titel')
-    date_time_begin = forms.SplitDateTimeField(label=u'Beginn', widget=forms.SplitDateTimeWidget(date_format='%Y-%m-%d', time_format='%H:%M'))
-    date_time_end = forms.SplitDateTimeField(label=u'Ende', required=False, widget=forms.SplitDateTimeWidget(date_format='%Y-%m-%d', time_format='%H:%M'))
+    date_time_begin = forms.SplitDateTimeField(label=u'Beginn', input_date_formats= ['%d.%m.%Y'], widget=forms.SplitDateTimeWidget(date_format='%d.%m.%Y', time_format='%H:%M'))
+    date_time_end = forms.SplitDateTimeField(label=u'Ende (falls festgelegt)', required=False, input_date_formats=['%d.%m.%Y'], widget=forms.SplitDateTimeWidget(date_format='%d.%m.%Y', time_format='%H:%M'))
     url = forms.URLField()
     description = forms.CharField(label= u'Beschreibung', widget=forms.Textarea )
     location = forms.ModelChoiceField (Location.objects.all(), required=False)

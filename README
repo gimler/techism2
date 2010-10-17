@@ -70,6 +70,7 @@ for i in range(-5,10):
         description="Some description of event " + str(i) + ".",
         location=choice(locations),
         tags=[choice(tags),choice(tags)])
+    e.update_archived_flag()
     e.save()
 #####################################################################################
 from techism2.models import Location
