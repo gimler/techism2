@@ -4,6 +4,18 @@ from django.core.cache import cache
 
 tags_cache_key = "tags"
 
+
+def get_event_query_set():
+    "Gets a base query set with all non-archived and published events"
+    return __get_base_event_query_set().filter(archived__exact=False)
+
+def get_archived_event_query_set():
+    "Gets a base query set with all archived and published events"
+    return __get_base_event_query_set().filter(archived__exact=True)
+
+def __get_base_event_query_set():
+    return Event.objects.filter(published__exact=True)
+
 def get_tags():
     # Note: no synchronization, propably not possible on GAE
     tags = cache.get(tags_cache_key)
@@ -20,7 +32,7 @@ def update_tags_cache():
     return tags
 
 def __fetch_tags():
-    dict_list = Event.objects.filter(archived__exact=False).values('tags')
+    dict_list = get_event_query_set().values('tags')
     tags = dict()    
     for dictionary in dict_list:
         for tag_list in dictionary.itervalues():
