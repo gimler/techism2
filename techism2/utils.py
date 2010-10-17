@@ -1,3 +1,5 @@
+ #!/usr/local/bin/python
+ # -*- coding: utf-8 -*-
 from pytz.gae import pytz
 from pytz import timezone
 

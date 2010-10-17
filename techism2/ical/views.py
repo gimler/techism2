@@ -1,3 +1,5 @@
+ #!/usr/local/bin/python
+ # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from techism2 import service
@@ -15,7 +17,7 @@ def ical(request):
     cal['prodid'] = icalendar.vText(u'-//Techism//Techism//DE')
     cal['version'] = icalendar.vText(u'2.0')
     cal['x-wr-calname'] = icalendar.vText(u'Techism')
-    cal['x-wr-caldesc'] = icalendar.vText(u'Techism - IT-Events in M\u00FCnchen')
+    cal['x-wr-caldesc'] = icalendar.vText(u'Techism - IT-Events in München')
     
     for e in event_list:
         event = icalendar.Event()
