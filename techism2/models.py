@@ -12,7 +12,7 @@ class Location(models.Model):
     
     def __unicode__(self):
         return self.name;
-    
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     date_time_begin = models.DateTimeField()
@@ -23,6 +23,7 @@ class Event(models.Model):
     tags = fields.CommaSeparatedListField(models.CharField(max_length=20), blank=True, null=True)
     user = models.ForeignKey(User, blank=True, null=True)
     archived = models.NullBooleanField()
+    published = models.NullBooleanField()
     date_time_created = models.DateTimeField(auto_now_add=True, null=True)
     date_time_modified = models.DateTimeField(auto_now=True, null=True)
     

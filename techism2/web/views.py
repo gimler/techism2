@@ -13,19 +13,19 @@ from django.contrib.auth import logout as django_logout
 
 
 def index(request):
-    event_list = Event.objects.filter(archived__exact=False).order_by('date_time_begin')
+    event_list = service.get_event_query_set().order_by('date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def archive(request):
-    event_list = Event.objects.filter(archived__exact=True).order_by('-date_time_begin')
+    event_list = service.get_archived_event_query_set().order_by('-date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def tag(request, tag_name):
-    event_list = Event.objects.filter(archived__exact=False).filter(tags=tag_name).order_by('date_time_begin')
+    event_list = service.get_event_query_set().filter(tags=tag_name).order_by('date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags, 'tag_name': tag_name}, context_instance=RequestContext(request))
@@ -101,14 +101,20 @@ def __create_or_update_event_with_location (form, user, event):
     event.description=form.cleaned_data['description']
     event.location=form.cleaned_data['location']
     event.tags=form.cleaned_data['tags']
-    if event.user == None and user.is_authenticated():
-        event.user=user
     
     if event.location == None:
         location = __create_location(form)
         event.location=location
     
-    # We also compute and store the archived flag
+    # Only when a new event is created
+    if event.id == None:
+        # auto-publish for staff users
+        event.published = user.is_staff
+        # link event to user
+        if user.is_authenticated():
+            event.user=user
+    
+    # Compute and store the archived flag
     event.update_archived_flag()
     
     event.save()

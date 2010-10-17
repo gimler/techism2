@@ -67,12 +67,31 @@ indexes:
 - kind: techism2_event
   properties:
   - name: archived
+  - name: published
+  - name: date_time_begin
+
+- kind: techism2_event
+  properties:
+  - name: archived
+  - name: published
+  - name: tags
+  - name: date_time_begin
+
+- kind: techism2_event
+  properties:
+  - name: archived
   - name: tags
   - name: date_time_begin
 
 - kind: techism2_event
   properties:
   - name: location_id
+  - name: __key__
+    direction: desc
+
+- kind: techism2_event
+  properties:
+  - name: published
   - name: __key__
     direction: desc
 
