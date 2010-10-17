@@ -7,11 +7,8 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>Techism - Open Source und Community Events in München</title>
 	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular&subset=latin">
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">              
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
-	<!--link rel="stylesheet/less" href="/static/css/style.less" type="text/css" /-->
-	<!--script src="/static/less/less-1.0.35.min.js" type="text/javascript" charset="utf-8"></script-->
   	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
     <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script>     
 	<script src="../static/jquery/js/jquery.infinitescroll.js" type="text/javascript" charset="utf-8"></script>	
@@ -60,46 +57,59 @@
 <body>
   
 		<section id="top">
-			<nav>
-				<ul>
-				<li><h1><a href="/">Techism</a></h1></li>
-				<li id="active"><a href="/events/">Events</a></li>
-				<li id="add" class="active"><a href="/events/create">+</a></li>
-				</ul>
-			</nav>
+
+<nav>
+<div>
+<ul>
+			<li>
+					<a href="/"><img src="/static/images/techism_logo_05.png" alt="Techism"></a>
+			</li>  		
+			<li id="active">
+					<a href="/events/">Events</a>
+			</li>	
+			<li id="add">
+					<a href="/events/create">+</a>
+			</li>
+</ul>
+</div>
+
+</nav> 
+			
 		</section>
 
     {% block content %}{% endblock %}
 	<footer>                          
-		<nav>
-    		<ul>
-    			<li>
-    				<span class="current">
-    					            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
-    					        </span>
-    			</li>
-    		</ul>
-	        
-			<ul>
-			<li><a href="#">&Uuml;ber uns</a></li>
-			<li><a href="#">FAQ</a></li>
-			<li><a href="/events/impressum/">Impressum</a></li>
-	    	{% if user.is_authenticated %}
-	      	  {{ user.email }}
-	      	  {% if user.is_staff %}
-	      	    <li><a href="/admin/">Admin</a></li> 
-	      	  {% endif %}
-	      	  	<li><a href="/accounts/logout/">Logout</a></li> 
-	      	{% else %}
-	      	  	<li><a href="/accounts/login/">Login</a></li>
-	      	{% endif %}			                             
-			</ul>           
-			<ul id="syndicate">            
-			<li><a href="#">API</a></li>
-			<li><a href="/feed.ics">iCal</a></li>
-			<li><a href="#">RSS</a></li>
-			<li><a href="http://twitter.com/techism">Twitter</a></li>
-			</ul>           
+			
+			<div id="head">           
+
+			<div id="left">
+					<ul> 			
+					<li><a href="#">&Uuml;ber uns</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="/events/impressum/">Impressum</a></li>
+			    	{% if user.is_authenticated %}
+			      	  {{ user.email }}
+			      	  {% if user.is_staff %}
+			      	    <li><a href="/admin/">Admin</a></li> 
+			      	  {% endif %}
+			      	  	<li><a href="/accounts/logout/">Logout</a></li> 
+			      	{% else %}
+			      	  	<li><a href="/accounts/login/">Login</a></li>
+			      	{% endif %}			                             
+					</ul>
+				</div>            
+
+			<div id="right">
+				<ul>            
+				<li><a href="/feed.ics">iCal</a></li>
+				<li><a href="#">RSS</a></li>
+				<li><a href="http://twitter.com/techism">Twitter</a></li>
+				</ul>
+				</div>
+
+			</div>
+			
+			       
 	</footer>
     
     {% block scripts %}{% endblock %}

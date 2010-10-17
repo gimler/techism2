@@ -58,7 +58,12 @@
 				        {% endif %}
 				        {% if event_list.has_next %}
 				            <a id="nextpage" href="?page={{ event_list.next_page_number }}">&raquo;</a>
-				        {% endif %}
+				        {% endif %} 
+				
+		    				<!--span class="current">
+		    					            Seite {{ event_list.number }} von {{ event_list.paginator.num_pages }}
+		    					        </span-->
+				
 					</h2>
 				</header>
 			</article>
