@@ -1,16 +1,25 @@
+ #!/usr/local/bin/python
+ # -*- coding: utf-8 -*-
 from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import Atom1Feed
+from techism2.models import Event
+from techism2 import service
 
 class UpcommingEventsFeed(Feed):
-    title = "Techism - IT-Events in Muenchen"
+    title = "Techism - IT-Events in München"
     link = "/events/"
-    description = "Upcomming events in Munich"
+    description = "Upcomming IT-Events in München"
+    feed_type = Atom1Feed
 
     def items(self):
-        return []
+        return service.get_event_query_set().order_by('date_time_begin')
 
     def item_title(self, item):
-        return "title"
+        return item.title
 
     def item_description(self, item):
-        return "description"
+        return item.description
+    
+    def item_link(self):
+        return "/events"
 
