@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
-from techism2.rss.feeds import UpcommingEventsFeed
+from techism2.rss.feeds import UpcommingEventsRssFeed, UpcommingEventsAtomFeed
 
 admin.autodiscover()
 
@@ -22,7 +22,10 @@ urlpatterns = patterns('',
     (r'^feed.ics$', 'techism2.ical.views.ical'),
     
     # Atom
-    (r'^feeds/upcomming_events$', UpcommingEventsFeed()),
+    (r'^feeds/atom/upcomming_events$', UpcommingEventsAtomFeed()),
+    
+    #RSS
+    (r'^feeds/rss/upcomming_events$', UpcommingEventsRssFeed()),
     
     # admin
     (r'^admin/', include(admin.site.urls)),
