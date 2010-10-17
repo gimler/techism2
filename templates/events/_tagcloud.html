@@ -1,0 +1,5 @@
+<section id="tagcloud">
+    {% for tag,count in tags.items %}
+        <a id="{{ count }}" href="/events/tags/{{ tag }}/">{{ tag }}</a>
+    {% endfor %}
+</section>

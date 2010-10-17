@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # web
     (r'^$', 'techism2.web.views.index'),
     (r'^events/$', 'techism2.web.views.index'),
+    (r'^events/(?P<event_id>\d+)/$', 'techism2.web.views.show'),
     (r'^events/edit/(?P<event_id>\d+)/$', 'techism2.web.views.edit'),
     (r'^events/create/$', 'techism2.web.views.create'),
     (r'^events/archive/$', 'techism2.web.views.archive'),
