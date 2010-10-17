@@ -16,3 +16,15 @@ function displayLocation(street, city){
     });
   }
 }
+
+
+function initializeMunichCityCenter() {
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(48.13788,11.575953);
+  var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
+}
