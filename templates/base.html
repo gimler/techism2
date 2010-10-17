@@ -12,71 +12,22 @@
 	<!--script src="/static/less/less-1.0.35.min.js" type="text/javascript" charset="utf-8"></script-->
   	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
     <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script>     
-	<script src="../static/jquery/js/jquery.infinitescroll.js" type="text/javascript" charset="utf-8"></script>	
-	<script type="text/javascript"> 
-	$(document).ready(function(){
-   	$(".detail").hide(); 
- 	/*$("#admin").hide();*/
-	/* clicks for touch interface */                 
-	$('.event').live('click', function() {
-		console.log("click!");
-		$(this).children(".detail").slideToggle(300);
-	});
-	/*infinite scrolling*/
-	$('#content').infinitescroll({
-	  navSelector  : "a#nextpage:last",                  // selector for the paged navigation (it will be hidden)
-	  nextSelector : "a#nextpage:last",                 // selector for the NEXT link (to page 2)
-	  itemSelector : ".event",                         // selector for all items you'll retrieve
-	},function(arrayOfNewElems){
-	                 	console.log("call");
-						  $(".detail").hide();
-						 var showevents = $(".event").size();
-						var eventsqty = {{ event_list.paginator.num_pages }}*2;
-						if (showevents>eventsqty) $("#loadmore").hide(); 
-						 console.log(showevents); 
-					});
-	// kill scroll binding
-	$(window).unbind('.infscr');
-	// hook up the manual click guy.
-	$('#loadmore').click(function(){
-	  $(document).trigger('retrieve.infscr');	
-	  return;
-	});
-	// remove the paginator when we're done.
-	$(document).ajaxError(function(e,xhr,opt){
-	  if (xhr.status == 404) $('#nextpage a').remove();
-	});
-	});    
-
-
-	</script> 
-	
-	
+	<script type="text/javascript" src="../static/jquery/js/jquery.infinitescroll.js" charset="utf-8"></script>	
     {% block head %}{% endblock %}
 </head>
 
 <body>
-  
-		<section id="top">
-
-<nav>
-<div>
-<ul>
-			<li>
-					<a href="/"><img src="/static/images/techism_logo_05.png" alt="Techism"></a>
-			</li>  		
-			<li id="active">
-					<a href="/events/">Events</a>
-			</li>	
-			<li id="add">
-					<a href="/events/create">+</a>
-			</li>
-</ul>
-</div>
-
-</nav> 
-			
-		</section>
+    <section id="top">
+        <nav>
+            <div>
+                <ul>
+        			<li><a href="/"><img src="/static/images/techism_logo_05.png" alt="Techism"></a></li>  		
+        			<li id="active"><a href="/events/">Events</a></li>	
+        			<li id="add"><a href="/events/create">+</a></li>
+                </ul>
+            </div>
+        </nav> 
+	</section>
 
     {% block content %}{% endblock %}
 	<footer>                          
@@ -97,14 +48,13 @@
 					</ul>
 				</div>            
 
-			<div id="right">
-				<ul>            
-				<li><a href="/feed.ics">iCal</a></li>
-				<li><a href="#">RSS</a></li>
-				<li><a href="http://twitter.com/techism">Twitter</a></li>
-				</ul>
-				</div>
-
+    			<div id="right">
+    				<ul>            
+        				<li><a href="/feed.ics">iCal</a></li>
+        				<li><a href="#">RSS</a></li>
+        				<li><a href="http://twitter.com/techism">Twitter</a></li>
+    				</ul>
+    			</div>
 			</div>
 	</footer>
     
