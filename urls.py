@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
+from techism2.rss.feeds import UpcommingEventsFeed
 
 admin.autodiscover()
 
@@ -8,7 +9,7 @@ urlpatterns = patterns('',
     # web
     (r'^$', 'techism2.web.views.index'),
     (r'^events/$', 'techism2.web.views.index'),
-    (r'^events/(?P<event_id>\d+)/$', 'techism2.web.views.show'),
+    url(r'^events/(?P<event_id>\d+)/$', 'techism2.web.views.show', name='event-show'),
     (r'^events/edit/(?P<event_id>\d+)/$', 'techism2.web.views.edit'),
     (r'^events/create/$', 'techism2.web.views.create'),
     (r'^events/archive/$', 'techism2.web.views.archive'),
@@ -20,6 +21,9 @@ urlpatterns = patterns('',
     
     # iCal
     (r'^feed.ics$', 'techism2.ical.views.ical'),
+    
+    # Atom
+    (r'^feeds/upcomming_events$', UpcommingEventsFeed()),
     
     # admin
     (r'^admin/', include(admin.site.urls)),
