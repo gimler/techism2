@@ -1,14 +1,18 @@
-from techism2.models import Event, Location
+from techism2.models import Event, Location, StaticPage
 from django.contrib import admin
 
 class EventAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields': ['title']}),
-        ('Event details', {'fields': ['date','url']}),
-    ]
-    list_filter = ['date']
     search_fields = ['title']
-    date_hierarchy = 'date'
+    list_filter = ['location', 'archived']
+    list_display = ['title', 'date_time_begin', 'date_time_end', 'location', 'tags', 'archived']
 
-admin.site.register(Event)
-admin.site.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'street', 'city']
+    list_display = ['name', 'street', 'city']
+
+class StaticPageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'content']
+
+admin.site.register(Event, EventAdmin)
+admin.site.register(Location, LocationAdmin)
+admin.site.register(StaticPage, StaticPageAdmin)

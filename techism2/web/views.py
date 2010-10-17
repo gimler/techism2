@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
-from techism2.models import Event, Location
+from techism2.models import Event, Location, StaticPage
 from techism2.web.forms import EventForm
 from datetime import datetime
 from datetime import timedelta
@@ -30,8 +30,21 @@ def tag(request, tag_name):
     page = __get_paginator_page(request, event_list)
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags, 'tag_name': tag_name}, context_instance=RequestContext(request))
 
-def impressum(request):
-    return render_to_response('events/impressum.html', {}, context_instance=RequestContext(request))
+def static_impressum(request):
+    return __render_static_page(request, 'static.impressum')
+
+def static_aboutus(request):
+    return __render_static_page(request, 'static.aboutus')
+
+def static_faq(request):
+    return __render_static_page(request, 'static.faq')
+
+def static_api(request):
+    return __render_static_page(request, 'static.api')
+
+def __render_static_page(request, name):
+    page, crated = StaticPage.objects.get_or_create(name=name, defaults={'content': u'<section id="content">Bitte Inhalt einf\u00FCgen.</section>'})
+    return render_to_response('events/static.html', {'content': page.content}, context_instance=RequestContext(request))
 
 def create(request):
     button_label = u'Event hinzuf\u00FCgen'

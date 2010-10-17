@@ -11,8 +11,13 @@ urlpatterns = patterns('',
     (r'^events/edit/(?P<event_id>\d+)/$', 'techism2.web.views.edit'),
     (r'^events/create/$', 'techism2.web.views.create'),
     (r'^events/archive/$', 'techism2.web.views.archive'),
-    (r'^events/impressum/$', 'techism2.web.views.impressum'),
     (r'^events/tags/(?P<tag_name>.+)/$', 'techism2.web.views.tag'),
+    
+    # static pages
+    (r'^impressum/$', 'techism2.web.views.static_impressum'),
+    (r'^aboutus/$', 'techism2.web.views.static_aboutus'),
+    (r'^faq/$', 'techism2.web.views.static_faq'),
+    (r'^api/$', 'techism2.web.views.static_api'),
     
     # iCal
     (r'^feed.ics$', 'techism2.ical.views.ical'),
