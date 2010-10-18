@@ -5,7 +5,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_filter = ['published', 'archived', 'location']
     list_display = ['title', 'date_time_begin', 'date_time_end', 'location', 'tags', 'archived', 'published']
-    #list_editable = ['published']
+    list_editable = ['published']
 
 class LocationAdmin(admin.ModelAdmin):
     search_fields = ['name', 'street', 'city']
