@@ -1,3 +1,5 @@
+ #!/usr/local/bin/python
+ # -*- coding: utf-8 -*-
 from techism2.models import Event, Location, StaticPage
 from django.contrib import admin
 

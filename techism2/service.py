@@ -1,3 +1,5 @@
+ #!/usr/local/bin/python
+ # -*- coding: utf-8 -*-
 from techism2.models import Event
 from datetime import datetime
 from django.core.cache import cache
