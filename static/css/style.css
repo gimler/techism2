@@ -12,6 +12,7 @@ nav ul{padding:0px;margin:0px;margin-left:10px;margin-top:20px;}nav ul li,nav ul
 nav ul .item{padding:15px;margin:15px;}
 #add{border-radius:5px;background:-webkit-gradient(linear, left 28, left bottom, from(#ffffff), to(#797979));padding-left:10px;padding-right:10px;height:45px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;}#add a{margin-right:0px;color:#000000;font-weight:bold;}
 a{color:#000000;font-weight:bold;text-decoration:none;display:inline;}a:hover{text-decoration:underline;}
+a img{border:0;}
 h1{font-size:28px;margin:0px;}h1 a{font-size:28px;color:#FFFFFF;text-decoration:none;}
 h1 a:hover{text-decoration:underline;}
 h2{font-size:28px;line-height:44px;display:inline;}h2 a{text-decoration:none;color:#000000;}
@@ -20,18 +21,9 @@ h3{font-size:20px;line-height:0;}
 #datebox{margin-left:10px;}
 #shortdate{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}#shortdate a{margin-left:15px;}
 #edit{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;margin-left:5px;display:inline;}
-#tagcloud{padding:5px;border-radius:5px;text-decoration:none;line-height:35px;}
-
-#tagcloud a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;border:1px solid grey;}
+#tagcloud{padding:5px;border-radius:5px;text-decoration:none;line-height:35px;}#tagcloud a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;border:1px solid grey;}
 #tagcloud a:hover{background:#424242;}
-#tagcloud a.selected{background:#E2E2E2;color:#000000}
-#tagcloud a:hover.selected{background:#424242;color:#ffffff}
-
-.tags,#tags a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;line-height:40px;}
-.tags:hover,#tags a:hover{background:#424242;}
-.tags,#tags a.selected{background:#E2E2E2;color:#000000}
-.tags:hover,#tags a.selected:hover{background:#424242;color:#ffffff}
-
+.tags,#tags a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;line-height:40px;}.tags:hover,#tags a:hover{background:#424242;}
 #top li a img{opacity:0.5;}
 #top a:hover img{opacity:0.7;}
 #top #logo{display:inline;}
