@@ -36,42 +36,46 @@
     	
 		<section id="what">
 			<h3>Was</h3>
-			    	{{ form.title.errors }}
-			    	{{ form.title.label_tag }} {{ form.title }}<br>
+			
+			
+			
 			    	
-			    	{{ form.url.errors }}
-			    	{{ form.url.label_tag }} {{ form.url }}<br>
+					<label>{{ form.title.label_tag }} </label> {{ form.title.errors }}
+			    	<div>{{ form.title }}</div>
 			    	
-			    	{{ form.description.errors }}
-			    	{{ form.description.label_tag }} {{ form.description  }}<br>
+					<label>{{ form.url.label_tag }}</label> {{ form.url.errors }}
+			    	<div>{{ form.url }}</div>
 			    	
-			    	{{ form.tags.errors }}
-			    	{{ form.tags.label_tag }} {{ form.tags }}<br><br> 
+					<label>{{ form.description.label_tag }}</label> {{ form.description.errors }}
+			    	<div>{{ form.description  }}</div><br>
+			    	
+					<label>{{ form.tags.label_tag }} (Komma getrennt)</label> {{ form.tags.errors }}
+			    	<div>{{ form.tags }}</div><br><br> 
 		</section>
 	 	<section id="when">   
 			<h3>Wann</h3>
 
-        	{{ form.date_time_begin.errors }}
-        	{{ form.date_time_begin.label_tag }} {{ form.date_time_begin }} Uhr<br>
+			<label>{{ form.date_time_begin.label_tag }}</label> {{ form.date_time_begin.errors }}
+        	<div id="shortform">{{ form.date_time_begin }}Uhr</div>
         	
-        	{{ form.date_time_end.errors }}
-        	{{ form.date_time_end.label_tag }} {{ form.date_time_end }} Uhr<br>
+        	<label>{{ form.date_time_end.label_tag }}</label> {{ form.date_time_end.errors }}
+			<div id="shortform">{{ form.date_time_end }}Uhr</div>
 
 		</section>     	
 	 	<section id="where">
     		<h3>Wo</h3> 
-        	<b>{{ form.location.label_tag }}</b><br>
-        	vorhandene  auswählen: {{ form.location }}<br>
-        	oder neue anlegen:<br>
+        	<label>Veranstaltungsort wählen {{ form.location.label_tag }}</label>
+        	 <div>{{ form.location }}</div>
+        	<p><strong>oder</strong></p>
+        	<div>Neuen Veranstaltungsort anlegen</div><br>
+        	<label>{{ form.location_name.label_tag }}</label> {{ form.location_name.errors }}
+			<div>{{ form.location_name }}</div>
         	
-        	{{ form.location_name.errors }}
-        	{{ form.location_name.label_tag }} {{ form.location_name }}<br>
+        	<label>{{ form.location_street.label_tag }}</label> {{ form.location_street.errors }}                 
+			<div>{{ form.location_street }}</div>
         	
-        	{{ form.location_street.errors }}
-        	{{ form.location_street.label_tag }} {{ form.location_street }}<br>
-        	
-        	{{ form.location_city.errors }}
-        	{{ form.location_city.label_tag }} {{ form.location_city }}<br>
+        	<label>{{ form.location_city.label_tag }}</label> {{ form.location_city.errors }}
+			<div>{{ form.location_city }}</div>
         	<input onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
         	<div id="map_canvas" style="height: 400px; width: 600px"></div>
       
