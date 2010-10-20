@@ -11,7 +11,7 @@ class EventForm(forms.Form):
     date_time_begin = forms.SplitDateTimeField(label=u'Beginn', input_date_formats= ['%d.%m.%Y'], widget=forms.SplitDateTimeWidget(date_format='%d.%m.%Y', time_format='%H:%M'))
     date_time_end = forms.SplitDateTimeField(label=u'Ende (falls festgelegt)', required=False, input_date_formats=['%d.%m.%Y'], widget=forms.SplitDateTimeWidget(date_format='%d.%m.%Y', time_format='%H:%M'))
     url = forms.URLField()
-    description = forms.CharField(label= u'Beschreibung', widget=forms.Textarea )
+    description = forms.CharField(label= u'Beschreibung', widget=forms.Textarea, required=False)
     location = forms.ModelChoiceField (Location.objects.all(), required=False)
     tags = fields.CommaSeparatedListFormField(label= u'Tags', required=False)
     

@@ -20,14 +20,14 @@ class Event(models.Model):
     date_time_begin = models.DateTimeField()
     date_time_end = models.DateTimeField(blank=True, null=True)
     url = models.URLField()
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     location = models.ForeignKey(Location, blank=True, null=True)
     tags = fields.CommaSeparatedListField(models.CharField(max_length=20), blank=True, null=True)
     user = models.ForeignKey(User, blank=True, null=True)
-    archived = models.NullBooleanField()
-    published = models.NullBooleanField()
-    date_time_created = models.DateTimeField(auto_now_add=True, null=True)
-    date_time_modified = models.DateTimeField(auto_now=True, null=True)
+    archived = models.BooleanField()
+    published = models.BooleanField()
+    date_time_created = models.DateTimeField(auto_now_add=True)
+    date_time_modified = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
         return self.title
