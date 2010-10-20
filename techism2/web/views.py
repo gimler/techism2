@@ -36,7 +36,7 @@ def static_about(request):
     return __render_static_page(request, 'static.about')
 
 def __render_static_page(request, name):
-    page, crated = StaticPage.objects.get_or_create(name=name, defaults={'content': u'<section id="content">Bitte Inhalt einf\u00FCgen.</section>'})
+    page, created = StaticPage.objects.get_or_create(name=name, defaults={'content': u'<section id="content">Bitte Inhalt einf\u00FCgen.</section>'})
     return render_to_response('events/static.html', {'content': page.content}, context_instance=RequestContext(request))
 
 def create(request):
