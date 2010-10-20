@@ -74,6 +74,13 @@ indexes:
   properties:
   - name: archived
   - name: published
+  - name: date_time_begin
+    direction: desc
+
+- kind: techism2_event
+  properties:
+  - name: archived
+  - name: published
   - name: tags
   - name: date_time_begin
 
