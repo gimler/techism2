@@ -85,4 +85,6 @@ location_list = Location.objects.all()
 for location in location_list:
     location.delete()
 #####################################################################################
+from techism2 import migration
+migration.import_from_json('mixxt_events.json')
 
