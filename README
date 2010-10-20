@@ -69,7 +69,8 @@ for i in range(-5,10):
         url="http://www.google.de",
         description="Some description of event " + str(i) + ".",
         location=choice(locations),
-        tags=[choice(tags),choice(tags)])
+        tags=[choice(tags),choice(tags)],
+        published=True)
     e.update_archived_flag()
     e.save()
 #####################################################################################
