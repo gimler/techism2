@@ -1,11 +1,13 @@
 {% load web_tags %}
 <article class="event">
     <header>
+
+        {% if event.user == user or user.is_superuser %}
+            <div id="edit"><a href="/events/edit/{{ event.id }}/">Edit</a></div> 
+        {% endif %}
         <h2><a id="{{ event.id }} event" href="#event">{{ event.title }}</a></h2>
         <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|display_date }}</div></div>
-        {% if event.user == user or user.is_superuser %}
-            <div id="datebox"><div id="edit"><a href="/events/edit/{{ event.id }}/">Edit</a></div></div>
-        {% endif %}                                                                                 
+                                                                                
     </header>  
     
     <section class="detail">
@@ -33,7 +35,7 @@
                 </p>     
                 </section>
                 <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">
-                <img src="http://maps.google.com/maps/api/staticmap?center=48.13788,11.575953&size=300x100&zoom=15&sensor=false" />       
+                <img src="http://maps.google.com/maps/api/staticmap?center=48.13788,11.575953&size=600x200&zoom=15&sensor=false" />       
                 </a>
             {% else %}
                 ist uns leider nicht bekannt...
