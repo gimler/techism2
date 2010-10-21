@@ -19,17 +19,37 @@ http://www.allbuttonspressed.com/projects/django-nonrel
 http://www.allbuttonspressed.com/projects/djangoappengine
 
 Don't use dev_appserver.sh, run with
-python manage.py runserver
+./manage.py runserver
 
 Available URLs:
+---------------
 http://localhost:8000/events/
 http://localhost:8000/admin/
 http://localhost:8000/_ah/admin
 http://localhost:8000/_ah/login
 
+Run Tests:
+----------
+./manage.py test techism2
+
 Deployment to App Engine:
-python manage.py deploy
+-------------------------
+./manage.py deploy
 (don't use appcfg)
+
+Migration from Mixxt:
+---------------------
+./manage.py shell
+from techism2 import migration
+migration.fetch_events_from_mixxt('mixxt_events.json')
+migration.fetch_archive_from_mixxt('mixxt_archive.json')
+(optional: delete existing data, see below)
+migration.import_from_json('mixxt_events.json')
+migration.import_from_json('mixxt_archive.json')
+quit()
+
+
+
 
 Script to add dummy location and event:
 Open the "Interactive Console" (http://localhost:8000/_ah/admin/interactive), paste this and run the program:

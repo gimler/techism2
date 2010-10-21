@@ -13,7 +13,7 @@
     <section class="detail">
         <section id="what">
             <h3>Was</h3>  
-            <p>{{ event.description }} <a id="url" href="{{ event.url }}">Website</a></p>
+            <p>{{ event.description|linebreaks }} <a id="url" href="{{ event.url }}">Website</a></p>
             <section id="tags">
                 {% for tag in event.tags %}
                     <a {% ifequal tag_name tag %}class="selected"{% endifequal %} href="/events/tags/{{ tag }}/">{{ tag }}</a>

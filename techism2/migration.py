@@ -101,6 +101,28 @@ class MixxtParser:
             return url
     
     def _get_event_description(self, div_tag):
+        # <div class="info_text specHigh1"> \n\t foo <p> \n\t blah blah.</p><p>blub blub.</p>
+        tag =  self._get_tag(div_tag, 'div', 'class', 'info_text specHigh1')
+        description = []
+        self._recursive_get_text(tag, description)
+        if len(description) > 0:
+            return u''.join(description).strip()
+    
+    def _recursive_get_text(self, tag, description):
+        if tag:
+            for node in tag.childNodes:
+                if node.nodeType == node.TEXT_NODE:
+                    description.append(node.data.strip())
+                elif node.nodeType == node.ELEMENT_NODE:
+                    self._recursive_get_text(node, description)
+                    if(node.tagName == 'p'):
+                        description.append('\n')
+                    if(node.tagName == 'br'):
+                        description.append('\n')
+                    if(node.tagName == 'li'):
+                        description.append('\n')
+    
+    def _get_event_description_old(self, div_tag):
         # TODO: strip tags?
         # <div class="info_text specHigh1"> \n\t foo <p> \n\t blah blah.</p><p>blub blub.</p>
         tag =  self._get_tag(div_tag, 'div', 'class', 'info_text specHigh1')
@@ -134,7 +156,7 @@ class MixxtParser:
             span_tag =  self._get_tag(li_tag, 'span', 'class', 'location')
             address =  self._get_text(span_tag)
             lines = address.splitlines()
-            if lines.count > index:
+            if len(lines) > index:
                 return lines[index].strip()
     
     
@@ -144,7 +166,7 @@ class MixxtParser:
         for tag in tags:
             if attribute_name:
                 attribute = tag.getAttribute(attribute_name)
-                if attribute_value == None or attribute == attribute_value:
+                if attribute_value is None or attribute == attribute_value:
                     if(count == index):
                         return tag
                     else:
@@ -175,12 +197,12 @@ def fetch_events_from_mixxt(output_file):
     print 'Done'
     
 
-def fetch_archvie_from_mixxt(output_file):
+def fetch_archive_from_mixxt(output_file):
     archive_index_base = 'http://techism.mixxt.de/networks/events/archive'
     links = []
-    for i in (1,32):
+    for i in range (1,32):
         event_archive_url = 'http://techism.mixxt.de/networks/events/archive.' + str(i)
-        links.extend(_fetch_event_links(event_index_url))
+        links.extend(_fetch_event_links(event_archive_url))
     events = _fetch_events(links)
     _write_events_to_json(events, output_file)
     print 'Done'
@@ -193,7 +215,12 @@ def import_from_json(input_file):
     for mixxt_event in mixxt_events:
         l_name = mixxt_event['location']['name']
         l_street = mixxt_event['location']['street']
+        if l_street is None:
+            l_street = u'-'
         l_city = mixxt_event['location']['city']
+        if l_city is None:
+            l_city = u'-'
+        location = None
         if l_name:
             print 'Creating Location %s' % l_name
             location, created = Location.objects.get_or_create(name=l_name, defaults={'street':l_street, 'city':l_city})
@@ -205,6 +232,8 @@ def import_from_json(input_file):
         event.location = location
         event.title = mixxt_event['title']
         event.url = mixxt_event['url']
+        if event.url is None:
+            event.url = "http://www.example.com"
         event.description = mixxt_event['description']
         event.set_date_time_begin_cet(_parse_datetime(mixxt_event['begin']))
         event.set_date_time_end_cet(_parse_datetime(mixxt_event['end']))
@@ -216,7 +245,7 @@ def import_from_json(input_file):
     input.close()
 
 def _parse_datetime(date_string):
-    if date_string == None:
+    if date_string is None:
         return None
     
     if len(date_string) == 8:
