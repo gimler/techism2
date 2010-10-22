@@ -1,14 +1,23 @@
 {% load web_tags %}
 <article class="event">
     <header>
+             
+	<div id="left">
+		<h2><a id="{{ event.id }} event" href="#event">{{ event.title }}</a></h2>
+	</div>            
+       
+	        {% if event.user == user or user.is_superuser %}
+	<div id="right">         
+	    <div id="edit"><a href="/events/edit/{{ event.id }}/">Edit</a></div> 
+	</div>
+	        {% endif %}
 
-        {% if event.user == user or user.is_superuser %}
-            <div id="edit"><a href="/events/edit/{{ event.id }}/">Edit</a></div> 
-        {% endif %}
-        <h2><a id="{{ event.id }} event" href="#event">{{ event.title }}</a></h2>
-        <div id="datebox"><div id="shortdate">{{ event.get_date_time_begin_cet|display_date }}</div></div>
-                                                                                
+		<div id="right">
+	<div id="shortdate">{{ event.get_date_time_begin_cet|display_date }}</div>
+		</div>          
+	   
     </header>  
+
     
     <section class="detail">
         <section id="what">
