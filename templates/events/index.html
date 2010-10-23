@@ -9,7 +9,9 @@
     $('.event').live('click', function() {
         console.log("click!");
         $(this).children(".detail").slideToggle(300);
-    });
+    }); 
+
+
     /*infinite scrolling*/
     $('#content').infinitescroll({
       navSelector  : "a#nextpage:last",                  // selector for the paged navigation (it will be hidden)
@@ -34,6 +36,7 @@
     $(document).ajaxError(function(e,xhr,opt){
       if (xhr.status == 404) $('#nextpage a').remove();
     });
+
     });    
     </script> 
 {% endblock %}

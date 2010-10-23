@@ -2,25 +2,18 @@ section,header,footer,aside,nav,article{display:block;}
 body{padding:0;margin:0 auto;width:85%;font-family:Trebuchet MS,Helvetica,Arial,sans-serif;font-size:15px;background:url("/static/images/head_spotlight.png") no-repeat 0px -50px,#232323 url("/static/images/bg_noise.gif") repeat;}
 #where img{width:100%;}
 #admin{background-color:#FFFFFF;opacity:.3;border-bottom-left-radius:5px;border-bottom-right-radius:5px;padding:5px;}
-#head{color:#ffffff;}#head a{font-size:28px;font-weight:normal;color:#ffffff;}
-#head ul{padding-left:0px;}
-#head li{list-style:none;display:inline;}
-#head #left{float:left;}
-#head #right{float:right;}
 #active a{color:#00ff00;text-decoration:none;}
 nav ul{padding:0px;margin:0px;margin-left:10px;margin-top:20px;}nav ul li,nav ul a{font-size:28px;font-weight:normal;color:#ffffff;list-style:none;margin-right:5px;display:inline;}
 nav ul .item{padding:15px;margin:15px;}
 #add{border-radius:5px;background:-webkit-gradient(linear, left 28, left bottom, from(#ffffff), to(#797979));padding-left:10px;padding-right:10px;height:45px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;}#add a{margin-right:0px;color:#000000;font-weight:bold;}
-a{color:#000000;font-weight:bold;text-decoration:none;display:inline;}a:hover{text-decoration:underline;}
+a{color:#000000;font-weight:bold;text-decoration:none;}a:hover{text-decoration:underline;}
 a img{border:0;}
 h1{font-size:28px;margin:0px;}h1 a{font-size:28px;color:#FFFFFF;text-decoration:none;}
 h1 a:hover{text-decoration:underline;}
 h2{font-size:28px;line-height:44px;display:inline;}h2 a{text-decoration:none;color:#000000;}
 h3{font-size:20px;line-height:0;}
 #what p{margin-bottom:5px;}
-#datebox{margin-left:10px;}
-#shortdate{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}#shortdate a{margin-left:15px;}
-#edit{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;margin-left:5px;display:inline;}
+#edit{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;margin-left:5px;}
 #tagcloud{padding:5px;border-radius:5px;text-decoration:none;line-height:35px;}#tagcloud a{background:#000000;color:#ffffff;padding:5px;border-radius:5px;text-decoration:none;border:1px solid grey;}
 #tagcloud a:hover{border:1px solid #00ff00;}
 #tagcloud .selected{border:1px solid #00ff00;}
@@ -34,10 +27,18 @@ h3{font-size:20px;line-height:0;}
 footer{width:100%;}
 footer ul{margin-bottom:8px;}footer ul li{margin-right:10px;}
 #content{background:#ffffff;border-radius:5px;color:#000000;}
-.event{border-top:1px solid #f7f7f7;border-bottom:1px solid #ececec;padding:5px 10px 5px 10px;}.event:first-child{border-top:none;}
+.event{border-top:1px solid #f7f7f7;border-bottom:1px solid #ececec;padding:10px 10px 10px 10px;display:block;}.event:first-child{border-top:none;}
 .event:last-child{border-bottom:none;}
-.event header{display:table;}.event header h2{display:table-cell;}
-.event header #shortdate{display:table-cell;vertical-align:middle;}
+.event header{color:#000000;height:40px;}.event header h2{font-size:28px;}
+.event header #left{float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:70%;}
+.event header #right{float:right;margin-top:10px;}
+#datebox{margin-left:10px;}
+#shortdate{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}#shortdate a{margin-left:15px;}
+#twocol a{font-size:28px;font-weight:normal;color:#ffffff;}
+#twocol ul{padding-left:0px;}
+#twocol li{list-style:none;display:inline;}
+#twocol #left{float:left;}
+#twocol #right{float:right;}
 .last{border-bottom:0px;}
 #create{padding:5px 10px;}#create ul{list-style-type:none;}
 #message{margin-top:5px;border-bottom:1px solid #646464;padding:15px;}#message ul{padding-left:25px;}
@@ -50,4 +51,4 @@ input,textarea{padding:9px;border:solid 1px #E5E5E5;outline:0;font:normal 13px/1
 textarea{width:90%;height:150px;line-height:150%;}
 #shortform input{width:100px;margin-right:10px;}
 input:hover,textarea:hover,input:focus,textarea:focus{border-color:#C9C9C9;-webkit-box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 8px;}
-.submit input{width:auto;padding:9px 15px;background:#617798;border:0;font-size:14px;color:#00ff00;-moz-border-radius:5px;-webkit-border-radius:5px;}
+.submit input{width:auto;padding:9px 15px;background:red;border:0;font-size:14px;color:#00ff00;-moz-border-radius:5px;-webkit-border-radius:5px;}
