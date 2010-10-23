@@ -33,7 +33,7 @@ body {
 	#232323 url("/static/images/bg_noise.gif") repeat;
 }  
 
-#where img{
+.where img{
 	width:100%;
 }
   
@@ -236,52 +236,47 @@ footer{
 	border-top: 1px solid #f7f7f7;
 	border-bottom: 1px solid #ececec;
 	padding:10px @content-margin 10px @content-margin;
-display: block;	
+	display: block;	
 	&:first-child {
     	border-top: none;
 	}
-
 	&:last-child {
 		border-bottom: none;
 	}
-	header{
-	color:#000000; 
-	height:40px;    
-//	padding:10px;
-
-
+	/* HEADER */
 	h2{
  		font-size:@h2-font-size;
 	}
-
-	#left{            
-		float: left;  
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow:ellipsis;  
-    	width:70%;
-		}
-	#right {
-		float: right;
-			margin-top:10px;		
+	header {     
+		display:table; 
+	    border-collapse:collapse; 
+	} 
+	.header-content { 
+		display:table-row; 	   
+	} 
+	.title, .edit, .date { 
+	    display:table-cell; 
+	} 
+	.title { 
+	    width:100%; 
 	}
-
+	.edit { 
+		padding:5px;
+		width:100px;
 	}
+	.date {
+	    width:100px;
+		white-space: nowrap;  
+	}  	
 }  
 
-#datebox{
-	margin-left:10px; 
-} 
-
-#shortdate {
+.box{
+	display:box;
 	background:@tag-background-light;
 	color:#FFFFFF;
 	border-radius:@tag-border-radius;
-	padding:3px;  
-	a {
-		margin-left:15px;
-	}
-}  
+	padding:3px; 
+}
  
 
 #twocol{   
@@ -304,9 +299,7 @@ display: block;
 	#right {
 		float: right;		
 	}
-}
-
-     
+} 
 
 .last {
 	border-bottom:0px; 

@@ -1,6 +1,6 @@
 section,header,footer,aside,nav,article{display:block;}
 body{padding:0;margin:0 auto;width:85%;font-family:Trebuchet MS,Helvetica,Arial,sans-serif;font-size:15px;background:url("/static/images/head_spotlight.png") no-repeat 0px -50px,#232323 url("/static/images/bg_noise.gif") repeat;}
-#where img{width:100%;}
+.where img{width:100%;}
 #admin{background-color:#FFFFFF;opacity:.3;border-bottom-left-radius:5px;border-bottom-right-radius:5px;padding:5px;}
 #active a{color:#00ff00;text-decoration:none;}
 nav ul{padding:0px;margin:0px;margin-left:10px;margin-top:20px;}nav ul li,nav ul a{font-size:28px;font-weight:normal;color:#ffffff;list-style:none;margin-right:5px;display:inline;}
@@ -29,11 +29,14 @@ footer ul{margin-bottom:8px;}footer ul li{margin-right:10px;}
 #content{background:#ffffff;border-radius:5px;color:#000000;}
 .event{border-top:1px solid #f7f7f7;border-bottom:1px solid #ececec;padding:10px 10px 10px 10px;display:block;}.event:first-child{border-top:none;}
 .event:last-child{border-bottom:none;}
-.event header{color:#000000;height:40px;}.event header h2{font-size:28px;}
-.event header #left{float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:70%;}
-.event header #right{float:right;margin-top:10px;}
-#datebox{margin-left:10px;}
-#shortdate{background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}#shortdate a{margin-left:15px;}
+.event h2{font-size:28px;}
+.event header{display:table;border-collapse:collapse;}
+.event .header-content{display:table-row;}
+.event .title,.event .edit,.event .date{display:table-cell;}
+.event .title{width:100%;}
+.event .edit{padding:5px;width:100px;}
+.event .date{width:100px;white-space:nowrap;}
+.box{display:box;background:#e2e2e2;color:#FFFFFF;border-radius:5px;padding:3px;}
 #twocol a{font-size:28px;font-weight:normal;color:#ffffff;}
 #twocol ul{padding-left:0px;}
 #twocol li{list-style:none;display:inline;}
