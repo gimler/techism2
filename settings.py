@@ -43,6 +43,6 @@ LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
     'djangotoolbox.auth.backends.NonrelPermissionBackend',
-    'auth_helpers.backends.GoogleAccountBackend',
+    'gaeauth.backends.GoogleAccountBackend',
     'django_openid_auth.auth.OpenIDBackend'
 )

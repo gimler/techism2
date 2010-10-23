@@ -34,9 +34,9 @@ urlpatterns = patterns('',
     # login/logout
     (r'^accounts/', include('django_openid_auth.urls')),
     (r'^accounts/logout/$', 'techism2.web.views.logout'),
-    url(r'^accounts/google_login/$', 'auth_helpers.views.login', name='google_login'),
-    url(r'^accounts/google_logout/$', 'auth_helpers.views.logout', name='google_logout'),
-    url(r'^accounts/google_authenticate/$', 'auth_helpers.views.authenticate', name='google_authenticate'),
+    url(r'^accounts/google_login/$', 'gaeauth.views.login', name='google_login'),
+    url(r'^accounts/google_logout/$', 'gaeauth.views.logout', name='google_logout'),
+    url(r'^accounts/google_authenticate/$', 'gaeauth.views.authenticate', name='google_authenticate'),
     
     # cron jobs
     (r'^cron/update_archived_flag', 'techism2.cron.views.update_archived_flag'),

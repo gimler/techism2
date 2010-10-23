@@ -13,8 +13,8 @@ def login(request, redirect_field_name=REDIRECT_FIELD_NAME):
     if not redirect_to or '//' in redirect_to or ' ' in redirect_to:
         redirect_to = '/'
     return HttpResponseRedirect(users.create_login_url(
-        '%s?%s=%s' % (reverse('auth_helpers.views.authenticate'), REDIRECT_FIELD_NAME,
-          redirect_to)))
+            '%s?%s=%s' % (reverse('google_authenticate'), REDIRECT_FIELD_NAME,
+                          redirect_to)))
 
 
 # redirects to the google user api generated login url
