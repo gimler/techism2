@@ -42,7 +42,6 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
-    'djangotoolbox.auth.backends.NonrelPermissionBackend',
     'gaeauth.backends.GoogleAccountBackend',
     'django_openid_auth.auth.OpenIDBackend'
 )

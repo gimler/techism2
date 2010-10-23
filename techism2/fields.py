@@ -7,7 +7,7 @@ class CommaSeparatedListField(fields.ListField):
     def formfield(self, **kwargs):
         defaults = {'form_class': CommaSeparatedListFormField}
         defaults.update(kwargs)
-        return super(fields.ListField, self).formfield(**defaults)
+        return super(fields.AbstractIterableField, self).formfield(**defaults)
 
 class CommaSeparatedListWidget(forms.TextInput):
     def render(self, name, value, attrs=None):

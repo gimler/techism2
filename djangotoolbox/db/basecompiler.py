@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models.sql import aggregates as sqlaggregates
 from django.db.models.sql.compiler import SQLCompiler
 from django.db.models.sql.constants import LOOKUP_SEP, MULTI, SINGLE
-from django.db.models.sql.where import AND, OR
+from django.db.models.sql.where import AND, OR, Constraint
 from django.db.utils import DatabaseError, IntegrityError
 from django.utils.tree import Node
 import random
@@ -124,11 +124,10 @@ class NonrelQuery(object):
         # not necessary with emulated negation handling code
         result = []
         for child in children:
-            if isinstance(child, Node) and child.negated and \
-                    len(child.children) == 1 and \
-                    isinstance(child.children[0], tuple):
-                node, lookup_type, annotation, value = child.children[0]
-                if lookup_type == 'isnull' and value == True and node.field is None:
+            if isinstance(child, tuple):
+                constraint = child[0]
+                lookup_type = child[1]
+                if lookup_type == 'isnull' and constraint.field is None:
                     continue
             result.append(child)
         return result
@@ -299,8 +298,13 @@ class NonrelCompiler(SQLCompiler):
             db_table = self.query.model._meta.db_table
             fields = [f for f in fields if db_table in only_load and
                       f.column in only_load[db_table]]
+
+        query_model = self.query.model
+        if query_model._meta.proxy:
+            query_model = query_model._meta.proxy_for_model
+
         for field in fields:
-            if field.model._meta != self.query.model._meta:
+            if field.model._meta != query_model._meta:
                 raise DatabaseError('Multi-table inheritance is not supported '
                                     'by non-relational DBs.')
         return fields

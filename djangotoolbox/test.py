@@ -8,6 +8,14 @@ try:
 except ImportError:
     from cStringIO import StringIO
 
+def skip_if(test):
+    """Skips a unit test if ``test`` is ``True``"""
+    def _inner(func):
+        if test:
+            return None
+        return func
+    return _inner
+
 class ModelTestCase(TestCase):
     """
     A test case for models that provides an easy way to validate the DB
@@ -66,6 +74,8 @@ class CapturingTestRunner(DjangoTestRunner):
             if captured_stderr:
                 e += '\n--------------- Captured stderr: ---------------\n'
                 e += captured_stderr
+            if captured_stdout or captured_stderr:
+                e += '\n--------------- End captured output ---------------\n\n'
             errors[-1] = (t, e)
 
         def override(func):
