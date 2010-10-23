@@ -1,0 +1,40 @@
+Techism 2.0
+Copyright 2010 The Authors
+   Christine Koppelt
+   Bernd Plontsch
+   Stefan Seelmann
+
+This product includes the following third-party components:
+
+ * gaeauth
+   https://bitbucket.org/fhahn/django-gaeauth/src/
+
+ * django_openid_auth
+   https://launchpad.net/django-openid-auth
+
+ * djangoappengine
+   http://www.allbuttonspressed.com/projects/djangoappengine
+   http://bitbucket.org/wkornewald/djangoappengine/src
+
+ * djangotoolbox
+   http://www.allbuttonspressed.com/projects/djangotoolbox
+   http://bitbucket.org/wkornewald/djangotoolbox/src
+
+ * pytz
+   http://pytz.sourceforge.net/
+   http://pypi.python.org/pypi/pytz/
+
+ * zip-packages/django.zip
+   http://www.allbuttonspressed.com/projects/django-nonrel
+   http://bitbucket.org/wkornewald/django-nonrel/src
+
+ * zip-packages/html5lib.zip
+   http://code.google.com/p/html5lib/
+
+ * zip-packages/icalendar.zip
+   http://pypi.python.org/pypi/icalendar/2.1
+
+ * zip-packages/openid.zip
+   http://pypi.python.org/pypi/python-openid, 
+   http://github.com/openid/python-openid
+
