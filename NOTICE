@@ -29,7 +29,7 @@ This product includes the following third-party components:
    http://pypi.python.org/pypi/gaepytz
 
  * zip-packages/django.zip
-   BSE License (zip-packages/django-LICENSE)
+   BSD License (zip-packages/django-LICENSE)
    http://www.allbuttonspressed.com/projects/django-nonrel
    http://bitbucket.org/wkornewald/django-nonrel/src
 
