@@ -45,3 +45,7 @@ AUTHENTICATION_BACKENDS = (
     'gaeauth.backends.GoogleAccountBackend',
     'django_openid_auth.auth.OpenIDBackend'
 )
+
+GAE_SETTINGS_MODULES = (
+    'gae_settings',
+)
