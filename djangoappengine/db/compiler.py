@@ -21,6 +21,8 @@ from google.appengine.api.datastore_types import Text, Category, Email, Link, \
 from djangotoolbox.db.basecompiler import NonrelQuery, NonrelCompiler, \
     NonrelInsertCompiler, NonrelUpdateCompiler, NonrelDeleteCompiler
 
+import cPickle as pickle
+
 import decimal
 
 # Valid query types (a dictionary is used for speedy lookups).
@@ -263,6 +265,13 @@ class GAEQuery(NonrelQuery):
         for query in self.gae_query:
             key = '%s %s' % (column, op)
             value = self.convert_value_for_db(db_type, value)
+            if isinstance(value, Text):
+                raise DatabaseError('TextField is not indexed, by default, '
+                                    "so you can't filter on it. "
+                                    'Please add an index definition for the '
+                                    'column "%s" as described here:\n'
+                                    'http://www.allbuttonspressed.com/blog/django/2010/07/Managing-per-field-indexes-on-App-Engine'
+                                    % column)
             if key in query:
                 existing_value = query[key]
                 if isinstance(existing_value, list):
@@ -340,11 +349,21 @@ class SQLCompiler(NonrelCompiler):
     query_class = GAEQuery
 
     def convert_value_from_db(self, db_type, value):
-        if isinstance(value, (list, tuple)) and len(value) and \
-                db_type.startswith('ListField:'):
+        if isinstance(value, (list, tuple, set)) and \
+                db_type.startswith(('ListField:', 'SetField:')):
             db_sub_type = db_type.split(':', 1)[1]
             value = [self.convert_value_from_db(db_sub_type, subvalue)
                      for subvalue in value]
+
+        if db_type.startswith('SetField:') and value is not None:
+            value = set(value)
+
+        if db_type.startswith('DictField:') and value is not None:
+            value = pickle.loads(value)
+            if ':' in db_type:
+                db_sub_type = db_type.split(':', 1)[1]
+                value = dict((key, self.convert_value_from_db(db_sub_type, value[key]))
+                             for key in value)
 
         # the following GAE database types are all unicode subclasses, cast them
         # to unicode so they appear like pure unicode instances for django
@@ -370,7 +389,7 @@ class SQLCompiler(NonrelCompiler):
                         'None')
                 else:
                     value = value.id()
-            elif db_type in ('text', 'gae_email', 'gae_link') :
+            elif db_type == 'text':
                 if value.name() is None:
                     raise DatabaseError('Wrong type for Key. Expected string, found'
                         'None')
@@ -389,20 +408,22 @@ class SQLCompiler(NonrelCompiler):
             value = unicode(value)
         elif isinstance(value, str):
             value = str(value)
-        elif isinstance(value, (list, tuple)) and len(value) and \
-                db_type.startswith('ListField:'):
+        elif isinstance(value, (list, tuple, set)) and \
+                db_type.startswith(('ListField:', 'SetField:')):
             db_sub_type = db_type.split(':', 1)[1]
             value = [self.convert_value_for_db(db_sub_type, subvalue)
                      for subvalue in value]
         elif isinstance(value, decimal.Decimal) and db_type.startswith("decimal:"):
             value = self.connection.ops.value_to_db_decimal(value, *eval(db_type[8:]))
+        elif isinstance(value, dict) and db_type.startswith('DictField:'):
+            if ':' in db_type:
+                db_sub_type = db_type.split(':', 1)[1]
+                value = dict([(key, self.convert_value_for_db(db_sub_type, value[key]))
+                              for key in value])
+            value = Blob(pickle.dumps(value))
 
         if db_type == 'gae_key':
             return value
-        elif db_type == 'gae_link':
-            value = Link(value)
-        elif db_type == 'gae_email':
-            value = Email(value)
         elif db_type == 'longtext':
             # long text fields cannot be indexed on GAE so use GAE's database
             # type Text
