@@ -1,8 +1,7 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-from techism2.models import Event
 from techism2 import service
 
  

@@ -1,8 +1,7 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 from django import forms
-from django.forms import ModelForm
-from techism2.models import Location, Event
+from techism2.models import Location
 from techism2 import fields
 
 

@@ -1,12 +1,11 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from techism2.models import Event, Location, StaticPage
 from techism2.web.forms import EventForm
-from datetime import datetime, timedelta
-from techism2 import service, utils
+from techism2 import service
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth import logout as django_logout
 

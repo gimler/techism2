@@ -1,5 +1,5 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 import unittest
 from techism2.migration import MixxtParser
 

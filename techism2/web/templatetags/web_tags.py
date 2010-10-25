@@ -1,7 +1,6 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 from django.template import Library 
-from django.template.defaultfilters import stringfilter
 from django.conf import settings
 from datetime import date, timedelta
 import locale

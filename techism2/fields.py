@@ -1,5 +1,5 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 from django import forms
 from djangotoolbox import fields
 

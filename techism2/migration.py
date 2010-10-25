@@ -1,5 +1,5 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 import urllib2
 import html5lib
 from html5lib import treebuilders, treewalkers, serializer

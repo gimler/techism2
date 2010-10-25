@@ -1,9 +1,8 @@
- #!/usr/local/bin/python
- # -*- coding: utf-8 -*-
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from techism2 import service
-from techism2.models import Event, Location
 from datetime import datetime, timedelta
 import icalendar
 import time

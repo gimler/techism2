@@ -1,9 +1,6 @@
 from django.http import HttpResponse
 from techism2 import service
-from techism2.models import Event, Location
 from datetime import datetime
-import icalendar
-import time
 
 
 def update_tags_cache(request):
