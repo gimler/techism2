@@ -112,6 +112,11 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: techism2_setting
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: techism2_staticpage
   properties:
   - name: __key__

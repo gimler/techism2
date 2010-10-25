@@ -1,5 +1,4 @@
-from django.conf.urls.defaults import *
-from django.conf import settings
+from django.conf.urls.defaults import patterns, url, include
 from django.contrib import admin
 from techism2.rss.feeds import UpcommingEventsRssFeed, UpcommingEventsAtomFeed
 

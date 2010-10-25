@@ -1,7 +1,8 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
-from techism2.models import Event
+from techism2.models import Event, Setting
 from django.core.cache import cache
+from django.core.mail import send_mail
 
 tags_cache_key = "tags"
 
@@ -43,4 +44,13 @@ def __fetch_tags():
                         tags[tag] = 0
                     tags[tag] += 1
     return tags
+
+def send_event_review_mail(event):
+    from_setting, _ = Setting.objects.get_or_create(name='event_review_mail_from', defaults={'value': u'x'})
+    to_setting, _ = Setting.objects.get_or_create(name='event_review_mail_to', defaults={'value': u'x'})
+    subject = u'[Techism] Neues Event - bitte prüfen'
+    message = u'Titel: %s\n\nBeschreibung %s\n\n' % (event.title, event.description)
+    fr = from_setting.value
+    to = to_setting.value.split(',')
+    send_mail(subject, message, fr, to, fail_silently=False)
 

@@ -78,4 +78,10 @@ class StaticPage(models.Model):
     date_time_created = models.DateTimeField(auto_now_add=True)
     date_time_modified = models.DateTimeField(auto_now=True)
 
+class Setting(models.Model):
+    name = models.CharField(max_length=200, primary_key=True)
+    value = models.CharField(max_length=500)
+    date_time_created = models.DateTimeField(auto_now_add=True)
+    date_time_modified = models.DateTimeField(auto_now=True)
+
 

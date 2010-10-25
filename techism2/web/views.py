@@ -7,6 +7,7 @@ from techism2.models import Event, Location, StaticPage
 from techism2.web.forms import EventForm
 from techism2 import service
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.urlresolvers import reverse
 from django.contrib.auth import logout as django_logout
 
 
@@ -90,7 +91,10 @@ def __save_event(request, button_label, old_event=None):
     form = EventForm(request.POST) 
     if form.is_valid(): 
         event= __create_or_update_event_with_location(form, request.user, old_event)
-        return HttpResponseRedirect('/events/')
+        if not event.published:
+            service.send_event_review_mail(event)
+        url = reverse('event-show', args=[event.id])
+        return HttpResponseRedirect(url)
     else:
         return render_to_response(
             'events/event.html',
