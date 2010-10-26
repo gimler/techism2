@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>OpenID failed</h1>
-    <p>{{ message|escape }}</p>
+<section id="content">
+  <article class="event">
+    <section>
+      <header>
+        <h2>Login</h2>
+      </header>
+      <p>{{ message|escape }}</p>
+    </section>
+  </article>  
+</section>
 {% endblock %}
