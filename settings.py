@@ -54,3 +54,6 @@ AUTHENTICATION_BACKENDS = (
 GAE_SETTINGS_MODULES = (
     'gae_settings',
 )
+
+from techism2 import service
+SECRET_KEY = service.get_secret_key()

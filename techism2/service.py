@@ -54,3 +54,8 @@ def send_event_review_mail(event):
     to = to_setting.value.split(',')
     send_mail(subject, message, fr, to, fail_silently=False)
 
+def get_secret_key():
+    secret_key_setting, _ = Setting.objects.get_or_create(name='SECRET_KEY', defaults={'value': u'none'})
+    secret_key = secret_key_setting.value
+    return secret_key
+
