@@ -1,5 +1,5 @@
 api_version: 1
-application: techism2-devel
+application: techism2
 default_expiration: 100d
 handlers:
 - {login: admin, script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py, url: /remote_api}
@@ -9,4 +9,4 @@ handlers:
 - {static_dir: static/, url: /static}
 - {script: djangoappengine/main/main.py, url: /.*}
 runtime: python
-version: 1-devel
+version: '1'
