@@ -55,7 +55,8 @@ def _tag_prod_deploy(version):
 
 
 def _deploy():
-    subprocess.check_call(["./manage.py", "deploy", "--nosyncdb"])
+    #subprocess.check_call(["./manage.py", "deploy", "--nosyncdb"])
+    subprocess.check_call(["./manage.py", "deploy"])
 
 
 def _update_app_yaml_for_prod_deploy():
