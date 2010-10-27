@@ -12,14 +12,14 @@ def prod_deploy():
     version = _update_app_yaml_for_prod_deploy()
     _update_version_html(version)
     _commit_prod_deploy(version)
-    _tag_prod_deploy(version)
+    tag = _tag_prod_deploy(version)
     _deploy()
     
     next_dev_version = _update_app_yaml_for_dev()
     _update_version_html(next_dev_version)
     _commit_dev(next_dev_version)
     
-    _push()
+    _push(tag)
     sys.stdout.write("Prod deployment successful, check http://%s.latest.techism2.appspot.com and update default version in App Engine console.\n" % version)
     
     
@@ -37,8 +37,9 @@ def _pull():
     subprocess.check_call(["git", "pull"])
 
 
-def _push():
+def _push(tag):
     subprocess.check_call(["git", "push"])
+    subprocess.check_call(["git", "push", "origin", tag])
 
 
 def _commit_prod_deploy(version):
@@ -50,8 +51,10 @@ def _commit_dev(next_version):
 
 
 def _tag_prod_deploy(version):
-    subprocess.check_call(["git", "tag", "-a", "v"+str(version), "-m", "Tag version " + str(version)])
-    sys.stdout.write("Created tag v" + str(version) + " for prod deployment\n")
+    tag = "v"+str(version)
+    subprocess.check_call(["git", "tag", "-a", tag, "-m", "Tag version " + str(version)])
+    sys.stdout.write("Created tag " + tag + " for prod deployment\n")
+    return tag
 
 
 def _deploy():
