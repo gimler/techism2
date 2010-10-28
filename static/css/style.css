@@ -193,14 +193,17 @@ footer ul li {
 .event .header-content {
   display: table-row;
 }
-.event .title, .event .edit, .event .date {
+.event .title,
+.event .edit,
+.event .show,
+.event .date {
   display: table-cell;
 }
 .event .title {
   width: 100%;
 }
-.event .edit {
-  padding: 5px;
+.event .edit, .event .show {
+  padding-right: 5px;
   width: 100px;
 }
 .event .date {
