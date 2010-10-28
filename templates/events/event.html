@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="/static/js/googlemaps.js"></script>
 	<script type="text/javascript" src="/static/js/templates/event.js"></script>
 	<script type="text/javascript">
+		var locations = {{ locations_as_json|safe }};
 	</script>
 {% endblock %}
 
@@ -58,8 +59,8 @@
 					<div>{{ form.location_street }}</div>
 					<label>{{ form.location_city.label_tag }}</label> {{ form.location_city.errors }}
 					<div>{{ form.location_city }}</div>
-					<input onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
-					<div id="map_canvas" style="height: 400px; width: 600px"></div>
+					<input id="id_location_show_in_map" onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
+					<div id="map_canvas" style="height: 400px; width: 100%"></div>
 				</section>
 				<input type="submit" value="{{ button_label }}" />
 			</form>

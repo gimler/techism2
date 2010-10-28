@@ -9,6 +9,7 @@ from techism2 import service
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout as django_logout
+from django.utils import simplejson as json
 
 
 def index(request):
@@ -41,6 +42,7 @@ def __render_static_page(request, name):
 
 def create(request):
     button_label = u'Event hinzuf\u00FCgen'
+    locations_as_json = __get_locations_as_json()
     
     if request.method == 'POST':
         return __save_event(request, button_label)
@@ -49,12 +51,14 @@ def create(request):
         'events/event.html',
         {
             'form': EventForm(),
-            'button_label': button_label
+            'button_label': button_label,
+            'locations_as_json': locations_as_json
         },
         context_instance=RequestContext(request))
 
 def edit(request, event_id):
     button_label = u'Event \u00E4ndern'
+    locations_as_json = __get_locations_as_json()
     
     event = Event.objects.get(id=event_id)
     if event.user != request.user and request.user.is_superuser == False:
@@ -68,9 +72,11 @@ def edit(request, event_id):
         'events/event.html',
         {
             'form': form,
-            'button_label': button_label
+            'button_label': button_label,
+            'locations_as_json': locations_as_json
         },
         context_instance=RequestContext(request))
+
 
 def show(request, event_id):
     tags = service.get_tags()
@@ -182,4 +188,15 @@ def __get_paginator_page(request, event_list):
         page = paginator.page(paginator.num_pages)
     
     return page
+
+def __get_locations_as_json():
+    location_list = Location.objects.all()
+    locations = dict()
+    for location in location_list:
+        locations[location.id] = dict()
+        locations[location.id]['name'] = location.name
+        locations[location.id]['street'] = location.street
+        locations[location.id]['city'] = location.city
+    locations_as_json = json.dumps(locations)
+    return locations_as_json
 
