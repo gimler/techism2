@@ -15,12 +15,12 @@ This product includes the following third-party components:
    https://launchpad.net/django-openid-auth
 
  * djangoappengine
-   ???
+   BSD License (djangoappengine/LICENSE)
    http://www.allbuttonspressed.com/projects/djangoappengine
    http://bitbucket.org/wkornewald/djangoappengine/src
 
  * djangotoolbox
-   ???
+   BSD License (djangotoolbox/LICENSE)
    http://www.allbuttonspressed.com/projects/djangotoolbox
    http://bitbucket.org/wkornewald/djangotoolbox/src
 
