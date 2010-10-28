@@ -59,3 +59,8 @@ def get_secret_key():
     secret_key = secret_key_setting.value
     return secret_key
 
+def get_secure_url():
+    secure_url_setting, _ = Setting.objects.get_or_create(name='secure_url', defaults={'value': u'none'})
+    secure_url = secure_url_setting.value
+    return secure_url
+

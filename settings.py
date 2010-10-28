@@ -46,6 +46,18 @@ OPENID_UPDATE_DETAILS_FROM_SREG = True
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'techism2.middleware.SecureRequiredMiddleware',
+)
+
 AUTHENTICATION_BACKENDS = (
     'gaeauth.backends.GoogleAccountBackend',
     'django_openid_auth.auth.OpenIDBackend'
