@@ -1,65 +1,62 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8" />
+	<meta charset="utf-8" />
 	<meta name="viewport" content="width=480, height=640, user-scalable=yes" />
-    <title>Techism - IT-Events in München</title>
-	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/> 
+	<title>Techism - IT-Events in München</title>
+	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png"/>
 	<link rel="icon" href="/static/images/favicon.ico" type="image/ico">
 	<link rel="alternate" type="application/atom+xml" title="Techism - IT-Events in München" href="/feeds/atom/upcomming_events"/>
-	<link rel="alternate" type="application/rss+xml"  title="Techism - IT-Events in München (für ältere RSS-Reader)" href="/feeds/rss/upcomming_events"/> 
+	<link rel="alternate" type="application/rss+xml"  title="Techism - IT-Events in München (für ältere RSS-Reader)" href="/feeds/rss/upcomming_events"/>
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 	<link type="text/css" href="/static/jquery/css/custom-theme/jquery-ui-1.8.5.custom.css" media="screen" rel="stylesheet"/>
-  	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
-    <script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script>     
-	<script type="text/javascript" src="/static/jquery/js/jquery.infinitescroll.js" charset="utf-8"></script>	
-    {% block head %}{% endblock %}
+	<script type="text/javascript" src="/static/jquery/js/jquery-1.4.2.min.js"></script> 
+	<script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.4.custom.min.js"></script>
+	<script type="text/javascript" src="/static/jquery/js/jquery.infinitescroll.js" charset="utf-8"></script>
+	{% block head %}{% endblock %}
 </head>
 
 <body>
-    <section id="top">
-        <nav>
-            <div>
-                <ul>
-        			<li><a href="/"><img src="/static/images/techism_logo_05.png" alt="Techism"></a></li>  		
-        			<li id="active"><a href="/events/">Events</a></li>	
-        			<li id="add"><a href="/events/create">+</a></li>
-                </ul>
-            </div>
-        </nav> 
+	<section id="top">
+		<nav>
+			<div>
+				<ul>
+					<li><a href="/"><img src="/static/images/techism_logo_05.png" alt="Techism"></a></li>
+					<li id="active"><a href="/events/">Events</a></li>	
+					<li id="add"><a href="/events/create">+</a></li>
+				</ul>
+				</div>
+		</nav> 
 	</section>
 
-    {% block content %}{% endblock %}
-	<footer>                          
-			<div id="twocol">           
-
+	{% block content %}{% endblock %}
+	<footer>
+		<div id="twocol">
 			<div id="left">
-					<ul> 			
+				<ul>
 					<li><a href="/impressum/">Impressum</a></li>
 					<li><a href="/about/">Über uns</a></li>
 					<li><a href="http://techism.mixxt.de/networks/wiki/index.gruppen">Wiki</a></li>					
-			    	{% if user.is_authenticated %}
-			      	  {% if user.is_superuser %}
-			      	    <li><a href="/admin/">Admin</a></li> 
-			      	  {% endif %}
-			      	  	<li><a href="/accounts/logout/">Logout</a></li> 
-			      	{% else %}
-			      	  	<li><a href="/accounts/login/">Login</a></li>
-			      	{% endif %}			                             
-					</ul>
-				</div>            
-
-    			<div id="right">
-    				<ul>            
-        				<li><a href="/feed.ics">iCal</a></li>
-        				<li><a href="/feeds/atom/upcomming_events">RSS</a></li>
-        				<li><a href="http://twitter.com/techism">Twitter</a></li>
-    				</ul>
-    			</div>
+					{% if user.is_authenticated %}
+						{% if user.is_superuser %}
+							<li><a href="/admin/">Admin</a></li> 
+						{% endif %}
+						<li><a href="/accounts/logout/">Logout</a></li> 
+					{% else %}
+						<li><a href="/accounts/login/">Login</a></li>
+					{% endif %}
+				</ul>
 			</div>
-			{% include "version.html" %}
+			<div id="right">
+				<ul>
+					<li><a href="/feed.ics">iCal</a></li>
+					<li><a href="/feeds/atom/upcomming_events">RSS</a></li>
+					<li><a href="http://twitter.com/techism">Twitter</a></li>
+				</ul>
+			</div>
+		</div>
+		{% include "version.html" %}
 	</footer>
-    
-    {% block scripts %}{% endblock %}
+	{% block scripts %}{% endblock %}
 </body>
 </html>

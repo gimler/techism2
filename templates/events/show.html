@@ -3,19 +3,19 @@
 {% block content %}
 
 <section id="content">
-  {% if event.published %}
-    {% include "events/_event_details.html" %}
-  {% else %}
-    <article class="event">
-      <section class="detail">
-        <h3>Dieses Event ist noch nicht veröffentlicht.</h3>
-        <p class="description"> 
-          Neue Events werden erst nach einem Review freigeschaltet - 
-          leider nötig um "Spam"-Listungen zu vermeiden.
-        </p>
-      </section>
-    </article>
-  {% endif %} 
+	{% if event.published %}
+		{% include "events/_event_details.html" %}
+	{% else %}
+		<article class="event">
+			<section class="detail">
+				<h3>Dieses Event ist noch nicht veröffentlicht.</h3>
+				<p class="description"> 
+					Neue Events werden erst nach einem Review freigeschaltet - 
+					leider nötig um "Spam"-Listungen zu vermeiden.
+				</p>
+			</section>
+		</article>
+		{% endif %} 
 </section>
 
 {% include "events/_tagcloud.html" %}

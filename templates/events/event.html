@@ -1,86 +1,68 @@
 {% extends "base.html" %}
 
 {% block head %}
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <script type="text/javascript" src="/static/jquery/js/jquery.ui.datepicker-de.js"></script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="/static/js/googlemaps.js"></script>
-  <script type="text/javascript" src="/static/js/templates/event.js"></script>
-  <script type="text/javascript">
-
-      
-  </script>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="/static/jquery/js/jquery.ui.datepicker-de.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="/static/js/googlemaps.js"></script>
+	<script type="text/javascript" src="/static/js/templates/event.js"></script>
+	<script type="text/javascript">
+	</script>
 {% endblock %}
 
 
 {% block content %}
-  <section id="content">
-	
-    <section id="create">
-	
-	{% if not user.is_authenticated %}
-    	<div id="message">
-			<p>Bitte beachten!</p>
-			<ul>
-			<li>Unser Fokus sind <strong>Treffen</strong>, <strong>Vorträge</strong> und <strong>Konferenzen</strong> aus dem <strong>Open Source</strong>, <strong>Usergroup</strong> und <strong>DIY</strong> Umfeld</li>
-			<li>Rein kommerziell motivierte Veranstalungen, ganz besonders welche mit Teilnahmebeschränkungen und Kosten >100€ werden in der Regel nicht aufgenommen.</li>
-			<li>Neue Events werden erst nach einem Review freigeschaltet. Dies ist leider nötig um "Spam"-Listungen zu vermeiden. Nach 5 erfolgreichen Eintragung entfällt der Review Prozess für dich.</li> 
-			</ul>
-			<p>Eine Anmeldung ist optional und ermöglichst das nachträgliche Editieren und Löschen deiner angelegten Events - <a href="/accounts/login/">Hier anmelden</a></p>
-		</div>
-    	{% endif %}
-    	
-    	  <form action="" method="post">    
-    	{% csrf_token %}
-    	{{ form.id }}
-    	
-		<section id="what">
-			<h3>Was</h3>
-			
-			
-			
-			    	
+	<section id="content">
+		<section id="create">
+			{% if not user.is_authenticated %}
+				<div id="message">
+					<p>Bitte beachten!</p>
+					<ul>
+						<li>Unser Fokus sind <strong>Treffen</strong>, <strong>Vorträge</strong> und <strong>Konferenzen</strong> aus dem <strong>Open Source</strong>, <strong>Usergroup</strong> und <strong>DIY</strong> Umfeld</li>
+						<li>Rein kommerziell motivierte Veranstalungen, ganz besonders welche mit Teilnahmebeschränkungen und Kosten >100€ werden in der Regel nicht aufgenommen.</li>
+						<li>Neue Events werden erst nach einem Review freigeschaltet. Dies ist leider nötig um "Spam"-Listungen zu vermeiden. Nach 5 erfolgreichen Eintragung entfällt der Review Prozess für dich.</li> 
+					</ul>
+				<p>Eine Anmeldung ist optional und ermöglichst das nachträgliche Editieren und Löschen deiner angelegten Events - <a href="/accounts/login/">Hier anmelden</a></p>
+				</div>
+			{% endif %}
+			<form action="" method="post">
+				{% csrf_token %}
+				{{ form.id }}
+				<section id="what">
+					<h3>Was</h3>
 					<label>{{ form.title.label_tag }} </label> {{ form.title.errors }}
-			    	<div>{{ form.title }}</div>
-			    	
+					<div>{{ form.title }}</div>
 					<label>{{ form.url.label_tag }}</label> {{ form.url.errors }}
-			    	<div>{{ form.url }}</div>
-			    	
+					<div>{{ form.url }}</div>
 					<label>{{ form.description.label_tag }}</label> {{ form.description.errors }}
-			    	<div>{{ form.description  }}</div><br>
-			    	
+					<div>{{ form.description  }}</div><br>
 					<label>{{ form.tags.label_tag }} (Komma getrennt)</label> {{ form.tags.errors }}
-			    	<div>{{ form.tags }}</div><br><br> 
-		</section>
-	 	<section id="when">   
-			<h3>Wann</h3>
-
-			<label>{{ form.date_time_begin.label_tag }}</label> {{ form.date_time_begin.errors }}
-        	<div id="shortform">{{ form.date_time_begin }}Uhr</div>
-        	
-        	<label>{{ form.date_time_end.label_tag }}</label> {{ form.date_time_end.errors }}
-			<div id="shortform">{{ form.date_time_end }}Uhr</div>
-
-		</section>     	
-	 	<section id="where">
-    		<h3>Wo</h3> 
-        	<label>Veranstaltungsort wählen {{ form.location.label_tag }}</label>
-        	 <div>{{ form.location }}</div>
-        	<p><strong>oder</strong></p>
-        	<div>Neuen Veranstaltungsort anlegen</div><br>
-        	<label>{{ form.location_name.label_tag }}</label> {{ form.location_name.errors }}
-			<div>{{ form.location_name }}</div>
-        	
-        	<label>{{ form.location_street.label_tag }}</label> {{ form.location_street.errors }}                 
-			<div>{{ form.location_street }}</div>
-        	
-        	<label>{{ form.location_city.label_tag }}</label> {{ form.location_city.errors }}
-			<div>{{ form.location_city }}</div>
-        	<input onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
-        	<div id="map_canvas" style="height: 400px; width: 600px"></div>
-      
-    		<input type="submit" value="{{ button_label }}" />
-        	</form>
-        </section>  
-</section>
+					<div>{{ form.tags }}</div><br><br> 
+				</section>
+				<section id="when">
+					<h3>Wann</h3>
+					<label>{{ form.date_time_begin.label_tag }}</label> {{ form.date_time_begin.errors }}
+					<div id="shortform">{{ form.date_time_begin }}Uhr</div>
+					<label>{{ form.date_time_end.label_tag }}</label> {{ form.date_time_end.errors }}
+					<div id="shortform">{{ form.date_time_end }}Uhr</div>
+				</section>
+				<section id="where">
+					<h3>Wo</h3> 
+					<label>Veranstaltungsort wählen {{ form.location.label_tag }}</label>
+					<div>{{ form.location }}</div>
+					<p><strong>oder</strong></p>
+					<div>Neuen Veranstaltungsort anlegen</div><br>
+					<label>{{ form.location_name.label_tag }}</label> {{ form.location_name.errors }}
+					<div>{{ form.location_name }}</div>
+					<label>{{ form.location_street.label_tag }}</label> {{ form.location_street.errors }}
+					<div>{{ form.location_street }}</div>
+					<label>{{ form.location_city.label_tag }}</label> {{ form.location_city.errors }}
+					<div>{{ form.location_city }}</div>
+					<input onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
+					<div id="map_canvas" style="height: 400px; width: 600px"></div>
+				</section>
+				<input type="submit" value="{{ button_label }}" />
+			</form>
+		</section>  
+	</section>
 {% endblock %}
