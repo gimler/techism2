@@ -33,7 +33,7 @@
                 </p>     
                 </section>
                 <a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">
-                <img src="http://maps.google.com/maps/api/staticmap?center=48.13788,11.575953&size=300x100&zoom=15&sensor=false" />       
+                <img src="http://maps.google.com/maps/api/staticmap?center={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&size=300x100&zoom=15&sensor=false" />       
                 </a>
             {% else %}
                 ist uns leider nicht bekannt...
