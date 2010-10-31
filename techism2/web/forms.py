@@ -34,13 +34,13 @@ class EventForm(forms.Form):
         
         if location_name or location_street or location_city:
             if not location_name:
-                self._errors["location_name"] = self.error_class([u'Alle Location Felder m\u00FCssen gef\u00FCllt sein.'])
+                self._errors["location_name"] = self.error_class([u'Alle Location Felder müssen gefüllt sein.'])
                 del cleaned_data["location_name"]
             if not location_street:
-                self._errors["location_street"] = self.error_class([u'Alle Location Felder m\u00FCssen gef\u00FCllt sein.'])
+                self._errors["location_street"] = self.error_class([u'Alle Location Felder müssen gefüllt sein.'])
                 del cleaned_data["location_street"]
             if not location_city:
-                self._errors["location_city"] = self.error_class([u'Alle Location Felder m\u00FCssen gef\u00FCllt sein.'])
+                self._errors["location_city"] = self.error_class([u'Alle Location Felder müssen gefüllt sein.'])
                 del cleaned_data["location_city"]
   
                 
