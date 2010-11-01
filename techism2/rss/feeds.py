@@ -15,7 +15,7 @@ class UpcommingEventsRssFeed(Feed):
         return service.get_event_query_set().order_by('date_time_begin')
 
     def item_title(self, item):
-        return item.title
+        return item.title + " - " + str(item.date_time_begin)
 
     def item_description(self, item):
         return item.description
