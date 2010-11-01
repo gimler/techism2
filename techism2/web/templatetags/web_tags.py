@@ -21,7 +21,7 @@ def display_date(event_date):
     elif (__is_the_day_after_tomorrow(event_date)):
         return "Übermorgen, " + event_date.strftime("%H:%M")
     else:
-        return event_date.strftime("%d. %b %Y %H:%M")
+        return event_date.strftime("%A, %d. %b %H:%M")
     
 
 def __is_today(event_date):
