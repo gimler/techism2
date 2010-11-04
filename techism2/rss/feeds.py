@@ -15,7 +15,11 @@ class UpcommingEventsRssFeed(Feed):
         return service.get_event_query_set().order_by('date_time_begin')
 
     def item_title(self, item):
-        return item.title + " - " + item.date_time_begin.strftime("%d.%m.%Y %H:%M")
+        if item.date_time_end is not None:
+            dateString = item.date_time_begin.strftime("%d.%m.%Y") + "-" + item.date_time_end.strftime("%d.%m.%Y")
+        else:
+            dateString = item.date_time_begin.strftime("%d.%m.%Y %H:%M")
+        return item.title + " - " + dateString
 
     def item_description(self, item):
         return item.description
