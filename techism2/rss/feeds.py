@@ -16,9 +16,9 @@ class UpcommingEventsRssFeed(Feed):
 
     def item_title(self, item):
         if item.date_time_end is not None:
-            dateString = item.date_time_begin.strftime("%d.%m.%Y") + "-" + item.date_time_end.strftime("%d.%m.%Y")
+            dateString = item.get_date_time_begin_cet().strftime("%d.%m.%Y") + "-" + item.get_date_time_end_cet().strftime("%d.%m.%Y")
         else:
-            dateString = item.date_time_begin.strftime("%d.%m.%Y %H:%M")
+            dateString = item.get_date_time_begin_cet().strftime("%d.%m.%Y %H:%M")
         return item.title + " - " + dateString
 
     def item_description(self, item):
