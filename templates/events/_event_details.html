@@ -12,17 +12,18 @@
 					</div>
 				{% endif %}
 			</div>
-			<div class="show">
-				<div class="box">
-				 	<a href="/events/{{ event.id }}/">Show</a>
-				</div>
-			</div>
 			<div class="date">
 				<div class="box">{{ event.get_date_time_begin_cet|display_date }} </div>
 			</div> 
 		</section>
 	</header>
 	<section class="detail">
+        <section>
+            <div>
+                <a href="/events/{{ event.id }}/">Link zu dieser Detailseite</a>
+            </div>
+        </section>
+	    
 		<section class="what">
 			<h3>Was</h3>
 			<p class="description">	
@@ -52,7 +53,7 @@
 				</p>
 				<p>
 					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">
-						<img src="http://maps.google.com/maps/api/staticmap?center={{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern&size=600x200&zoom=15&sensor=false" />       
+						<img src="http://maps.google.com/maps/api/staticmap?center={{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern&size=600x200&zoom=15&sensor=false&markers=color:red|{{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern" />       
 					</a>
 				</p>
 			{% else %}
