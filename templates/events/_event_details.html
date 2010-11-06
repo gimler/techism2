@@ -53,15 +53,15 @@
 			<h3>Wo</h3>
 			{% if event.location.name and event.location.street and event.location.city %}
 				<p>	
-					{{event.location.name}}, {{event.location.street}}, {{event.location.city}} <br>
-					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Karte</a>
+					{{event.location.name}}, {{event.location.street}}, {{event.location.city}} <br><br>
+					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Location in Google Maps anzeigen</a>
 				</p>
-				<p>
+				<!--p>
 					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">
 						<img src="http://maps.google.com/maps/api/staticmap?center={{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern&size=600x200&zoom=15&sensor=false&markers=color:red|{{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern" />       
 					</a>
 				</p>
-				<div id="map_canvas" style="height: 400px; width: 100%"></div>
+				<div id="map_canvas" style="height: 400px; width: 100%"></div-->
 			{% else %}
 				<p>
 					ist uns leider nicht bekannt...	
