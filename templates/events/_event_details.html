@@ -44,17 +44,12 @@
 				{% endif %}
 			</p>
 		</section>
-		<section class="where">
+		<section class="where" id="event{{ event.id }}">
 			<h3>Wo</h3>
 			{% if event.location.name and event.location.street and event.location.city %}
 				<p>	
 					{{event.location.name}}, {{event.location.street}}, {{event.location.city}} 
 					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Karte</a>
-				</p>
-				<p>
-					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">
-						<img src="http://maps.google.com/maps/api/staticmap?center={{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern&size=600x200&zoom=15&sensor=false&markers=color:red|{{event.location.street|urlencode}},{{event.location.city|urlencode}},Bayern" />       
-					</a>
 				</p>
 			{% else %}
 				<p>
