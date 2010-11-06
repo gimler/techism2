@@ -15,6 +15,11 @@
 			<div class="date">
 				<div class="box">{{ event.get_date_time_begin_cet|display_date }} </div>
 			</div> 
+			{% if event.takes_more_than_one_day %}
+			    <div class="date">
+                    <div class="box">{{ event.getNumberOfDays }} Tage</div>
+                </div> 
+			{% endif %}
 		</section>
 	</header>
 	<section class="detail">
@@ -48,8 +53,8 @@
 			<h3>Wo</h3>
 			{% if event.location.name and event.location.street and event.location.city %}
 				<p>	
-					{{event.location.name}}, {{event.location.street}}, {{event.location.city}} 
-					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Karte</a>
+					{{event.location.name}}, {{event.location.street}}, {{event.location.city}} <br><br>
+					<a href="http://maps.google.de/maps?q={{event.location.street|urlencode}},{{ event.location.city|urlencode}},Bayern&z=17">Location in Google Maps anzeigen</a>
 				</p>
 			{% else %}
 				<p>

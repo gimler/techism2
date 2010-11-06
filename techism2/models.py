@@ -71,6 +71,21 @@ class Event(models.Model):
             self.archived = self.get_date_time_end_utc() < utc
         else:   
             self.archived = self.get_date_time_begin_utc() + timedelta(hours=1) < utc
+            
+    def takes_more_than_one_day (self):
+        if self.date_time_end is None: 
+            return False;
+        elif (self.get_date_time_end_cet().weekday() == self.get_date_time_begin_cet().weekday()):
+            return False;
+        else:
+            return True;
+        
+    def getNumberOfDays (self):
+        if (self.takes_more_than_one_day()):
+            return (self.get_date_time_end_cet().date() - self.get_date_time_begin_cet().date()).days + 1
+        else:
+            return 0;
+                                            
 
 class StaticPage(models.Model):
     name = models.CharField(max_length=200, primary_key=True)
