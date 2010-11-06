@@ -27,7 +27,7 @@ function initializeMunichCityCenter() {
     zoom: 15,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-	scrollwheel: false
+    scrollwheel: false
   };
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
 }
