@@ -26,7 +26,8 @@ function initializeMunichCityCenter() {
   var myOptions = {
     zoom: 15,
     center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+	scrollwheel: false
   };
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
 }
@@ -67,7 +68,8 @@ function renderEventDetailMap() {
 		var myOptions = {
 				zoom: 15,
 				center: new google.maps.LatLng(48.13788,11.575953),
-				mapTypeId: google.maps.MapTypeId.ROADMAP
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				scrollwheel: false
 		};
 		map = new google.maps.Map(document.getElementById(mapId), myOptions);
 		
