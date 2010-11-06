@@ -22,14 +22,10 @@ function displayLocation(street, city){
 
 function initializeMunichCityCenter() {
   geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(48.13788,11.575953);
-  var myOptions = {
-    zoom: 15,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
+  var myOptions = getOptionsMunichCityCenter ();
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
 }
+
 
 function renderEventDetailMap() {
 	var where = $(this).children("section.where");
@@ -54,11 +50,7 @@ function renderEventDetailMap() {
 		// dynamic map for larger screens
 		where.append('<div id="'+map_id+'" style="height: 200px; width: 100%" />');
 		
-		var myOptions = {
-				zoom: 15,
-				center: new google.maps.LatLng(48.13788,11.575953),
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
+		var myOptions = getOptionsMunichCityCenter ();
 		map = new google.maps.Map(document.getElementById(map_id), myOptions);
 		
 		var geocoder = new google.maps.Geocoder();
@@ -76,7 +68,7 @@ function renderEventDetailMap() {
 }
 
 
-jQuery.parseQuery = function(qs,options) {
+jQuery.parseQuery = function(qs, options) {
 	var q = (typeof qs === 'string'?qs:window.location.search), o = {'f':function(v){return unescape(v).replace(/\+/g,' ');}}, options = (typeof qs === 'object' && typeof options === 'undefined')?qs:options, o = jQuery.extend({}, o, options), params = {};
 	jQuery.each(q.match(/^\??(.*)$/)[1].split('&'),function(i,p){
 		p = p.split('=');
@@ -84,4 +76,17 @@ jQuery.parseQuery = function(qs,options) {
 		params[p[0]] = params[p[0]]?((params[p[0]] instanceof Array)?(params[p[0]].push(p[1]),params[p[0]]):[params[p[0]],p[1]]):p[1];
 	});
 	return params;
+}
+
+
+// Helper functions
+
+function getOptionsMunichCityCenter (){
+  var latlng = new google.maps.LatLng(48.13788,11.575953);
+  var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  return myOptions;
 }
