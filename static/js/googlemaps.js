@@ -33,33 +33,43 @@ function initializeMunichCityCenter() {
 
 function renderEventDetailMap() {
 	var where = $(this).children("section.where");
-	var map_id = "map_" + where[0].id;
+	
+	// the id of that map div
+	var mapId = "map_" + where[0].id;
 	
 	// only load the map once
-	if( $("#"+map_id).length > 0) {
+	if( $("#"+mapId).length > 0) {
+		return;
+	}
+	
+	// get the map link
+	var mapLink = where.find('a')
+	
+	// exit if there isn't a map link
+	if( mapLink.length == 0) {
 		return;
 	}
 	
 	// extract query string and 'q' parameter from link
-	var a = where.find('a')
-	var query = $.parseQuery(a[0].search, {'f':function(v){return v;}}).q
+	var query = $.parseQuery(mapLink[0].search, {'f':function(v){return v;}}).q
 	
-	if(where.width() < 640) {
+	var width = where.width();
+	var height = Math.round(width / 3);
+	if(width < 640) {
 		// static map with link for small screens, max. size of static map is 640x640
-		var width = where.width();
-		var height = Math.round(width / 3);
-		where.append('<a id="'+map_id+'" href="http://maps.google.de/maps?q='+query+'&z=17"><img src="http://maps.google.com/maps/api/staticmap?center='+query+'&size='+width+'x'+height+'&zoom=15&sensor=false&markers=color:red|'+query+'" /></a>');
+		
+		where.append('<a id="'+mapId+'" href="http://maps.google.de/maps?q='+query+'&z=17"><img src="http://maps.google.com/maps/api/staticmap?center='+query+'&size='+width+'x'+height+'&zoom=15&sensor=false&markers=color:red|'+query+'" /></a>');
 	}
 	else {
 		// dynamic map for larger screens
-		where.append('<div id="'+map_id+'" style="height: 200px; width: 100%" />');
+		where.append('<div id="'+mapId+'" style="height: '+height+'px; width: 100%" />');
 		
 		var myOptions = {
 				zoom: 15,
 				center: new google.maps.LatLng(48.13788,11.575953),
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-		map = new google.maps.Map(document.getElementById(map_id), myOptions);
+		map = new google.maps.Map(document.getElementById(mapId), myOptions);
 		
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode( { 'address': decodeURIComponent(query)}, function(results, status) {
