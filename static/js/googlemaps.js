@@ -22,13 +22,7 @@ function displayLocation(street, city){
 
 function initializeMunichCityCenter() {
   geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(48.13788,11.575953);
-  var myOptions = {
-    zoom: 15,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    scrollwheel: false
-  };
+  var myOptions = getOptionsMunichCityCenter ();
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
 }
 
@@ -65,12 +59,8 @@ function renderEventDetailMap() {
 		// dynamic map for larger screens
 		where.append('<div id="'+mapId+'" style="height: '+height+'px; width: 100%" />');
 		
-		var myOptions = {
-				zoom: 15,
-				center: new google.maps.LatLng(48.13788,11.575953),
-				mapTypeId: google.maps.MapTypeId.ROADMAP,
-				scrollwheel: false
-		};
+		var myOptions = getOptionsMunichCityCenter ();
+		
 		map = new google.maps.Map(document.getElementById(mapId), myOptions);
 		
 		var geocoder = new google.maps.Geocoder();
@@ -96,4 +86,18 @@ jQuery.parseQuery = function(qs,options) {
 		params[p[0]] = params[p[0]]?((params[p[0]] instanceof Array)?(params[p[0]].push(p[1]),params[p[0]]):[params[p[0]],p[1]]):p[1];
 	});
 	return params;
+}
+
+
+//utility methods
+
+function getOptionsMunichCityCenter (){
+    var latlng = new google.maps.LatLng(48.13788,11.575953);
+    var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    scrollwheel: false
+  };
+  return myOptions;
 }
