@@ -5,9 +5,9 @@ $(".detail").hide();
 /*$("#admin").hide();*/
 
 /* clicks for touch interface */
-$('.event').live('click', function() {
+$('article.event > header').live('click', function() {
 	//console.log("click!");
-	$(this).children(".detail").slideToggle(300, renderEventDetailMap)
+	$(this).parent().children(".detail").slideToggle(300, renderEventDetailMap)
 }); 
 
 
