@@ -4,6 +4,7 @@ from django.template import Library
 from django.conf import settings
 from datetime import date, timedelta
 import locale
+from django.utils.translation import ugettext
 
 register = Library()
 
@@ -19,9 +20,15 @@ def display_date(event_date):
     elif (__is_tomorrow(event_date)):
         return "Morgen, " + event_date.strftime("%H:%M")
     elif (__is_the_day_after_tomorrow(event_date)):
+        
         return "Übermorgen, " + event_date.strftime("%H:%M")
     else:
-        return event_date.strftime("%A, %d. %b %H:%M")
+        weekday = ugettext (event_date.strftime("%A"))
+        day = event_date.day
+        month = ugettext (event_date.strftime("%B"))[:3]
+        time = event_date.strftime("%H:%M")
+        return weekday + ", " + str(day) + ". " + month + " " + time
+         
     
 
 def __is_today(event_date):
