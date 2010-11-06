@@ -15,7 +15,7 @@ class UpcommingEventsRssFeed(Feed):
         return service.get_event_query_set().order_by('date_time_begin')
 
     def item_title(self, item):
-        if item.date_time_end is not None:
+        if item.date_time_end is not None and (item.get_date_time_end_cet().weekday() != item.get_date_time_begin_cet().weekday()):
             dateString = item.get_date_time_begin_cet().strftime("%d.%m.%Y") + "-" + item.get_date_time_end_cet().strftime("%d.%m.%Y")
         else:
             dateString = item.get_date_time_begin_cet().strftime("%d.%m.%Y %H:%M")
