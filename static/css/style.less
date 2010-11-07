@@ -2,21 +2,20 @@
 @tag-color:#FFFFFF;
 @tag-background-light:#E2E2E2;
 @tag-hover:#424242;
+@tag-border-radius:5px;
 @general-font-size:15px;
+@general-border-radius:5px;
 @link-highlight:#00ff00;
-@tag-border-radius:5px; 
-@general-border-radius:5px;  
+@link-color:#000000;
 @nav-size:28px;   
 @h2-font-size:28px;  
 @h1-font-size:28px; 
 @h3-font-size:20px; 
 @validate-error:#424242;    
-@content-margin:10px; 
-@link-color:#000000; 
+@content-margin:10px;
 @content-background:#FFFFFF; 
 @content-font-color:#000000;
 @content-font-color-invertet:#FFFFFF;
-
 
 /* Tell the browser to render HTML 5 elements as block */
 section, header, footer, aside, nav, article {
@@ -96,7 +95,7 @@ a {
   font-weight:bold;
   text-decoration: none;
 //  display:inline;       
-  &:hover{
+  :hover{
     text-decoration: underline;
 //    color:@tag-hover;
   }
@@ -232,10 +231,10 @@ footer{
   border-bottom: 1px solid #ececec;
   padding:10px @content-margin 10px @content-margin;
   display: block;  
-  &:first-child {
+  :first-child {
       border-top: none;
   }
-  &:last-child {
+  :last-child {
     border-bottom: none;
   }
   /* HEADER */
