@@ -61,14 +61,13 @@ nav ul .item {
   background-color: #ffffff;
   background: -webkit-gradient(linear, left 28, left bottom, from(#ffffff), to(#797979));
   background: -moz-linear-gradient(top, #ffffff 28px, #797979);
-  padding-left: 10px;
-  padding-right: 10px;
   height: 45px;
 }
 #add a {
   margin-right: 0px;
   color: #000000;
   font-weight: bold;
+  padding: 0 10px;
 }
 a {
   color: #000000;
