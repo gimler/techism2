@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponseNotFound
 from techism2.models import Event, Location, StaticPage
 from techism2.web.forms import EventForm
 from techism2 import service
@@ -16,18 +16,24 @@ def index(request):
     event_list = service.get_event_query_set().order_by('date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
+    if page == -1:
+        return HttpResponseNotFound()
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def archive(request):
     event_list = service.get_archived_event_query_set().order_by('-date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
+    if page == -1:
+        return HttpResponseNotFound()
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags}, context_instance=RequestContext(request))
 
 def tag(request, tag_name):
     event_list = service.get_event_query_set().filter(tags=tag_name).order_by('date_time_begin')
     tags = service.get_tags()
     page = __get_paginator_page(request, event_list)
+    if page == -1:
+        return HttpResponseNotFound()
     return render_to_response('events/index.html', {'event_list': page, 'tags': tags, 'tag_name': tag_name}, context_instance=RequestContext(request))
 
 def static_impressum(request):
@@ -185,7 +191,7 @@ def __get_paginator_page(request, event_list):
     try:
         page = paginator.page(num)
     except (EmptyPage, InvalidPage):
-        page = paginator.page(paginator.num_pages)
+        page = -1
     
     return page
 
