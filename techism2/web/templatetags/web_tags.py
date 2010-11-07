@@ -23,7 +23,7 @@ def display_date(event_date):
         
         return "Übermorgen, " + event_date.strftime("%H:%M")
     else:
-        weekday = ugettext (event_date.strftime("%A"))
+        weekday = ugettext (event_date.strftime("%A"))[:2]
         day = event_date.day
         month = ugettext (event_date.strftime("%B"))[:3]
         time = event_date.strftime("%H:%M")
