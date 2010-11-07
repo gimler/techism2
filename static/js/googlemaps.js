@@ -1,27 +1,13 @@
 function displayLocation(street, city){
   if (street.length > 0 && city.length > 0){
       var location = street +","+city+","+ "Bayern";
-      
-      if (geocoder) {
-        geocoder.geocode( { 'address': location}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map, 
-                position: results[0].geometry.location,
-                draggable: true
-            });
-          } else {
-            document.getElementById("map_error").innerHTML="Geocode war nicht erfolgreich: " + status;
-          }
-        });
-      }
+      geocoder = new google.maps.Geocoder();
+      geocodeAndSetMarker (map, location, true);
   }
 }
 
 
 function initializeMunichCityCenter() {
-  geocoder = new google.maps.Geocoder();
   var myOptions = getOptionsMunichCityCenter ();
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
 }
@@ -52,28 +38,15 @@ function renderEventDetailMap() {
 	var height = Math.round(width / 3);
 	if(width < 640) {
 		// static map with link for small screens, max. size of static map is 640x640
-		
 		where.append('<a id="'+mapId+'" href="http://maps.google.de/maps?q='+query+'&z=17"><img src="http://maps.google.com/maps/api/staticmap?center='+query+'&size='+width+'x'+height+'&zoom=15&sensor=false&markers=color:red|'+query+'" /></a>');
 	}
 	else {
 		// dynamic map for larger screens
 		where.append('<div id="'+mapId+'" style="height: '+height+'px; width: 100%" />');
-		
 		var myOptions = getOptionsMunichCityCenter ();
-		
 		map = new google.maps.Map(document.getElementById(mapId), myOptions);
-		
 		var geocoder = new google.maps.Geocoder();
-		geocoder.geocode( { 'address': decodeURIComponent(query)}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-					map: map, 
-					position: results[0].geometry.location,
-					draggable: false
-				});
-			}
-		});
+		geocodeAndSetMarker (map, decodeURIComponent(query), false)
 	}
 }
 
@@ -100,4 +73,17 @@ function getOptionsMunichCityCenter (){
     scrollwheel: false
   };
   return myOptions;
+}
+
+function geocodeAndSetMarker (myMap, location, isDraggable){
+      geocoder.geocode( { 'address': location}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+          myMap.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: myMap, 
+              position: results[0].geometry.location,
+              draggable: isDraggable
+          });
+        } 
+      });
 }
