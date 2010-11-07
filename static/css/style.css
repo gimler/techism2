@@ -13,7 +13,7 @@ body {
   width: 85%;
   font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
   font-size: 15px;
-  background: url("/static/images/head_spotlight.png") no-repeat 0px -50px, #232323 url("/static/images/bg_noise.gif") repeat;
+  background: #000000 url("/static/images/head_spotlight.png") no-repeat 0px -50px, #232323 url("/static/images/bg_noise.gif") repeat;
 }
 .where img {
   width: 100%;
@@ -21,8 +21,12 @@ body {
 #admin {
   background-color: #FFFFFF;
   opacity: .3;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   padding: 5px;
 }
 #active a {
@@ -48,32 +52,35 @@ nav ul .item {
   margin: 15px;
 }
 #add {
-  border-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   background-color: #ffffff;
   background: -webkit-gradient(linear, left 28, left bottom, from(#ffffff), to(#797979));
-  padding-left: 10px;
-  padding-right: 10px;
+  background: -moz-linear-gradient(top, #ffffff 28px, #797979);
   height: 45px;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
 }
 #add a {
   margin-right: 0px;
   color: #000000;
   font-weight: bold;
+  padding: 0 10px;
 }
 a {
   color: #000000;
   font-weight: bold;
   text-decoration: none;
 }
-a :hover {
-  text-decoration: underline;
-}
 a img {
   /*firefox remove borders*/
 
   border: 0;
+}
+a:hover {
+  text-decoration: underline;
 }
 h1 {
   font-size: 28px;
@@ -107,12 +114,16 @@ h3 {
   background: #e2e2e2;
   color: #FFFFFF;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   padding: 3px;
   margin-left: 5px;
 }
 #tagcloud {
   padding: 5px;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   text-decoration: none;
   line-height: 35px;
 }
@@ -121,6 +132,8 @@ h3 {
   color: #ffffff;
   padding: 5px;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   text-decoration: none;
   border: 1px solid grey;
 }
@@ -135,6 +148,8 @@ h3 {
   color: #ffffff;
   padding: 5px;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   text-decoration: none;
   line-height: 40px;
 }
@@ -168,6 +183,8 @@ footer ul li {
 #content {
   background: #ffffff;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   color: #000000;
 }
 .event {
@@ -177,12 +194,6 @@ footer ul li {
   display: block;
   /* HEADER */
 
-}
-.event :first-child {
-  border-top: none;
-}
-.event :last-child {
-  border-bottom: none;
 }
 .event h2 {
   font-size: 28px;
@@ -212,11 +223,20 @@ footer ul li {
   width: 100px;
   white-space: nowrap;
 }
+/* less compiler adds space when defined in nested .event */
+.event:first-child {
+  border-top: none;
+}
+.event:last-child {
+  border-bottom: none;
+}
 .box {
   display: box;
   background: #e2e2e2;
   color: #FFFFFF;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   padding: 3px;
 }
 #twocol a {
@@ -266,6 +286,8 @@ footer ul li {
   color: #00ff00;
   background: #424242;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   padding: 5px;
 }
 label {
@@ -306,6 +328,8 @@ textarea:hover,
 input:focus,
 textarea:focus {
   border-color: #C9C9C9;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 }
 .submit input {
@@ -315,8 +339,9 @@ textarea:focus {
   border: 0;
   font-size: 14px;
   color: #00ff00;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 #version span, #version a {
   font-size: 10px;

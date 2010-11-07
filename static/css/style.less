@@ -2,7 +2,6 @@
 @tag-color:#FFFFFF;
 @tag-background-light:#E2E2E2;
 @tag-hover:#424242;
-@tag-border-radius:5px;
 @general-font-size:15px;
 @general-border-radius:5px;
 @link-highlight:#00ff00;
@@ -11,7 +10,7 @@
 @h2-font-size:28px;  
 @h1-font-size:28px; 
 @h3-font-size:20px; 
-@validate-error:#424242;    
+@validate-error:#424242;
 @content-margin:10px;
 @content-background:#FFFFFF; 
 @content-font-color:#000000;
@@ -29,7 +28,7 @@ body {
   font-family: Trebuchet MS, Helvetica, Arial, sans-serif;
   font-size: @general-font-size;
   background: 
-  url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
+  #000 url("/static/images/head_spotlight.png")  no-repeat 0px -50px,
   #232323 url("/static/images/bg_noise.gif") repeat;
 }  
 
@@ -37,11 +36,15 @@ body {
   width:100%;
 }
   
-#admin {         
+#admin {
   background-color:#FFFFFF;
   opacity:.3;
-  border-bottom-left-radius: @general-border-radius;
-  border-bottom-right-radius: @general-border-radius;
+  -webkit-border-top-left-radius: @general-border-radius;
+  -webkit-border-top-right-radius: @general-border-radius;
+  -moz-border-radius-topleft: @general-border-radius;
+  -moz-border-radius-topright: @general-border-radius;
+  border-top-left-radius: @general-border-radius;
+  border-top-right-radius: @general-border-radius;
   padding:5px;     
 }
 
@@ -75,34 +78,38 @@ li #active{
 }
 
 #add {
-  border-radius:@tag-border-radius;
+  -webkit-border-top-left-radius: @general-border-radius;
+  -webkit-border-top-right-radius: @general-border-radius;
+  -moz-border-radius-topleft: @general-border-radius;
+  -moz-border-radius-topright: @general-border-radius;
+  border-top-left-radius: @general-border-radius;
+  border-top-right-radius: @general-border-radius;
   background-color:@content-background;
   background: -webkit-gradient(linear, left 28, left bottom, from(@content-background), to(#797979));
-  padding-left:10px;
-  padding-right:10px;
+  background: -moz-linear-gradient(top, @content-background 28px, #797979);
   height:45px;
-  border-bottom-left-radius:0px;
-  border-bottom-right-radius:0px;              
   a {
     margin-right: 0px;
     color:@content-font-color;
     font-weight:bold;
+    padding: 0 10px;
   }
-}                   
+}
 
 a {
   color:@link-color;
   font-weight:bold;
   text-decoration: none;
 //  display:inline;       
-  :hover{
-    text-decoration: underline;
-//    color:@tag-hover;
-  }
   img{ /*firefox remove borders*/
     border:0;
   }
 } 
+a:hover{
+  text-decoration: underline;
+//    color:@tag-hover;
+}
+
 
 p {
 } 
@@ -143,26 +150,32 @@ h3 {
 #edit {
   background:@tag-background-light;
   color:#FFFFFF;
-  border-radius:@tag-border-radius;
+  border-radius: @general-border-radius;
+  -webkit-border-radius: @general-border-radius;
+  -moz-border-radius: @general-border-radius;
   padding:3px;  
   margin-left:5px;
 //  display:inline;
 }                 
 
 #tagcloud {
-  padding:5px; 
-  border-radius:@tag-border-radius;
+  padding:5px;
+  border-radius: @general-border-radius;
+  -webkit-border-radius: @general-border-radius;
+  -moz-border-radius: @general-border-radius;
   text-decoration: none;
   line-height:35px;  
   a {
     background:@tag-background;
     color:@tag-color;
     padding:5px; 
-    border-radius:@tag-border-radius;
+    border-radius: @general-border-radius;
+    -webkit-border-radius: @general-border-radius;
+    -moz-border-radius: @general-border-radius;
     text-decoration: none; 
     border: 1px solid grey;
   }
-  a:hover {         
+  a:hover {
 //    background:@tag-hover;
     border: 1px solid @link-highlight;    
   }
@@ -176,7 +189,9 @@ h3 {
     background: @tag-background;
     color:@tag-color;
     padding:5px; 
-    border-radius:@tag-border-radius; 
+    border-radius: @general-border-radius;
+    -webkit-border-radius: @general-border-radius;
+    -moz-border-radius: @general-border-radius;
     text-decoration: none; 
     line-height:40px;  
   }
@@ -220,9 +235,11 @@ footer{
   }
 }
 
-#content {       
+#content {
   background: @content-background; 
   border-radius: @general-border-radius;
+  -webkit-border-radius: @general-border-radius;
+  -moz-border-radius: @general-border-radius;
   color:@content-font-color;  
 }
 
@@ -231,12 +248,6 @@ footer{
   border-bottom: 1px solid #ececec;
   padding:10px @content-margin 10px @content-margin;
   display: block;  
-  :first-child {
-      border-top: none;
-  }
-  :last-child {
-    border-bottom: none;
-  }
   /* HEADER */
   h2{
      font-size:@h2-font-size;
@@ -263,13 +274,24 @@ footer{
       width:100px;
     white-space: nowrap;  
   }    
-}  
+}
+
+/* less compiler adds space when defined in nested .event */
+.event:first-child {
+  border-top: none;
+}
+.event:last-child {
+  border-bottom: none;
+}
+
 
 .box{
   display:box;
   background:@tag-background-light;
   color:#FFFFFF;
-  border-radius:@tag-border-radius;
+  border-radius: @general-border-radius;
+  -webkit-border-radius: @general-border-radius;
+  -moz-border-radius: @general-border-radius;
   padding:3px; 
 }
 
@@ -310,7 +332,9 @@ footer{
   margin-top:5px;
   //background:#646464;
 //  color:#646464;
-//  border-radius:@tag-border-radius;
+//  border-radius: @general-border-radius;
+//  -webkit-border-radius: @general-border-radius;
+//  -moz-border-radius: @general-border-radius;
   border-bottom: 1px solid #646464;
   padding:15px;
   ul {
@@ -331,9 +355,11 @@ footer{
 }
 
 .errorlist {
-    color: @link-highlight;
+  color: @link-highlight;
   background: @validate-error;  
-  border-radius:@tag-border-radius;
+  border-radius: @general-border-radius;
+  -webkit-border-radius: @general-border-radius;
+  -moz-border-radius: @general-border-radius;
   padding:5px;
 }   
 
@@ -383,7 +409,9 @@ textarea {
 input:hover, textarea:hover,
 input:focus, textarea:focus {
   border-color: #C9C9C9;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+  box-shadow: rgba(0,0,0, 0.15) 0px 0px 8px;
+  -moz-box-shadow: rgba(0,0,0, 0.15) 0px 0px 8px;
+  -webkit-box-shadow: rgba(0,0,0, 0.15) 0px 0px 8px;
 }
       
 .submit input {
@@ -393,9 +421,10 @@ input:focus, textarea:focus {
   border: 0;
   font-size: 14px;
   color: @link-highlight;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}        
+  border-radius: @general-border-radius;
+  -webkit-border-radius: @general-border-radius;
+  -moz-border-radius: @general-border-radius;
+}
 
 #version span, #version a {
   font-size: 10px;

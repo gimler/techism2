@@ -49,7 +49,9 @@ def send_event_review_mail(event):
     from_setting, _ = Setting.objects.get_or_create(name='event_review_mail_from', defaults={'value': u'x'})
     to_setting, _ = Setting.objects.get_or_create(name='event_review_mail_to', defaults={'value': u'x'})
     subject = u'[Techism] Neues Event - bitte prüfen'
-    message = u'Titel: %s\n\nBeschreibung %s\n\n' % (event.title, event.description)
+    message_details = u'Titel: %s\n\nBeschreibung: %s\n\n' % (event.title, event.description);
+    message_urls = u'Login-Url: %s\n\nEvent-Url: %s\n\n' % (get_secure_url()+"/accounts/login/", get_secure_url()+"/admin/techism2/event/");
+    message = message_details + message_urls
     fr = from_setting.value
     to = to_setting.value.split(',')
     send_mail(subject, message, fr, to, fail_silently=False)
