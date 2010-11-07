@@ -1,15 +1,39 @@
 function displayLocation(street, city){
-  if (street.length > 0 && city.length > 0){
-      var location = street +","+city+","+ "Bayern";
-      geocoder = new google.maps.Geocoder();
-      geocodeAndSetMarker (map, location, true);
-  }
+  var where = $("#map_location");
+  var mapHtml = where.html();
+  var location = street +","+city+","+ "Bayern";
+  var width = where.width();
+  var height = Math.round(width / 3);
+  if (mapHtml.substring(0, 4) == "<div"){
+    if (street.length > 0 && city.length > 0){
+        geocoder = new google.maps.Geocoder();
+        geocodeAndSetMarker (map, location, true);
+      }
+    } else {
+        var newMap = '<img id="map_location" src="http://maps.google.com/maps/api/staticmap?center=' + location + '&size='+width+'x'+height+'&zoom=15&sensor=false&markers=color:red|' + location + '" />';
+        where.replaceWith(newMap);
+    }
 }
 
 
 function initializeMunichCityCenter() {
-  var myOptions = getOptionsMunichCityCenter ();
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);  
+  //var myOptions = getOptionsMunichCityCenter ();
+  //map = new google.maps.Map($("map_canvas"), myOptions);  
+  var where = $("#map_canvas");
+  var width = where.width();
+  var height = Math.round(width / 3);
+  var mapId = "map_location";
+  if(width < 640) {
+    // static map with link for small screens, max. size of static map is 640x640
+    var query ="48.13788,11.575953";
+    where.append('<img id="'+mapId+'" src="http://maps.google.com/maps/api/staticmap?center='+query+'&size='+width+'x'+height+'&zoom=15&sensor=false" />');
+  }
+  else {
+    // dynamic map for larger screens
+    where.append('<div id="'+mapId+'" style="height: '+height+'px; width: 100%" />');
+    var myOptions = getOptionsMunichCityCenter ();
+    map = new google.maps.Map(document.getElementById(mapId), myOptions);
+  }
 }
 
 function renderEventDetailMap() {
