@@ -1,4 +1,12 @@
-section, header, footer, aside, nav, article { display: block; }
+/* Tell the browser to render HTML 5 elements as block */
+section,
+header,
+footer,
+aside,
+nav,
+article {
+  display: block;
+}
 body {
   padding: 0;
   margin: 0 auto;
@@ -7,10 +15,12 @@ body {
   font-size: 15px;
   background: url("/static/images/head_spotlight.png") no-repeat 0px -50px, #232323 url("/static/images/bg_noise.gif") repeat;
 }
-.where img { width: 100%; }
+.where img {
+  width: 100%;
+}
 #admin {
-  background-color: #ffffff;
-  opacity: 0.3;
+  background-color: #FFFFFF;
+  opacity: .3;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 5px;
@@ -25,15 +35,7 @@ nav ul {
   margin-left: 10px;
   margin-top: 20px;
 }
-nav ul li {
-  font-size: 28px;
-  font-weight: normal;
-  color: #ffffff;
-  list-style: none;
-  margin-right: 5px;
-  display: inline;
-}
-nav ul a {
+nav ul li, nav ul a {
   font-size: 28px;
   font-weight: normal;
   color: #ffffff;
@@ -65,18 +67,26 @@ a {
   font-weight: bold;
   text-decoration: none;
 }
-a:hover { text-decoration: underline; }
-a img { border: 0; }
+a :hover {
+  text-decoration: underline;
+}
+a img {
+  /*firefox remove borders*/
+
+  border: 0;
+}
 h1 {
   font-size: 28px;
   margin: 0px;
 }
 h1 a {
   font-size: 28px;
-  color: #ffffff;
+  color: #FFFFFF;
   text-decoration: none;
 }
-h1 a:hover { text-decoration: underline; }
+h1 a:hover {
+  text-decoration: underline;
+}
 h2 {
   font-size: 28px;
   line-height: 44px;
@@ -90,10 +100,12 @@ h3 {
   font-size: 20px;
   line-height: 0;
 }
-#what p { margin-bottom: 5px; }
+#what p {
+  margin-bottom: 5px;
+}
 #edit {
   background: #e2e2e2;
-  color: #ffffff;
+  color: #FFFFFF;
   border-radius: 5px;
   padding: 3px;
   margin-left: 5px;
@@ -112,8 +124,12 @@ h3 {
   text-decoration: none;
   border: 1px solid grey;
 }
-#tagcloud a:hover { border: 1px solid #00ff00; }
-#tagcloud .selected { border: 1px solid #00ff00; }
+#tagcloud a:hover {
+  border: 1px solid #00ff00;
+}
+#tagcloud .selected {
+  border: 1px solid #00ff00;
+}
 #tags a {
   background: #000000;
   color: #ffffff;
@@ -122,15 +138,33 @@ h3 {
   text-decoration: none;
   line-height: 40px;
 }
-#tags a:hover { border: 1px solid #00ff00; }
-#tags .selected { border: 1px solid #00ff00; }
-#top li a img { opacity: 0.5; }
-#top a:hover img { opacity: 0.7; }
-#top #logo { display: inline; }
-#top div { display: inline; }
-footer { width: 100%; }
-footer ul { margin-bottom: 8px; }
-footer ul li { margin-right: 10px; }
+#tags a:hover {
+  border: 1px solid #00ff00;
+}
+#tags .selected {
+  border: 1px solid #00ff00;
+}
+#top li a img {
+  opacity: 0.5;
+}
+#top a:hover img {
+  opacity: 0.7;
+}
+#top #logo {
+  display: inline;
+}
+#top div {
+  display: inline;
+}
+footer {
+  width: 100%;
+}
+footer ul {
+  margin-bottom: 8px;
+}
+footer ul li {
+  margin-right: 10px;
+}
 #content {
   background: #ffffff;
   border-radius: 5px;
@@ -141,26 +175,36 @@ footer ul li { margin-right: 10px; }
   border-bottom: 1px solid #ececec;
   padding: 10px 10px 10px 10px;
   display: block;
+  /* HEADER */
+
 }
-.event:first-child { border-top: none; }
-.event:last-child { border-bottom: none; }
-.event h2 { font-size: 28px; }
+.event :first-child {
+  border-top: none;
+}
+.event :last-child {
+  border-bottom: none;
+}
+.event h2 {
+  font-size: 28px;
+}
 .event header {
   display: table;
   border-collapse: collapse;
   cursor: pointer;
 }
-.event .header-content { display: table-row; }
-.event .title { display: table-cell; }
-.event .edit { display: table-cell; }
-.event .show { display: table-cell; }
-.event .date { display: table-cell; }
-.event .title { width: 100%; }
-.event .edit {
-  padding-right: 5px;
-  width: 100px;
+.event .header-content {
+  display: table-row;
 }
-.event .show {
+.event .title,
+.event .edit,
+.event .show,
+.event .date {
+  display: table-cell;
+}
+.event .title {
+  width: 100%;
+}
+.event .edit, .event .show {
   padding-right: 5px;
   width: 100px;
 }
@@ -171,7 +215,7 @@ footer ul li { margin-right: 10px; }
 .box {
   display: box;
   background: #e2e2e2;
-  color: #ffffff;
+  color: #FFFFFF;
   border-radius: 5px;
   padding: 3px;
 }
@@ -180,22 +224,36 @@ footer ul li { margin-right: 10px; }
   font-weight: normal;
   color: #ffffff;
 }
-#twocol ul { padding-left: 0px; }
+#twocol ul {
+  padding-left: 0px;
+}
 #twocol li {
   list-style: none;
   display: inline;
 }
-#twocol #left { float: left; }
-#twocol #right { float: right; }
-.last { border-bottom: 0px; }
-#create { padding: 5px 10px; }
-#create ul { list-style-type: none; }
+#twocol #left {
+  float: left;
+}
+#twocol #right {
+  float: right;
+}
+.last {
+  border-bottom: 0px;
+}
+#create {
+  padding: 5px 10px;
+}
+#create ul {
+  list-style-type: none;
+}
 #message {
   margin-top: 5px;
   border-bottom: 1px solid #646464;
   padding: 15px;
 }
-#message ul { padding-left: 25px; }
+#message ul {
+  padding-left: 25px;
+}
 #message li {
   list-style: disc;
   margin-left: 0px;
@@ -215,13 +273,14 @@ label {
   display: inline;
   padding: 5px;
 }
+/* FORMS */
 .form label {
   margin-left: 10px;
   color: #999999;
 }
 input, textarea {
   padding: 9px;
-  border: solid 1px #e5e5e5;
+  border: solid 1px #E5E5E5;
   outline: 0;
   font: normal 13px/100% Verdana, Tahoma, sans-serif;
   width: 90%;
@@ -242,20 +301,11 @@ textarea {
   width: 100px;
   margin-right: 10px;
 }
-input:hover {
-  border-color: #c9c9c9;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
-}
-textarea:hover {
-  border-color: #c9c9c9;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
-}
-input:focus {
-  border-color: #c9c9c9;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
-}
+input:hover,
+textarea:hover,
+input:focus,
 textarea:focus {
-  border-color: #c9c9c9;
+  border-color: #C9C9C9;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 }
 .submit input {
@@ -268,11 +318,7 @@ textarea:focus {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
-#version span {
-  font-size: 10px;
-  color: #ffffff;
-}
-#version a {
+#version span, #version a {
   font-size: 10px;
   color: #ffffff;
 }
