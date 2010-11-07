@@ -26,45 +26,68 @@
 				<p>Eine Anmeldung ist optional und ermöglichst das nachträgliche Editieren und Löschen deiner angelegten Events - <a href="/accounts/login/">Hier anmelden</a></p>
 				</div>
 			{% endif %}
+      <div>
 			<form action="" method="post">
 				{% csrf_token %}
 				{{ form.id }}
 				<section id="what">
-					<h3>Was</h3>
-					<label>{{ form.title.label_tag }} </label> {{ form.title.errors }}
-					<div>{{ form.title }}</div>
-					<label>{{ form.url.label_tag }}</label> {{ form.url.errors }}
-					<div>{{ form.url }}</div>
-					<label>{{ form.description.label_tag }}</label> {{ form.description.errors }}
-					<div>{{ form.description  }}</div><br>
-					<label>{{ form.tags.label_tag }} (Komma getrennt)</label> {{ form.tags.errors }}
-					<div>{{ form.tags }}</div><br><br> 
+					<div class="row">
+					  <h3>Was</h3>
+					</div>
+					<div class="row">
+					  {{ form.title.label_tag }} {{ form.title.errors }} 
+					  {{ form.title }}
+					</div>
+					<div class="row">
+  					{{ form.url.label_tag }} {{ form.url.errors }}
+					  {{ form.url }}
+					</div>
+					<div class="row">
+  					{{ form.description.label_tag }} {{ form.description.errors }}
+					  {{ form.description  }}
+					</div>
+					<div class="row">
+					  {{ form.tags.label_tag }} (Komma getrennt) {{ form.tags.errors }}
+					  {{ form.tags }}
+					</div>
 				</section>
 				<section id="when">
-					<h3>Wann</h3>
-					<label>{{ form.date_time_begin.label_tag }}</label> {{ form.date_time_begin.errors }}
-					<div id="shortform">{{ form.date_time_begin }} (HH:mm) Uhr</div>
-					
-					<label>{{ form.date_time_end.label_tag }}</label> {{ form.date_time_end.errors }}
-					<div id="shortform">{{ form.date_time_end }} (HH:mm) Uhr</div>
+					<div class="row"><h3>Wann</h3></div>
+					<div class="row" id="shortform">
+					  {{ form.date_time_begin.label_tag }} {{ form.date_time_begin.errors }}
+					  <div>{{ form.date_time_begin }} (HH:mm) Uhr</div>
+					</div>
+					<div class="row" id="shortform">
+					  {{ form.date_time_end.label_tag }} {{ form.date_time_end.errors }}					  
+					  <div>{{ form.date_time_end }} (HH:mm) Uhr</div>
+				  </div>
 				</section>
 				<section id="where">
-					<h3>Wo</h3> 
-					<label>Veranstaltungsort wählen {{ form.location.label_tag }}</label>
-					<div>{{ form.location }}</div>
-					<p><strong>oder</strong></p>
-					<div>Neuen Veranstaltungsort anlegen</div><br>
-					<label>{{ form.location_name.label_tag }}</label> {{ form.location_name.errors }}
-					<div>{{ form.location_name }}</div>
-					<label>{{ form.location_street.label_tag }}</label> {{ form.location_street.errors }}
-					<div>{{ form.location_street }}</div>
-					<label>{{ form.location_city.label_tag }}</label> {{ form.location_city.errors }}
-					<div>{{ form.location_city }}</div>
+					<div class="row"><h3>Wo</h3></div> 
+					<div class="row">
+            <label>Veranstaltungsort wählen</label> {{ form.location.label_tag }}
+					  {{ form.location }}</div>
+					<div class="row"><p><strong>oder</strong></p></div>
+					<div class="row">Neuen Veranstaltungsort anlegen</div><br>
+					<div class="row">
+					  {{ form.location_name.label_tag }} {{ form.location_name.errors }}					  
+					  {{ form.location_name }}
+					<div class="row">
+					  {{ form.location_street.label_tag }} {{ form.location_street.errors }}					  
+					  {{ form.location_street }}
+					</div>
+					<div class="row">
+					  {{ form.location_city.label_tag }} {{ form.location_city.errors }}
+					  {{ form.location_city }}
+					</div>
+					
 					<input id="id_location_show_in_map" onclick="displayLocation(id_{{ form.location_street.html_name }}.value, id_{{ form.location_city.html_name }}.value)" type="button" value="Adresse in Google Maps anzeigen"><div id="map_error"></div>
-					<div id="map_canvas" style="height: 400px; width: 100%"></div>
 				</section>
-				<input type="submit" value="{{ button_label }}" />
+					<div id="map_canvas" style="height: 400px; width: 100%"></div>
+          
+          <div class="row"><input type="submit" value="{{ button_label }}" /></div> 				
 			</form>
 		</section>  
+		</div>
 	</section>
 {% endblock %}

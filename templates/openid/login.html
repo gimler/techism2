@@ -1,31 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <section id="content">
-  <article class="event">
-    <section>
-    <header>
-      <h2>Login</h2>
-    </header>
-      Für Techism benötigst Du keinen neuen Benutzernamen und Passwort, stattdessen wird
-      OpenID oder Google Login zur Authentifizierung benutzt. 
+    <section id="login">
+			<div id="message"> 
+        Nach der Anmeldung kannst du folgende Vorteile nutzen:			  
+				<ul>
+					<li>Nachträgliche Editieren und Löschen deiner angelegten Events</li>
+          <li>Entfallen des Reviewprozesse nach mehreren erfolgreichen Event Eintragungen.</li> 
+				</ul>
+       <strong>Datenschutz:</strong> Bei der Anmeldung speichern wir deinen Namen und E-Mail Adresse ab. Diese Daten werden bei jedem Login aktualisiert. Die Übertragung deiner Daten ist nach dem Login SSL ist verschlüsselt. 			
+			</div>
     </section>
     
-    <section>
-    <header>
+    <section id="openid">
       <h3>OpenID Login</h3>
-    </header>
-      Bitte trage Deine OpenID in das folgende Feld ein, falls Du einen Account bei einem 
-      aufgeführen Anbieter hast, kannst Du einfach auf das entsprechende Logo klicken. 
-      Du wirst dann zu Deinem Anbieter (OpenID Provider) weitergeleitet und musst Dich dort
-      u.U. authentifizieren. Anschließend wirst Du gefragt, ob Du die OpenID benutzen willst,
-      um Dich bei Techism anzumelden. Weiterhin fragt Techism von Deinem OpenID Provider Deinen
-      Namen und E-Mail Adresse ab, diese Daten werden auch innerhalb von Techism gespeichert 
-      und bei jedem zukünftigen Login aktualisiert.
-    
+      
       <div >
-        <a href="#"><img src="/static/openid/openid.png" onclick="id_openid_identifier.value=''" /></a>
-        <a href="#"><img src="/static/openid/google.png" onclick="id_openid_identifier.value='https://www.google.com/accounts/o8/id'" /></a>
-        <a href="#"><img src="/static/openid/yahoo.png" onclick="id_openid_identifier.value='https://me.yahoo.com/'" /></a>
+        <a href="#" onclick="id_openid_identifier.value=''"><img src="/static/openid/openid.png"  />Open ID</a>
+        <a href="#" onclick="id_openid_identifier.value='https://www.google.com/accounts/o8/id'">Google</a>
+        <a href="#" onclick="id_openid_identifier.value='https://me.yahoo.com/'">Yahoo</a>
       </div>
 
       {% if form.errors %}
@@ -50,13 +43,10 @@
     </section>
     
     <section>
-    <header>
       <h3>Google Login</h3>
-    </header>
-    <a href="/accounts/google_login">Google Login</a>
+      <a href="/accounts/google_login">Google Login</a>
     </section>
-    
-  </article>  
+ 
 </section>
 {% endblock %}
 

@@ -16,6 +16,7 @@
 @content-background:#FFFFFF; 
 @content-font-color:#000000;
 @content-font-color-invertet:#FFFFFF;
+@form-maxwidth:500px;
 
 /* Tell the browser to render HTML 5 elements as block */
 section, header, footer, aside, nav, article {
@@ -308,10 +309,7 @@ footer{
 
 #message{
   margin-top:5px;
-  //background:#646464;
-//  color:#646464;
-//  border-radius:@tag-border-radius;
-  border-bottom: 1px solid #646464;
+  border-bottom: 1px dotted #646464;
   padding:15px;
   ul {
     padding-left:25px;         
@@ -326,9 +324,14 @@ footer{
   } 
   a {
 //     color:@link-highlight;
-  }
-      
+  }      
+
+}   
+
+#message.bottom{
+	  border-bottom: none;
 }
+
 
 .errorlist {
     color: @link-highlight;
@@ -344,6 +347,18 @@ label {
 }     
    
 /* FORMS */
+#create h3 {
+	margin-top:55px;
+}
+
+form div{  
+
+}
+
+.row{
+	margin:0 auto;
+	max-width:@form-maxwidth;
+}
 
 .form label {
   margin-left: 10px;
@@ -357,7 +372,6 @@ input, textarea {
   font: normal 13px/100% Verdana, Tahoma, sans-serif;
 //  width: 200px;
   width: 90%;
-  max-width:500px;
   background: #FFFFFF url('bg_form.png') left top repeat-x;
   background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
   background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
@@ -386,7 +400,8 @@ input:focus, textarea:focus {
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 }
       
-.submit input {
+.submit input {   
+	text-align:center;
   width: auto;
   padding: 9px 15px;
   background: red;
