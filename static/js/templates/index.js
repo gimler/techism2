@@ -14,11 +14,11 @@ $(document).ready(function(){
     });
 
   // infinite scrolling
-  //TODO: use errorCallback
   $('#content').infinitescroll({
     navSelector  : ".next",  // selector for the paged navigation (it will be hidden)
     nextSelector : ".next",  // selector for the NEXT link (to page 2)
     itemSelector : ".event", // selector for all items you'll retrieve
+    errorCallback: function(){ $('#infscr-loading').remove() }
     },function(arrayOfNewElems){
       // hide all event details
       $(".detail").hide();
@@ -52,7 +52,7 @@ $(document).ready(function(){
   $('.next').bind('click', moreHandler);
 
   // remove the paginator when we're done.
-  $(document).ajaxError(function(e,xhr,opt){
-    if (xhr.status == 404) $('.next').remove();
-  });
+//  $(document).ajaxError(function(e,xhr,opt){
+//    if (xhr.status == 404) $('.next').remove();
+//  });
 });
