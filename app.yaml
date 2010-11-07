@@ -1,6 +1,6 @@
 api_version: 1
 application: techism2-devel
-default_expiration: 100d
+default_expiration: 1d
 handlers:
 - {login: admin, script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py, url: /remote_api}
 - {login: admin, script: djangoappengine/deferred/handler.py, url: /_ah/queue/deferred}
