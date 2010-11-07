@@ -21,10 +21,10 @@
                 <header>
                     <h2>
                         {% if event_list.has_previous %}
-                            <a href="?page={{ event_list.previous_page_number }}">&laquo;</a>
+                            <a href="?page={{ event_list.previous_page_number }}" class="prev">&laquo;</a>
                         {% endif %}
                         {% if event_list.has_next %}
-                            <a href="?page={{ event_list.next_page_number }}">&raquo;</a>
+                            <a href="?page={{ event_list.next_page_number }}" class="next">&raquo;</a>
                         {% endif %} 
                     </h2>
                 </header>
