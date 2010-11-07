@@ -9,4 +9,4 @@ handlers:
 - {static_dir: static/, url: /static}
 - {script: djangoappengine/main/main.py, url: /.*}
 runtime: python
-version: 4-devel
+version: 5-devel
