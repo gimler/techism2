@@ -77,6 +77,7 @@ li #active{
 
 #add {
   border-radius:@tag-border-radius;
+  background-color:@content-background;
   background: -webkit-gradient(linear, left 28, left bottom, from(@content-background), to(#797979));
   padding-left:10px;
   padding-right:10px;
@@ -243,7 +244,8 @@ footer{
   }
   header {     
     display:table; 
-      border-collapse:collapse; 
+    border-collapse:collapse;
+    cursor: pointer;
   } 
   .header-content { 
     display:table-row;      
