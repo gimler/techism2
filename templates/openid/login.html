@@ -33,9 +33,13 @@
       {% endif %}
       <form name="fopenid" action="{{ action }}" method="post">
           {% csrf_token %}
-                  <label for="id_openid_identifier">OpenID</label>
-                  {{ form.openid_identifier }}
-                  <input name="bsignin" type="submit" value="Sign in">
+			<div class="row">
+                  		<label for="id_openid_identifier">OpenID</label>
+                  		{{ form.openid_identifier }}
+			</div>
+			<div class="row submit">
+				<input name="bsignin" type="submit" value="Sign in">
+			</div>
        {% if next %}
               <input type="hidden" name="next" value="{{ next }}" />
        {% endif %}
